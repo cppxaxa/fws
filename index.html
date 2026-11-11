@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f2e9">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23203b2e'/%3E%3Cpath d='M16 26V13M16 20C6 21 5 13 6 9c8 0 12 5 10 11Zm0-7C15 5 21 3 27 4c0 8-4 11-11 9Z' fill='none' stroke='%23dafa78' stroke-width='2'/%3E%3C/svg%3E">
+  <meta name="description" content="One Farmwagon makhana can. Three very different explanations. Pick your classroom seat and find your snack personality.">
+  <title>Farmwagon — Pick your seat. Find your crunch.</title>
+  <style>
+    :root { --ink: #203b2e; --paper: #f5f2e9; --muted: #657369; --line: #d7dbcf; --accent: #dafa78; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    button, a { touch-action: manipulation; }
+    button { cursor: pointer; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid #b65b24; outline-offset: 6px; }
+    [hidden] { display: none !important; }
+    .svg-library { position: absolute; width: 0; height: 0; overflow: hidden; }
+    .shell { max-width: 1440px; margin: auto; padding: 0 6%; }
+    header { height: 100px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); gap: 20px; }
+    .brand { display: inline-flex; gap: 9px; align-items: center; text-decoration: none; font-family: 'Space Grotesk', sans-serif; font-size: 25px; font-weight: 700; letter-spacing: -1.2px; }
+    .brand svg { width: 29px; height: 34px; }
+    .brand-dot { color: #7d9a38; }
+    .header-note { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; }
+    .header-note::before { content: ''; display: inline-block; height: 6px; width: 6px; margin-right: 9px; background: #708849; border-radius: 50%; vertical-align: middle; }
+    .edition { font-size: 10px; letter-spacing: 1.4px; border: 1px solid var(--line); padding: 9px 13px; border-radius: 30px; }
+    .landing-hero { position: relative; display: grid; grid-template-columns: 1.05fr 1fr; min-height: 475px; align-items: center; gap: 25px; }
+    .eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; display: flex; align-items: center; gap: 9px; margin: 0 0 23px; }
+    .eyebrow::before { content: ''; width: 23px; height: 1px; background: currentColor; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+    h1 { font-size: clamp(48px, 5.2vw, 75px); letter-spacing: -4px; line-height: 1.06; margin-bottom: 23px; font-weight: 500; }
+    .hero-copy h1 span { position: relative; display: inline-block; }
+    .hero-copy h1 span::after { content: ''; position: absolute; left: 0; right: 0; height: 11px; background: #d6e5ae; bottom: 1px; z-index: -1; transform: rotate(-1deg); }
+    .hero-copy { position: relative; z-index: 1; padding: 48px 0; }
+    .intro { font-size: 14px; color: var(--muted); line-height: 1.8; max-width: 350px; margin-bottom: 23px; }
+    .tiny-note { display: flex; align-items: center; gap: 9px; color: #75806e; font-size: 10px; }
+    .tiny-note svg { width: 19px; height: 19px; }
+    .product-stage { min-height: 410px; position: relative; display: grid; place-items: center; isolation: isolate; }
+    .halo { position: absolute; width: 345px; height: 345px; border-radius: 50%; background: #e6e9d8; z-index: -2; }
+    .halo::after { content: ''; position: absolute; inset: -23px; border: 1px dashed #cbd2b9; border-radius: 50%; }
+    .can { width: 235px; height: 315px; filter: drop-shadow(15px 25px 13px #344c2826); transform: rotate(-10deg); }
+    .landing-can { animation: can-enter 1s cubic-bezier(.2,.8,.2,1) both, bob 6s ease-in-out 1s infinite; }
+    .stage-label { position: absolute; right: -5px; top: 76px; font-size: 11px; line-height: 1.5; transform: rotate(7deg); }
+    .stage-label span { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 23px; margin-top: 4px; }
+    .little-star { position: absolute; font-size: 42px; left: 37px; top: 63px; font-weight: 400; }
+    .floating-puff { position: absolute; width: 44px; height: 44px; filter: drop-shadow(2px 6px 4px #766f3820); }
+    .puff-one { left: 43px; bottom: 85px; transform: rotate(25deg); }
+    .puff-two { right: 30px; bottom: 68px; width: 62px; height: 62px; transform: rotate(-12deg); }
+    .puff-three { right: 75px; top: 33px; width: 30px; height: 30px; }
+    .stage-caption { position: absolute; bottom: 7px; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #7e876e; }
+    .selection { padding: 12px 0 40px; }
+    .section-heading { display: flex; justify-content: space-between; align-items: center; margin-bottom: 19px; gap: 15px; }
+    .section-heading h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin: 0; font-family: 'DM Sans', sans-serif; }
+    .section-heading p { font-size: 11px; color: var(--muted); margin: 0; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+    .seat-card { position: relative; border: 1px solid #d5dacb; border-radius: 9px; padding: 22px 24px 18px; text-align: left; color: var(--ink); transition: transform .25s, box-shadow .25s; overflow: hidden; }
+    .seat-card:hover { transform: translateY(-6px); box-shadow: 0 12px 25px #263e2910; }
+    .back-card { background: #e7ecd9; }
+    .middle-card { background: #f0e5d7; }
+    .front-card { background: #e3e9e9; }
+    .card-top { display: flex; align-items: center; justify-content: space-between; }
+    .seat-number { font-size: 9px; letter-spacing: 1.8px; opacity: .65; }
+    .pill { font-size: 8px; padding: 5px 8px; border: 1px solid #203b2e33; border-radius: 20px; letter-spacing: .8px; text-transform: uppercase; }
+    .seat-art { height: 96px; display: flex; align-items: center; }
+    .seat-art svg { width: 100px; height: 80px; overflow: visible; }
+    .art-aside { margin-left: auto; color: #61704e; font-size: 12px; font-style: italic; transform: rotate(-8deg); }
+    .middle-card .art-aside { color: #99724b; }
+    .front-card .art-aside { color: #617a86; transform: none; font-style: normal; font-size: 9px; letter-spacing: 1px; }
+    .seat-card h3 { font-size: 24px; font-weight: 500; letter-spacing: -.8px; margin: 0 0 9px; }
+    .seat-card p { color: #64705e; font-size: 11px; line-height: 1.8; margin-bottom: 20px; max-width: 230px; }
+    .card-bottom { border-top: 1px solid #203b2e20; padding-top: 13px; display: flex; align-items: center; justify-content: space-between; font-size: 10px; font-weight: 600; }
+    .arrow { font-size: 19px; line-height: 1; transition: transform .25s; }
+    .seat-card:hover .arrow { transform: translateX(4px); }
+    .auto-note { display: flex; align-items: center; justify-content: center; gap: 7px; margin: 23px 0 0; color: #7b8273; font-size: 10px; }
+    .auto-note svg { width: 13px; height: 13px; }
+    footer { display: flex; justify-content: space-between; align-items: center; gap: 15px; border-top: 1px solid var(--line); min-height: 68px; font-size: 9px; color: #77816f; letter-spacing: .3px; }
+    .footer-center { color: #53664a; }
+    .footer-center span { color: #8d9d65; margin: 0 7px; }
+    .back-button { background: transparent; border: 1px solid var(--line); color: inherit; padding: 10px 17px; border-radius: 30px; font-size: 12px; }
+    .back-button:hover { background: #ffffff60; }
+    .experience { --detail-accent: #dafa78; overflow-x: clip; }
+    .experience[data-seat="back"] { background: #e5eecc; --detail-accent: #c6e949; }
+    .experience[data-seat="middle"] { background: #fff3e5; --detail-accent: #f6b49b; }
+    .experience[data-seat="front"] { background: #f4f6f8; --ink: #183b5b; --muted: #566a7b; --line: #d4dce4; --detail-accent: #dce8f3; }
+    body:has(.experience:not([hidden])) { background: var(--page-bg, #f5f2e9); }
+    .detail-hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 35px; align-items: center; padding: 65px 0 70px; min-height: 590px; }
+    .detail-hero h1 { font-size: clamp(45px, 5.8vw, 80px); max-width: 650px; }
+    .detail-hero .intro { max-width: 450px; font-size: 16px; }
+    .detail-tag { display: inline-block; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; background: var(--detail-accent); padding: 9px 13px; border-radius: 20px; margin-bottom: 24px; }
+    .detail-cta { display: inline-flex; align-items: center; gap: 28px; background: var(--ink); color: white; border-radius: 6px; padding: 15px 20px; font-size: 12px; text-decoration: none; }
+    .detail-stage { position: relative; display: grid; place-items: center; min-height: 390px; }
+    .detail-stage .halo { background: var(--detail-accent); opacity: .6; }
+    .detail-stage .can { width: 260px; height: 350px; }
+    .detail-sticker { position: absolute; bottom: 15px; right: 0; background: var(--detail-accent); border: 1px solid var(--ink); border-radius: 50%; width: 100px; height: 100px; display: grid; place-items: center; text-align: center; font-size: 13px; padding: 15px; transform: rotate(12deg); }
+    .ticker { padding: 17px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; font-family: 'Space Grotesk', sans-serif; font-size: 13px; letter-spacing: 1px; }
+    .ticker-track { display: flex; justify-content: space-around; gap: 30px; min-width: max-content; }
+    .ticker-track span { padding: 0 15px; }
+    .detail-section { padding: 85px 0; }
+    .detail-section h2 { font-size: clamp(32px, 4vw, 48px); letter-spacing: -1.8px; font-weight: 500; max-width: 600px; margin-bottom: 35px; }
+    .benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .benefit { border-top: 1px solid var(--ink); padding-top: 20px; }
+    .benefit-number { font-size: 11px; color: var(--muted); display: block; margin-bottom: 30px; }
+    .benefit h3 { font-size: 23px; letter-spacing: -.7px; font-weight: 500; }
+    .benefit p { color: var(--muted); font-size: 14px; line-height: 1.8; max-width: 310px; }
+    .closing { background: var(--detail-accent); border-radius: 12px; padding: 45px; display: flex; align-items: center; justify-content: space-between; gap: 30px; margin-bottom: 75px; }
+    .closing h2 { font-size: 32px; letter-spacing: -1px; margin-bottom: 12px; }
+    .closing p { color: var(--muted); font-size: 14px; line-height: 1.7; max-width: 550px; margin: 0; }
+    .closing .back-button { flex-shrink: 0; border-color: currentColor; }
+    .product-disclaimer { font-size: 10px; color: var(--muted); line-height: 1.7; margin: -45px 0 35px; }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .65s, transform .65s; }
+    .reveal.visible { opacity: 1; transform: none; }
+    [data-seat="back"] .detail-hero h1 { font-weight: 700; transform: rotate(-2deg); }
+    [data-seat="back"] .detail-stage { animation: dramatic-entry .9s cubic-bezier(.2,.8,.2,1) both; }
+    [data-seat="back"] .detail-stage .can { animation: bob 3.5s ease-in-out infinite; }
+    [data-seat="back"] .ticker-track { animation: ticker 14s linear infinite alternate; }
+    [data-seat="back"] .reveal { transform: translateY(55px) rotate(3deg); transition-duration: .8s; }
+    [data-seat="back"] .reveal.visible { transform: none; }
+    [data-seat="middle"] .detail-stage { animation: can-enter .7s ease-out both; }
+    [data-seat="middle"] .benefit:nth-child(2) { border-color: #b76a50; }
+    [data-seat="middle"] .benefit:nth-child(3) { border-color: #8a71a0; }
+    [data-seat="front"] .detail-stage { animation: fade-in .5s ease-out both; }
+    [data-seat="front"] .can { transform: none; }
+    [data-seat="front"] .detail-sticker { border-radius: 6px; transform: none; height: auto; font-size: 11px; }
+    [data-seat="front"] h1 { letter-spacing: -2.5px; font-weight: 400; }
+    @keyframes can-enter { from { opacity: 0; transform: translateY(25px) rotate(-5deg); } to { opacity: 1; } }
+    @keyframes dramatic-entry { from { opacity: 0; transform: translateX(90px) rotate(18deg) scale(.7); } to { opacity: 1; transform: none; } }
+    @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-10deg); } 50% { transform: translateY(-12px) rotate(-7deg); } }
+    @keyframes ticker { to { transform: translateX(-100px); } }
+    @media (min-width: 1500px) { .landing-hero { min-height: 520px; } }
+    @media (max-width: 1000px) {
+      .shell { padding: 0 5%; }
+      .header-note { display: none; }
+      h1 { letter-spacing: -2.5px; }
+      .stage-label { right: -10px; font-size: 9px; }
+      .stage-label span { font-size: 18px; }
+      .halo { width: 270px; height: 270px; }
+      .seat-card { padding: 18px; }
+      .seat-card h3 { font-size: 21px; }
+      .art-aside { font-size: 10px; }
+      .seat-art svg { width: 80px; }
+    }
+    @media (max-width: 700px) {
+      header { height: 78px; }
+      .brand { font-size: 23px; }
+      .edition { font-size: 8px; }
+      .experience header { gap: 10px; }
+      .experience header .brand { font-size: 20px; }
+      .experience header .back-button { padding: 9px 10px; font-size: 11px; }
+      .landing-hero { grid-template-columns: 1fr; gap: 0; }
+      .hero-copy { padding: 40px 0 5px; text-align: center; }
+      .hero-copy .eyebrow, .tiny-note { justify-content: center; }
+      h1 { font-size: 52px; }
+      .intro { margin-left: auto; margin-right: auto; }
+      .product-stage { min-height: 335px; }
+      .product-stage .can { width: 190px; height: 260px; }
+      .stage-label { right: 4%; top: 60px; }
+      .little-star { left: 12%; top: 30px; }
+      .puff-one { left: 15%; bottom: 55px; }
+      .puff-two { right: 12%; bottom: 40px; }
+      .puff-three { right: 22%; top: 13px; }
+      .stage-caption { bottom: 0; font-size: 8px; }
+      .selection { padding-top: 28px; }
+      .section-heading { align-items: flex-start; }
+      .section-heading h2 { font-size: 10px; }
+      .section-heading p { font-size: 9px; text-align: right; max-width: 130px; }
+      .cards { grid-template-columns: 1fr; gap: 13px; }
+      .seat-card { padding: 20px 24px; }
+      .seat-art { height: 85px; }
+      .seat-card h3 { font-size: 26px; }
+      .seat-card p { max-width: none; font-size: 12px; }
+      .art-aside { font-size: 15px; margin-right: 10px; }
+      .seat-art svg { width: 105px; }
+      footer { flex-wrap: wrap; justify-content: center; padding: 22px 0; text-align: center; }
+      .footer-center { width: 100%; order: -1; }
+      .detail-hero { grid-template-columns: 1fr; padding: 40px 0; gap: 15px; }
+      .detail-hero h1 { font-size: 50px; }
+      .detail-hero .intro { margin-left: 0; }
+      .detail-stage { min-height: 355px; }
+      .detail-stage .can { width: 220px; height: 300px; }
+      .detail-sticker { right: 5%; }
+      .detail-section { padding: 55px 0; }
+      .benefits { grid-template-columns: 1fr; gap: 28px; }
+      .benefit-number { margin-bottom: 15px; }
+      .benefit p { max-width: none; }
+      .closing { padding: 30px; flex-direction: column; align-items: flex-start; margin-bottom: 65px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal, [data-seat="back"] .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <svg class="svg-library" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="can-body" x1="0" x2="1"><stop stop-color="#1b462e"/><stop offset=".45" stop-color="#365e3e"/><stop offset="1" stop-color="#173f29"/></linearGradient>
+      <linearGradient id="metal" x1="0" x2="1"><stop stop-color="#a5ad9a"/><stop offset=".4" stop-color="#edf0df"/><stop offset="1" stop-color="#9ca68c"/></linearGradient>
+      <radialGradient id="puff-fill" cx=".35" cy=".3"><stop stop-color="#fffdf0"/><stop offset=".75" stop-color="#eee6c9"/><stop offset="1" stop-color="#d6cba8"/></radialGradient>
+      <symbol id="leaf" viewBox="0 0 32 38"><path d="M16 34V15M16 26C3 27 1 17 2 11c10-1 16 6 14 15Zm0-9C15 5 23 1 30 2c1 10-4 17-14 15Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+      <symbol id="puff" viewBox="0 0 60 60"><path d="M14 9C20 2 31 5 35 8c9-3 17 3 17 11 8 7 6 17 0 22-1 10-14 15-22 11-9 5-18-1-19-9C0 37 2 24 8 20 6 15 9 10 14 9Z" fill="url(#puff-fill)"/><path d="m18 18 5 4m15-8-3 5M15 35l5-3m18 8 4 2" stroke="#b3a174" stroke-width="2" stroke-linecap="round" opacity=".6"/></symbol>
+      <symbol id="product-can" viewBox="0 0 240 330">
+        <ellipse cx="120" cy="304" rx="91" ry="15" fill="#9ea38c" opacity=".22"/>
+        <path d="M33 35h174v252c0 25-174 25-174 0Z" fill="url(#can-body)"/>
+        <ellipse cx="120" cy="36" rx="87" ry="22" fill="url(#metal)"/>
+        <ellipse cx="120" cy="33" rx="79" ry="16" fill="#c6ceba" stroke="#7f8e76" stroke-width="1.5"/>
+        <ellipse cx="120" cy="32" rx="70" ry="12" fill="none" stroke="#a2af94"/>
+        <path d="M107 27c0-6 28-6 28 0v7c0 7-28 7-28 0Z" fill="#a2ae97" stroke="#7b8b73"/>
+        <ellipse cx="121" cy="29" rx="8" ry="3" fill="#dbe1cf"/>
+        <path d="M36 284c35 16 135 16 168 0v8c-30 20-140 20-168 0Z" fill="url(#metal)"/>
+        <path d="M39 59v218" stroke="#9eaf7d" opacity=".15" stroke-width="3"/>
+        <g fill="#e9e7bc" text-anchor="middle" font-family="Arial, sans-serif">
+          <use href="#leaf" x="109" y="65" width="22" height="27" style="color:#e9e7bc"/>
+          <text x="120" y="110" font-size="21" font-weight="bold" letter-spacing="-1">farmwagon.</text>
+          <text x="120" y="129" font-size="7" letter-spacing="3">A LITTLE GOOD, EVERY DAY</text>
+          <text x="120" y="169" font-size="31" font-weight="bold" letter-spacing="2">MAKHANA</text>
+          <text x="120" y="186" font-size="8" letter-spacing="3">THE EVERYDAY CRUNCH</text>
+        </g>
+        <path d="M41 241c31-38 122-37 159 0" fill="none" stroke="#b3bf83" opacity=".5"/>
+        <use href="#puff" x="58" y="210" width="52" height="52" transform="rotate(-15 84 236)"/>
+        <use href="#puff" x="100" y="221" width="59" height="59"/>
+        <use href="#puff" x="141" y="211" width="43" height="43"/>
+        <g stroke="#c1cc90" fill="none" opacity=".7"><path d="M58 268c-8-7-10-19-3-25m1 18-10-4m9-3 7-9M179 270c12-6 18-17 16-27m-9 19 13-1m-8-8-4-9"/></g>
+      </symbol>
+      <symbol id="back-art" viewBox="0 0 110 85"><g stroke="#435a31" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m14 50 62-8 12 8-61 9Zm9 9-5 20m64-27 4 22M37 33l-4-16 31-4 6 17M39 33l4 10m21-13 2 13"/><path d="m43 26 9 1 4-6m-5 13 9-2M5 22l7 3m64-16 5-5m3 22 8-2"/><path d="m67 58 13-15 17 7-12 16Z" fill="#d4dfb6"/><path d="m74 58 10 5"/></g><text x="3" y="12" fill="#435a31" font-size="13" transform="rotate(-10)">z z</text></symbol>
+      <symbol id="middle-art" viewBox="0 0 110 85"><g stroke="#9c714e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m16 49 67-5 11 9-66 6Zm8 10-3 20m66-24 3 23M37 33l-3-19 33-2 2 20M40 33l3 13m21-13 2 12"/><path d="m35 45 21-2 5 8-22 2Zm36-5 9-3 3 8-9 3M43 21l8 3 7-5"/><path d="m8 17 3-7 3 7 7 3-7 3-3 7-3-7-7-3Zm79-5 2-5 2 5 5 2-5 2-2 5-2-5-5-2Z"/></g></symbol>
+      <symbol id="front-art" viewBox="0 0 110 85"><g stroke="#526d7c" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M16 47h78v9H16Zm9 9v23m59-23v23M38 31V10h33v21M43 31v15m23-15v15M42 18h25M33 44h28v-6H33Zm37-1h12v-8H70Z"/><path d="m81 20 4 4 8-9"/></g></symbol>
+      <symbol id="clock" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7" fill="none" stroke="currentColor"/><path d="M10 5v5l3 2" fill="none" stroke="currentColor" stroke-linecap="round"/></symbol>
+    </defs>
+  </svg>
+
+  <div id="landing" class="shell">
+    <header>
+      <a class="brand" href="#" aria-label="Farmwagon home"><svg aria-hidden="true"><use href="#leaf"/></svg>farmwagon<span class="brand-dot">.</span></a>
+      <span class="header-note">Good food. A little less ordinary.</span>
+      <span class="edition">THE CLASSROOM EDITION ↗</span>
+    </header>
+    <main>
+      <section class="landing-hero" aria-labelledby="landing-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Same makhana. Different energy.</p>
+          <h1 id="landing-title" tabindex="-1">Where do<br>you <span>sit?</span></h1>
+          <p class="intro">One seriously good snack. Three ways to explain it.<br>Pick your classroom personality. We’ll do the rest.</p>
+          <div class="tiny-note"><svg aria-hidden="true"><use href="#leaf"/></svg>A little nostalgia. A whole lot of crunch.</div>
+        </div>
+        <div class="product-stage" role="img" aria-label="Illustration of a green Farmwagon sealed makhana can surrounded by makhana">
+          <div class="halo"></div>
+          <span class="little-star" aria-hidden="true">✳</span>
+          <svg class="can landing-can" aria-hidden="true"><use href="#product-can"/></svg>
+          <div class="stage-label" aria-hidden="true">small snack.<br><span>big main<br>character energy.</span></div>
+          <svg class="floating-puff puff-one" aria-hidden="true"><use href="#puff"/></svg>
+          <svg class="floating-puff puff-two" aria-hidden="true"><use href="#puff"/></svg>
+          <svg class="floating-puff puff-three" aria-hidden="true"><use href="#puff"/></svg>
+          <span class="stage-caption">Farmwagon makhana · Your new desk mate</span>
+        </div>
+      </section>
+      <section class="selection" aria-labelledby="selection-title">
+        <div class="section-heading"><h2 id="selection-title">Choose your seat</h2><p>No wrong answers. Just different vibes.</p></div>
+        <div class="cards">
+          <button type="button" class="seat-card back-card" data-choice="back">
+            <div class="card-top"><span class="seat-number">SEAT 01 / THE BACK</span><span class="pill">Unfiltered</span></div>
+            <div class="seat-art" aria-hidden="true"><svg><use href="#back-art"/></svg><span class="art-aside">attendance? optional.<br>snacking? compulsory.</span></div>
+            <h3>Backbencher</h3>
+            <p>Zero filter. Full flavour. A little roast with<br>your roasted makhana.</p>
+            <div class="card-bottom"><span>Let’s cause a little crunch</span><span class="arrow" aria-hidden="true">↗</span></div>
+          </button>
+          <button type="button" class="seat-card middle-card" data-choice="middle">
+            <div class="card-top"><span class="seat-number">SEAT 02 / THE MIDDLE</span><span class="pill">Best of both</span></div>
+            <div class="seat-art" aria-hidden="true"><svg><use href="#middle-art"/></svg><span class="art-aside">a little focus.<br>a little daydream.</span></div>
+            <h3>Middle row student</h3>
+            <p>A bit of wit. A bit of wisdom. The perfect<br>balance of fun and functional.</p>
+            <div class="card-bottom"><span>Find my happy middle</span><span class="arrow" aria-hidden="true">↗</span></div>
+          </button>
+          <button type="button" class="seat-card front-card" data-choice="front">
+            <div class="card-top"><span class="seat-number">SEAT 03 / THE FRONT</span><span class="pill">To the point</span></div>
+            <div class="seat-art" aria-hidden="true"><svg><use href="#front-art"/></svg><span class="art-aside">NOTES READY.<br>SNACK SORTED. ✓</span></div>
+            <h3>Front row student</h3>
+            <p>All the good stuff. None of the noise.<br>Consider this your well-organised snack break.</p>
+            <div class="card-bottom"><span>Give me the essentials</span><span class="arrow" aria-hidden="true">↗</span></div>
+          </button>
+        </div>
+        <p class="auto-note"><svg aria-hidden="true"><use href="#clock"/></svg>Can’t decide? We’ll save you a front-row seat in <span id="countdown">40</span>s.</p>
+      </section>
+    </main>
+    <footer><span>© <span class="year">2026</span> Farmwagon</span><span class="footer-center">Thoughtfully packed <span>✳</span> Unapologetically crunchy</span><span>Made for every kind of you.</span></footer>
+  </div>
+
+  <div id="experience" class="experience" hidden>
+    <div class="shell">
+      <header>
+        <a class="brand" href="#" data-home aria-label="Farmwagon home"><svg aria-hidden="true"><use href="#leaf"/></svg>farmwagon<span class="brand-dot">.</span></a>
+        <button type="button" class="back-button" data-home>← Choose another seat</button>
+      </header>
+      <main>
+        <section class="detail-hero" aria-labelledby="detail-title">
+          <div>
+            <span class="detail-tag" id="detail-tag"></span>
+            <h1 id="detail-title" tabindex="-1"></h1>
+            <p class="intro" id="detail-intro"></p>
+            <a class="detail-cta" href="#inside"><span id="detail-cta"></span><span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="detail-stage" role="img" aria-label="Illustration of the Farmwagon sealed makhana can">
+            <div class="halo"></div>
+            <svg class="can" aria-hidden="true"><use href="#product-can"/></svg>
+            <svg class="floating-puff puff-one" aria-hidden="true"><use href="#puff"/></svg>
+            <svg class="floating-puff puff-three" aria-hidden="true"><use href="#puff"/></svg>
+            <span class="detail-sticker" id="detail-sticker"></span>
+          </div>
+        </section>
+        <div class="ticker" aria-hidden="true"><div class="ticker-track" id="detail-ticker"></div></div>
+        <section class="detail-section" id="inside" aria-labelledby="inside-title">
+          <p class="eyebrow reveal" id="inside-eyebrow"></p>
+          <h2 class="reveal" id="inside-title"></h2>
+          <div class="benefits" id="benefits"></div>
+        </section>
+        <section class="closing reveal">
+          <div><h2 id="closing-title"></h2><p id="closing-copy"></p></div>
+          <button type="button" class="back-button" data-home>← Back to the classroom</button>
+        </section>
+        <p class="product-disclaimer">Product illustration is conceptual. Refer to the actual pack for ingredients, allergens, nutritional information, storage instructions, and seal condition.</p>
+      </main>
+      <footer><span>© <span class="year">2026</span> Farmwagon</span><span class="footer-center">Same can. Your kind of crunch.</span><span>Made for every kind of you.</span></footer>
+    </div>
+  </div>
+  <script>
+    const stories = {
+      back: {
+        tag: 'Seat 01 / Backbench energy',
+        title: 'Bro. Syllabus chhodo. Crunch pakdo.',
+        intro: 'Lecture going on. Brain gone off. Then Farmwagon makhana enters the chat. Roasted little puffs in a sealed can. Full snack scene, zero boring explanation. English thoda broken. Crunch fully working.',
+        cta: 'Okay but what is this?', sticker: 'Topper nahi. Top snack.',
+        ticker: ['✳ LAST BENCH. FIRST BITE.', '✳ LESS BLAH. MORE CRUNCH.', '✳ CAN WE SKIP TO SNACK BREAK?'],
+        eyebrow: 'Important notes. Not in exam.',
+        heading: 'Small puff. Full attitude.',
+        benefits: [
+          ['Makhana hai, magic nahi.', 'Fox nuts, aka popped water lily seeds. Light, crisp, roasted little legends. Fancy name bolke impress karna? Your wish, bro. We just here for the crunch.'],
+          ['Sealed can. Scene sorted.', 'No sad packet doing gymnastics in your bag. A proper sealed can for your makhana. Check seal before opening. Even backbenchers have standards, okay?'],
+          ['Break ka main character.', 'Between lectures, during a movie, after one very long “quick call”. Open, munch, enjoy. Sharing with front row? Optional. Being smug? Natural.']
+        ],
+        closingTitle: 'Attendance low. Snack game high.',
+        closingCopy: 'Farmwagon makhana. For that “bas ek aur” moment. Actual ingredients and nutrition? Pack pe padh lena. We roast the vibe, not the facts.'
+      },
+      middle: {
+        tag: 'Seat 02 / A happy middle',
+        title: 'A little focus. A little flavour.',
+        intro: 'For the note-taker with doodles in the margins. Meet Farmwagon makhana: roasted, delightfully crisp puffs in a sealed can. A thoughtful little pause between the things you have to do and the things you love.',
+        cta: 'Meet your break-time muse', sticker: 'Balance, with a crunch.',
+        ticker: ['✳ MAKE ROOM FOR A LITTLE JOY', '✳ A CRISP CHANGE OF PACE', '✳ YOUR DESK’S COLOURFUL PLUS-ONE'],
+        eyebrow: 'The sweet spot of snack time',
+        heading: 'Good breaks make bright days.',
+        benefits: [
+          ['A familiar favourite, reimagined.', 'Makhana, also known as fox nuts or popped water lily seeds, brings a delicate crunch to your everyday. Roasted and ready for a change of pace.'],
+          ['A can with a plan.', 'A sealed can keeps your snack neatly packed until you are ready to open it. A tidy companion for your desk, your bag, and your next little adventure.'],
+          ['Fits between everything.', 'A creative brainstorm. An afternoon chapter. A catch-up with friends. There is no perfect time for a break—just a little space you make for yourself.']
+        ],
+        closingTitle: 'Your everyday, with a little extra.',
+        closingCopy: 'Not too serious. Not all play. Just Farmwagon makhana and a moment that is entirely yours. Pick a different seat whenever the mood changes.'
+      },
+      front: {
+        tag: 'Seat 03 / The essentials',
+        title: 'A considered choice. A satisfying crunch.',
+        intro: 'Farmwagon makhana offers roasted fox nuts in a sealed can. A straightforward snack for your workday, study session, or time away from the screen.',
+        cta: 'Explore the product', sticker: 'Simply. Clearly. Crunchy.',
+        ticker: ['ROASTED MAKHANA', 'SEALED CAN', 'AN EVERYDAY SNACK'],
+        eyebrow: 'Product overview',
+        heading: 'The details that matter.',
+        benefits: [
+          ['The product', 'Makhana, commonly called fox nuts or popped water lily seeds, has a light, crisp texture. Farmwagon brings this familiar snack to your daily routine in a roasted format.'],
+          ['The packaging', 'Supplied in a sealed can. Check that the seal is intact before opening, and follow the storage and consumption instructions printed on the product label.'],
+          ['The occasion', 'Suitable for a pause between meetings, a study break, or a relaxed evening. Consult the pack for serving information, ingredients, allergens, and nutritional details.']
+        ],
+        closingTitle: 'A simple addition to your day.',
+        closingCopy: 'Farmwagon makhana. Clearly presented, thoughtfully packed, and ready for your next snack break. For verified product specifications, always refer to the actual packaging.'
+      }
+    };
+    const landing = document.getElementById('landing');
+    const experience = document.getElementById('experience');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let timer;
+    let observer;
+    let deadline;
+    const setText = (id, value) => { document.getElementById(id).textContent = value; };
+
+    function stopCountdown() {
+      window.clearInterval(timer);
+    }
+
+    function startCountdown() {
+      stopCountdown();
+      deadline = Date.now() + 40000;
+      setText('countdown', '40');
+      timer = window.setInterval(() => {
+        const remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+        setText('countdown', String(remaining));
+        if (remaining === 0) {
+          stopCountdown();
+          window.location.hash = 'front';
+        }
+      }, 250);
+    }
+
+    function revealSections() {
+      if (observer) observer.disconnect();
+      const sections = experience.querySelectorAll('.reveal');
+      sections.forEach(section => section.classList.remove('visible'));
+      if (!('IntersectionObserver' in window) || reducedMotion.matches) {
+        sections.forEach(section => section.classList.add('visible'));
+        return;
+      }
+      observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      sections.forEach(section => observer.observe(section));
+    }
+
+    function render() {
+      const seat = window.location.hash.slice(1);
+      // The product anchor belongs to the current experience, not a new route.
+      if (seat === 'inside' && !experience.hidden) return;
+      stopCountdown();
+      const story = Object.hasOwn(stories, seat) ? stories[seat] : null;
+      landing.hidden = Boolean(story);
+      experience.hidden = !story;
+      if (story) {
+        experience.dataset.seat = seat;
+        document.body.style.setProperty('--page-bg', { back: '#e5eecc', middle: '#fff3e5', front: '#f4f6f8' }[seat]);
+        for (const [id, value] of Object.entries({
+          'detail-tag': story.tag, 'detail-title': story.title, 'detail-intro': story.intro,
+          'detail-cta': story.cta, 'detail-sticker': story.sticker,
+          'inside-eyebrow': story.eyebrow, 'inside-title': story.heading,
+          'closing-title': story.closingTitle, 'closing-copy': story.closingCopy
+        })) setText(id, value);
+        document.getElementById('detail-ticker').replaceChildren(...story.ticker.map(text => {
+          const item = document.createElement('span');
+          item.textContent = text;
+          return item;
+        }));
+        document.getElementById('benefits').replaceChildren(...story.benefits.map(([title, copy], index) => {
+          const article = document.createElement('article');
+          article.className = 'benefit reveal';
+          const number = document.createElement('span');
+          number.className = 'benefit-number';
+          number.textContent = `0${index + 1}`;
+          const heading = document.createElement('h3');
+          heading.textContent = title;
+          const paragraph = document.createElement('p');
+          paragraph.textContent = copy;
+          article.append(number, heading, paragraph);
+          return article;
+        }));
+        document.title = `Farmwagon — ${story.tag.split(' / ')[1]}`;
+        revealSections();
+      } else {
+        if (observer) observer.disconnect();
+        document.body.style.removeProperty('--page-bg');
+        document.title = 'Farmwagon — Pick your seat. Find your crunch.';
+        startCountdown();
+      }
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      document.getElementById(story ? 'detail-title' : 'landing-title').focus({ preventScroll: true });
+    }
+
+    document.querySelectorAll('[data-choice]').forEach(button => {
+      button.addEventListener('click', () => { window.location.hash = button.dataset.choice; });
+    });
+    document.querySelectorAll('[data-home]').forEach(button => {
+      button.addEventListener('click', event => {
+        event.preventDefault();
+        window.location.hash = '';
+      });
+    });
+    document.querySelector('.detail-cta').addEventListener('click', event => {
+      event.preventDefault();
+      document.getElementById('inside').scrollIntoView({ behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+    });
+    document.querySelectorAll('.year').forEach(element => { element.textContent = new Date().getFullYear(); });
+    window.addEventListener('hashchange', render);
+    render();
+  </script>
+</body>
+</html>
