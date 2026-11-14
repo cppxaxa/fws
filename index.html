@@ -2,198 +2,1419 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f5f2e9">
+  <meta name="description" content="Choose your nostalgic classroom seat and shop Farmwagon raw makhana, flavoured makhana, and moringa leaf powder.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="format-detection" content="telephone=no">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Farmwagon — Pick your seat. Find your good.">
+  <meta property="og:description" content="School nostalgia meets farm-grown makhana and moringa. Pick your classroom personality and shop your way.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23203b2e'/%3E%3Cpath d='M16 26V13M16 20C6 21 5 13 6 9c8 0 12 5 10 11Zm0-7C15 5 21 3 27 4c0 8-4 11-11 9Z' fill='none' stroke='%23dafa78' stroke-width='2'/%3E%3C/svg%3E">
-  <meta name="description" content="One Farmwagon makhana can. Three very different explanations. Pick your classroom seat and find your snack personality.">
-  <title>Farmwagon — Pick your seat. Find your crunch.</title>
+  <title>Farmwagon — Pick your seat. Find your good.</title>
   <style>
-    :root { --ink: #203b2e; --paper: #f5f2e9; --muted: #657369; --line: #d7dbcf; --accent: #dafa78; }
+    :root {
+      --ink: #173c2c;
+      --paper: #f7f3e8;
+      --surface: #fffdf6;
+      --muted: #627268;
+      --line: #d7ddcf;
+      --accent: #d9f56f;
+      --accent-strong: #b7df31;
+      --accent-soft: #e8f4c4;
+      --seat-ink: #173c2c;
+      --seat-bg: #edf4d8;
+      --seat-accent: #c9ef42;
+      --shadow: 0 18px 55px rgba(34, 57, 42, .12);
+      --safe-left: max(18px, env(safe-area-inset-left));
+      --safe-right: max(18px, env(safe-area-inset-right));
+    }
+
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; }
-    button, a { -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      overflow-x: hidden;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    body[data-seat="back"] {
+      --seat-ink: #173922;
+      --seat-bg: #e6f4bd;
+      --seat-accent: #c6f22f;
+    }
+    body[data-seat="middle"] {
+      --seat-ink: #503225;
+      --seat-bg: #fff0dd;
+      --seat-accent: #ffaf8a;
+    }
+    body[data-seat="front"] {
+      --seat-ink: #173c59;
+      --seat-bg: #eaf3fb;
+      --seat-accent: #b9d8f3;
+    }
+    body.modal-open,
+    body.drawer-open { overflow: hidden; }
+    button, a { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
     button { font: inherit; }
-    button, a { touch-action: manipulation; }
+    button, a { color: inherit; }
     button { cursor: pointer; }
-    a { color: inherit; }
-    :focus-visible { outline: 3px solid #b65b24; outline-offset: 6px; }
-    [hidden] { display: none !important; }
-    .svg-library { position: absolute; width: 0; height: 0; overflow: hidden; }
-    .shell { max-width: 1440px; margin: auto; padding: 0 6%; }
-    header { height: 100px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); gap: 20px; }
-    .brand { display: inline-flex; gap: 9px; align-items: center; text-decoration: none; font-family: 'Space Grotesk', sans-serif; font-size: 25px; font-weight: 700; letter-spacing: -1.2px; }
-    .brand svg { width: 29px; height: 34px; }
-    .brand-dot { color: #7d9a38; }
-    .header-note { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; }
-    .header-note::before { content: ''; display: inline-block; height: 6px; width: 6px; margin-right: 9px; background: #708849; border-radius: 50%; vertical-align: middle; }
-    .edition { font-size: 10px; letter-spacing: 1.4px; border: 1px solid var(--line); padding: 9px 13px; border-radius: 30px; }
-    .landing-hero { position: relative; display: grid; grid-template-columns: 1.05fr 1fr; min-height: 475px; align-items: center; gap: 25px; }
-    .eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; display: flex; align-items: center; gap: 9px; margin: 0 0 23px; }
-    .eyebrow::before { content: ''; width: 23px; height: 1px; background: currentColor; }
+    img, svg { display: block; }
     h1, h2, h3, p { margin-top: 0; }
-    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
-    h1 { font-size: clamp(48px, 5.2vw, 75px); letter-spacing: -4px; line-height: 1.06; margin-bottom: 23px; font-weight: 500; }
-    .hero-copy h1 span { position: relative; display: inline-block; }
-    .hero-copy h1 span::after { content: ''; position: absolute; left: 0; right: 0; height: 11px; background: #d6e5ae; bottom: 1px; z-index: -1; transform: rotate(-1deg); }
-    .hero-copy { position: relative; z-index: 1; padding: 48px 0; }
-    .intro { font-size: 14px; color: var(--muted); line-height: 1.8; max-width: 350px; margin-bottom: 23px; }
-    .tiny-note { display: flex; align-items: center; gap: 9px; color: #75806e; font-size: 10px; }
-    .tiny-note svg { width: 19px; height: 19px; }
-    .product-stage { min-height: 410px; position: relative; display: grid; place-items: center; isolation: isolate; }
-    .halo { position: absolute; width: 345px; height: 345px; border-radius: 50%; background: #e6e9d8; z-index: -2; }
-    .halo::after { content: ''; position: absolute; inset: -23px; border: 1px dashed #cbd2b9; border-radius: 50%; }
-    .can { width: 235px; height: 315px; filter: drop-shadow(15px 25px 13px #344c2826); transform: rotate(-10deg); }
-    .landing-can { animation: can-enter 1s cubic-bezier(.2,.8,.2,1) both, bob 6s ease-in-out 1s infinite; }
-    .stage-label { position: absolute; right: -5px; top: 76px; font-size: 11px; line-height: 1.5; transform: rotate(7deg); }
-    .stage-label span { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 23px; margin-top: 4px; }
-    .little-star { position: absolute; font-size: 42px; left: 37px; top: 63px; font-weight: 400; }
-    .floating-puff { position: absolute; width: 44px; height: 44px; filter: drop-shadow(2px 6px 4px #766f3820); }
-    .puff-one { left: 43px; bottom: 85px; transform: rotate(25deg); }
-    .puff-two { right: 30px; bottom: 68px; width: 62px; height: 62px; transform: rotate(-12deg); }
-    .puff-three { right: 75px; top: 33px; width: 30px; height: 30px; }
-    .stage-caption { position: absolute; bottom: 7px; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #7e876e; }
-    .selection { padding: 12px 0 40px; }
-    .section-heading { display: flex; justify-content: space-between; align-items: center; margin-bottom: 19px; gap: 15px; }
-    .section-heading h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin: 0; font-family: 'DM Sans', sans-serif; }
-    .section-heading p { font-size: 11px; color: var(--muted); margin: 0; }
-    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
-    .seat-card { position: relative; border: 1px solid #d5dacb; border-radius: 9px; padding: 22px 24px 18px; text-align: left; color: var(--ink); transition: transform .25s, box-shadow .25s; overflow: hidden; }
-    .seat-card:hover { transform: translateY(-6px); box-shadow: 0 12px 25px #263e2910; }
-    .back-card { background: #e7ecd9; }
-    .middle-card { background: #f0e5d7; }
-    .front-card { background: #e3e9e9; }
-    .card-top { display: flex; align-items: center; justify-content: space-between; }
-    .seat-number { font-size: 9px; letter-spacing: 1.8px; opacity: .65; }
-    .pill { font-size: 8px; padding: 5px 8px; border: 1px solid #203b2e33; border-radius: 20px; letter-spacing: .8px; text-transform: uppercase; }
-    .seat-art { height: 96px; display: flex; align-items: center; }
-    .seat-art svg { width: 100px; height: 80px; overflow: visible; }
-    .art-aside { margin-left: auto; color: #61704e; font-size: 12px; font-style: italic; transform: rotate(-8deg); }
-    .middle-card .art-aside { color: #99724b; }
-    .front-card .art-aside { color: #617a86; transform: none; font-style: normal; font-size: 9px; letter-spacing: 1px; }
-    .seat-card h3 { font-size: 24px; font-weight: 500; letter-spacing: -.8px; margin: 0 0 9px; }
-    .seat-card p { color: #64705e; font-size: 11px; line-height: 1.8; margin-bottom: 20px; max-width: 230px; }
-    .card-bottom { border-top: 1px solid #203b2e20; padding-top: 13px; display: flex; align-items: center; justify-content: space-between; font-size: 10px; font-weight: 600; }
-    .arrow { font-size: 19px; line-height: 1; transition: transform .25s; }
-    .seat-card:hover .arrow { transform: translateX(4px); }
-    .auto-note { display: flex; align-items: center; justify-content: center; gap: 7px; margin: 23px 0 0; color: #7b8273; font-size: 10px; }
-    .auto-note svg { width: 13px; height: 13px; }
-    footer { display: flex; justify-content: space-between; align-items: center; gap: 15px; border-top: 1px solid var(--line); min-height: 68px; font-size: 9px; color: #77816f; letter-spacing: .3px; }
-    .footer-center { color: #53664a; }
-    .footer-center span { color: #8d9d65; margin: 0 7px; }
-    .back-button { background: transparent; border: 1px solid var(--line); color: inherit; padding: 10px 17px; border-radius: 30px; font-size: 12px; }
-    .back-button:hover { background: #ffffff60; }
-    .experience { --detail-accent: #dafa78; overflow-x: clip; }
-    .experience[data-seat="back"] { background: #e5eecc; --detail-accent: #c6e949; }
-    .experience[data-seat="middle"] { background: #fff3e5; --detail-accent: #f6b49b; }
-    .experience[data-seat="front"] { background: #f4f6f8; --ink: #183b5b; --muted: #566a7b; --line: #d4dce4; --detail-accent: #dce8f3; }
-    body:has(.experience:not([hidden])) { background: var(--page-bg, #f5f2e9); }
-    .detail-hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 35px; align-items: center; padding: 65px 0 70px; min-height: 590px; }
-    .detail-hero h1 { font-size: clamp(45px, 5.8vw, 80px); max-width: 650px; }
-    .detail-hero .intro { max-width: 450px; font-size: 16px; }
-    .detail-tag { display: inline-block; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; background: var(--detail-accent); padding: 9px 13px; border-radius: 20px; margin-bottom: 24px; }
-    .detail-cta { display: inline-flex; align-items: center; gap: 28px; background: var(--ink); color: white; border-radius: 6px; padding: 15px 20px; font-size: 12px; text-decoration: none; }
-    .detail-stage { position: relative; display: grid; place-items: center; min-height: 390px; }
-    .detail-stage .halo { background: var(--detail-accent); opacity: .6; }
-    .detail-stage .can { width: 260px; height: 350px; }
-    .detail-sticker { position: absolute; bottom: 15px; right: 0; background: var(--detail-accent); border: 1px solid var(--ink); border-radius: 50%; width: 100px; height: 100px; display: grid; place-items: center; text-align: center; font-size: 13px; padding: 15px; transform: rotate(12deg); }
-    .ticker { padding: 17px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; font-family: 'Space Grotesk', sans-serif; font-size: 13px; letter-spacing: 1px; }
-    .ticker-track { display: flex; justify-content: space-around; gap: 30px; min-width: max-content; }
-    .ticker-track span { padding: 0 15px; }
-    .detail-section { padding: 85px 0; }
-    .detail-section h2 { font-size: clamp(32px, 4vw, 48px); letter-spacing: -1.8px; font-weight: 500; max-width: 600px; margin-bottom: 35px; }
-    .benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-    .benefit { border-top: 1px solid var(--ink); padding-top: 20px; }
-    .benefit-number { font-size: 11px; color: var(--muted); display: block; margin-bottom: 30px; }
-    .benefit h3 { font-size: 23px; letter-spacing: -.7px; font-weight: 500; }
-    .benefit p { color: var(--muted); font-size: 14px; line-height: 1.8; max-width: 310px; }
-    .closing { background: var(--detail-accent); border-radius: 12px; padding: 45px; display: flex; align-items: center; justify-content: space-between; gap: 30px; margin-bottom: 75px; }
-    .closing h2 { font-size: 32px; letter-spacing: -1px; margin-bottom: 12px; }
-    .closing p { color: var(--muted); font-size: 14px; line-height: 1.7; max-width: 550px; margin: 0; }
-    .closing .back-button { flex-shrink: 0; border-color: currentColor; }
-    .product-disclaimer { font-size: 10px; color: var(--muted); line-height: 1.7; margin: -45px 0 35px; }
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .65s, transform .65s; }
-    .reveal.visible { opacity: 1; transform: none; }
-    [data-seat="back"] .detail-hero h1 { font-weight: 700; transform: rotate(-2deg); }
-    [data-seat="back"] .detail-stage { animation: dramatic-entry .9s cubic-bezier(.2,.8,.2,1) both; }
-    [data-seat="back"] .detail-stage .can { animation: bob 3.5s ease-in-out infinite; }
-    [data-seat="back"] .ticker-track { animation: ticker 14s linear infinite alternate; }
-    [data-seat="back"] .reveal { transform: translateY(55px) rotate(3deg); transition-duration: .8s; }
-    [data-seat="back"] .reveal.visible { transform: none; }
-    [data-seat="middle"] .detail-stage { animation: can-enter .7s ease-out both; }
-    [data-seat="middle"] .benefit:nth-child(2) { border-color: #b76a50; }
-    [data-seat="middle"] .benefit:nth-child(3) { border-color: #8a71a0; }
-    [data-seat="front"] .detail-stage { animation: fade-in .5s ease-out both; }
-    [data-seat="front"] .can { transform: none; }
-    [data-seat="front"] .detail-sticker { border-radius: 6px; transform: none; height: auto; font-size: 11px; }
-    [data-seat="front"] h1 { letter-spacing: -2.5px; font-weight: 400; }
-    @keyframes can-enter { from { opacity: 0; transform: translateY(25px) rotate(-5deg); } to { opacity: 1; } }
-    @keyframes dramatic-entry { from { opacity: 0; transform: translateX(90px) rotate(18deg) scale(.7); } to { opacity: 1; transform: none; } }
-    @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-10deg); } 50% { transform: translateY(-12px) rotate(-7deg); } }
-    @keyframes ticker { to { transform: translateX(-100px); } }
-    @media (min-width: 1500px) { .landing-hero { min-height: 520px; } }
-    @media (max-width: 1000px) {
-      .shell { padding: 0 5%; }
-      .header-note { display: none; }
-      h1 { letter-spacing: -2.5px; }
-      .stage-label { right: -10px; font-size: 9px; }
-      .stage-label span { font-size: 18px; }
-      .halo { width: 270px; height: 270px; }
-      .seat-card { padding: 18px; }
-      .seat-card h3 { font-size: 21px; }
-      .art-aside { font-size: 10px; }
-      .seat-art svg { width: 80px; }
+    h1, h2, h3 {
+      font-family: "Trebuchet MS", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      text-wrap: balance;
     }
-    @media (max-width: 700px) {
-      header { height: 78px; }
-      .brand { font-size: 23px; }
-      .edition { font-size: 8px; }
-      .experience header { gap: 10px; }
-      .experience header .brand { font-size: 20px; }
-      .experience header .back-button { padding: 9px 10px; font-size: 11px; }
-      .landing-hero { grid-template-columns: 1fr; gap: 0; }
-      .hero-copy { padding: 40px 0 5px; text-align: center; }
-      .hero-copy .eyebrow, .tiny-note { justify-content: center; }
-      h1 { font-size: 52px; }
-      .intro { margin-left: auto; margin-right: auto; }
-      .product-stage { min-height: 335px; }
-      .product-stage .can { width: 190px; height: 260px; }
-      .stage-label { right: 4%; top: 60px; }
-      .little-star { left: 12%; top: 30px; }
-      .puff-one { left: 15%; bottom: 55px; }
-      .puff-two { right: 12%; bottom: 40px; }
-      .puff-three { right: 22%; top: 13px; }
-      .stage-caption { bottom: 0; font-size: 8px; }
-      .selection { padding-top: 28px; }
-      .section-heading { align-items: flex-start; }
-      .section-heading h2 { font-size: 10px; }
-      .section-heading p { font-size: 9px; text-align: right; max-width: 130px; }
-      .cards { grid-template-columns: 1fr; gap: 13px; }
-      .seat-card { padding: 20px 24px; }
-      .seat-art { height: 85px; }
-      .seat-card h3 { font-size: 26px; }
-      .seat-card p { max-width: none; font-size: 12px; }
-      .art-aside { font-size: 15px; margin-right: 10px; }
-      .seat-art svg { width: 105px; }
-      footer { flex-wrap: wrap; justify-content: center; padding: 22px 0; text-align: center; }
-      .footer-center { width: 100%; order: -1; }
-      .detail-hero { grid-template-columns: 1fr; padding: 40px 0; gap: 15px; }
-      .detail-hero h1 { font-size: 50px; }
-      .detail-hero .intro { margin-left: 0; }
-      .detail-stage { min-height: 355px; }
-      .detail-stage .can { width: 220px; height: 300px; }
-      .detail-sticker { right: 5%; }
-      .detail-section { padding: 55px 0; }
-      .benefits { grid-template-columns: 1fr; gap: 28px; }
-      .benefit-number { margin-bottom: 15px; }
-      .benefit p { max-width: none; }
-      .closing { padding: 30px; flex-direction: column; align-items: flex-start; margin-bottom: 65px; }
+    [hidden] { display: none !important; }
+    :focus-visible {
+      outline: 3px solid #bd5a25;
+      outline-offset: 4px;
     }
+    h1[tabindex="-1"]:focus,
+    .memory-dialog:focus { outline: none; }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .svg-library {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+    .shell {
+      width: min(100%, 1320px);
+      margin: 0 auto;
+      padding-left: var(--safe-left);
+      padding-right: var(--safe-right);
+    }
+
+    .site-header {
+      position: sticky;
+      z-index: 40;
+      top: 0;
+      display: flex;
+      min-height: 74px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid rgba(32, 59, 46, .12);
+      background: rgba(247, 243, 232, .88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      padding-top: env(safe-area-inset-top);
+    }
+    .brand {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      gap: 8px;
+      border: 0;
+      background: transparent;
+      text-decoration: none;
+      font-family: "Trebuchet MS", ui-sans-serif, sans-serif;
+      font-size: clamp(20px, 5vw, 25px);
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      white-space: nowrap;
+    }
+    .brand svg { width: 27px; height: 33px; }
+    .brand-dot { color: #76933c; }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .header-button {
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .46);
+      padding: 0 13px;
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: .5px;
+      white-space: nowrap;
+    }
+    .header-button:hover { background: white; }
+    .seat-button { display: none; }
+    .bag-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border-color: var(--ink);
+      background: var(--ink);
+      color: white;
+    }
+    .bag-count {
+      display: grid;
+      min-width: 21px;
+      height: 21px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--ink);
+      font-size: 10px;
+    }
+
+    .landing {
+      position: relative;
+      min-height: calc(100dvh - 74px);
+      padding-top: 34px;
+      padding-bottom: 52px;
+      isolation: isolate;
+    }
+    .landing-grid {
+      display: grid;
+      align-items: center;
+      gap: 28px;
+    }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 17px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      width: 24px;
+      height: 1px;
+      background: currentColor;
+      content: "";
+    }
+    .landing-copy h1 {
+      max-width: 760px;
+      margin-bottom: 20px;
+      font-size: clamp(48px, 13vw, 82px);
+      font-weight: 500;
+      letter-spacing: clamp(-4px, -1vw, -2px);
+      line-height: .96;
+    }
+    .marker {
+      position: relative;
+      z-index: 0;
+      display: inline-block;
+    }
+    .marker::after {
+      position: absolute;
+      z-index: -1;
+      right: -3px;
+      bottom: 3px;
+      left: -3px;
+      height: .18em;
+      background: var(--accent);
+      content: "";
+      transform: rotate(-1.5deg);
+    }
+    .landing-copy > p {
+      max-width: 540px;
+      color: var(--muted);
+      font-size: clamp(15px, 4vw, 18px);
+      line-height: 1.7;
+    }
+    .primary-button,
+    .secondary-button {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      border-radius: 9px;
+      padding: 0 18px;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+    .primary-button {
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: white;
+      box-shadow: 6px 6px 0 var(--accent);
+    }
+    .primary-button:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--accent); }
+    .secondary-button {
+      border: 1px solid currentColor;
+      background: transparent;
+      color: inherit;
+    }
+    .hero-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 27px;
+    }
+    .hero-points span {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.44);
+      padding: 8px 11px;
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: .4px;
+    }
+
+    .hero-art,
+    .persona-art {
+      position: relative;
+      min-height: 390px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 50% 46%, #edf1d8 0 34%, transparent 35%),
+        linear-gradient(135deg, rgba(255,255,255,.55), rgba(226,234,203,.7));
+      isolation: isolate;
+    }
+    .hero-art::before,
+    .persona-art::before {
+      position: absolute;
+      inset: 9%;
+      border: 1px dashed #b6c09f;
+      border-radius: 50%;
+      content: "";
+      animation: spin 24s linear infinite;
+    }
+    .hero-can {
+      position: absolute;
+      z-index: 2;
+      top: 50%;
+      left: 47%;
+      width: min(57vw, 245px);
+      height: auto;
+      filter: drop-shadow(18px 25px 14px rgba(27, 55, 37, .18));
+      transform: translate(-50%, -50%) rotate(-9deg);
+      animation: can-bob 5s ease-in-out infinite;
+    }
+    .hero-packet {
+      position: absolute;
+      z-index: 3;
+      right: 7%;
+      bottom: 8%;
+      transform: rotate(9deg);
+      animation: packet-bob 4.5s ease-in-out .5s infinite;
+    }
+    .hero-sticker {
+      position: absolute;
+      z-index: 4;
+      top: 8%;
+      right: 5%;
+      display: grid;
+      width: 92px;
+      height: 92px;
+      place-items: center;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      background: var(--accent);
+      padding: 15px;
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1.15;
+      text-align: center;
+      transform: rotate(9deg);
+    }
+    .hero-doodle {
+      position: absolute;
+      z-index: 4;
+      bottom: 16%;
+      left: 7%;
+      font-family: "Trebuchet MS", sans-serif;
+      font-size: 40px;
+      font-weight: 300;
+      transform: rotate(-12deg);
+    }
+    .hero-caption {
+      position: absolute;
+      z-index: 5;
+      bottom: 16px;
+      left: 18px;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+    .floating-puff {
+      position: absolute;
+      z-index: 4;
+      width: 42px;
+      height: 42px;
+      filter: drop-shadow(2px 6px 4px rgba(118, 111, 56, .12));
+      animation: puff-float 4s ease-in-out infinite;
+    }
+    .puff-one { top: 17%; left: 7%; }
+    .puff-two { right: 5%; bottom: 38%; width: 55px; height: 55px; animation-delay: .8s; }
+
+    .seat-modal {
+      position: fixed;
+      z-index: 100;
+      inset: 0;
+      display: grid;
+      overflow-y: auto;
+      background: rgba(17, 44, 32, .62);
+      overscroll-behavior: contain;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .memory-dialog {
+      position: relative;
+      width: 100%;
+      min-height: 100dvh;
+      overflow: hidden;
+      background: var(--paper);
+      padding: max(28px, env(safe-area-inset-top)) var(--safe-right) max(28px, env(safe-area-inset-bottom)) var(--safe-left);
+      animation: modal-enter .55s cubic-bezier(.18,.84,.24,1) both;
+    }
+    .memory-dialog::before {
+      position: absolute;
+      top: -150px;
+      right: -170px;
+      width: 360px;
+      height: 360px;
+      border: 1px dashed #bac4aa;
+      border-radius: 50%;
+      content: "";
+    }
+    .modal-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+    .roll-call {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 9px;
+      font-weight: 850;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+    .roll-call::before {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #7a9a3e;
+      content: "";
+    }
+    .edition-chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 11px;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .modal-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 770px;
+      margin-bottom: 25px;
+    }
+    .modal-copy h1 {
+      margin-bottom: 13px;
+      font-size: clamp(39px, 10.5vw, 66px);
+      font-weight: 500;
+      letter-spacing: -2.7px;
+      line-height: 1;
+    }
+    .modal-copy p {
+      max-width: 600px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .memory-options {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: 12px;
+    }
+    .memory-option {
+      position: relative;
+      display: grid;
+      min-height: 188px;
+      overflow: hidden;
+      border: 1px solid rgba(23, 60, 44, .18);
+      border-radius: 16px;
+      background: var(--card-bg);
+      color: var(--card-ink);
+      padding: 20px;
+      text-align: left;
+      transition: transform .24s ease, box-shadow .24s ease;
+    }
+    .memory-option:hover,
+    .memory-option:active {
+      z-index: 3;
+      transform: translateY(-4px) rotate(var(--hover-rotate, 0deg));
+      box-shadow: var(--shadow);
+    }
+    .memory-option.back {
+      --card-bg: #e6f1c9;
+      --card-ink: #294825;
+      --hover-rotate: -1deg;
+    }
+    .memory-option.middle {
+      --card-bg: #f9e4d1;
+      --card-ink: #68452d;
+      --hover-rotate: .6deg;
+    }
+    .memory-option.front {
+      --card-bg: #e5eef2;
+      --card-ink: #34576a;
+    }
+    .option-number {
+      position: relative;
+      z-index: 2;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+    .option-art {
+      position: absolute;
+      top: 18px;
+      right: 12px;
+      width: 115px;
+      height: 90px;
+      opacity: .9;
+    }
+    .memory-option h2 {
+      align-self: end;
+      max-width: 220px;
+      margin: 64px 0 6px;
+      font-size: 25px;
+      font-weight: 600;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    .memory-option p {
+      max-width: 250px;
+      margin: 0;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+    .option-arrow {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      font-size: 25px;
+    }
+    .modal-note {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .persona-view {
+      background: var(--seat-bg);
+      color: var(--seat-ink);
+      transition: background .35s ease;
+    }
+    .persona-hero {
+      display: grid;
+      min-height: 630px;
+      align-items: center;
+      gap: 24px;
+      padding-top: 46px;
+      padding-bottom: 54px;
+    }
+    .persona-tag {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      background: var(--seat-accent);
+      padding: 8px 12px;
+      font-size: 9px;
+      font-weight: 850;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+    .persona-copy h1 {
+      max-width: 720px;
+      margin: 20px 0 18px;
+      font-size: clamp(46px, 12vw, 80px);
+      font-weight: 550;
+      letter-spacing: clamp(-4px, -1vw, -2px);
+      line-height: .98;
+    }
+    .persona-copy > p {
+      max-width: 590px;
+      margin-bottom: 25px;
+      color: color-mix(in srgb, var(--seat-ink) 70%, transparent);
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    .persona-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .persona-view .primary-button {
+      border-color: var(--seat-ink);
+      background: var(--seat-ink);
+      box-shadow: 6px 6px 0 var(--seat-accent);
+    }
+    .persona-art {
+      min-height: 360px;
+      border-color: color-mix(in srgb, var(--seat-ink) 22%, transparent);
+      background:
+        radial-gradient(circle at 50% 48%, color-mix(in srgb, var(--seat-accent) 48%, white) 0 34%, transparent 35%),
+        linear-gradient(135deg, rgba(255,255,255,.4), color-mix(in srgb, var(--seat-accent) 24%, transparent));
+    }
+    .persona-art .hero-can { width: min(57vw, 245px); }
+    .persona-seat-art {
+      position: absolute;
+      z-index: 5;
+      top: 8%;
+      left: 5%;
+      width: 115px;
+      height: 95px;
+      color: var(--seat-ink);
+      transform: rotate(-8deg);
+    }
+    .persona-art-note {
+      position: absolute;
+      z-index: 6;
+      right: 5%;
+      bottom: 9%;
+      max-width: 125px;
+      border-bottom: 2px solid currentColor;
+      padding-bottom: 5px;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.1;
+      transform: rotate(-5deg);
+    }
+    body[data-seat="back"] .persona-art,
+    body[data-seat="back"] .persona-copy h1 { transform: rotate(-.6deg); }
+    body[data-seat="back"] .persona-seat-art { animation: back-desk 2.8s ease-in-out infinite; }
+    body[data-seat="middle"] .persona-art-note { transform: rotate(4deg); }
+    body[data-seat="front"] .persona-art,
+    body[data-seat="front"] .persona-copy h1 { transform: none; }
+
+    .memory-strip {
+      border-top: 1px solid color-mix(in srgb, var(--seat-ink) 24%, transparent);
+      border-bottom: 1px solid color-mix(in srgb, var(--seat-ink) 24%, transparent);
+      background: rgba(255,255,255,.25);
+      padding-top: 45px;
+      padding-bottom: 45px;
+    }
+    .memory-strip-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .memory-strip-heading h2 {
+      max-width: 560px;
+      margin: 0;
+      font-size: clamp(30px, 8vw, 48px);
+      font-weight: 550;
+      letter-spacing: -1.8px;
+      line-height: 1;
+    }
+    .memory-strip-heading span {
+      display: none;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .persona-lines {
+      display: grid;
+      gap: 12px;
+    }
+    .persona-line {
+      position: relative;
+      min-height: 172px;
+      overflow: hidden;
+      border: 1px solid color-mix(in srgb, var(--seat-ink) 22%, transparent);
+      border-radius: 14px;
+      background: rgba(255,255,255,.36);
+      padding: 20px;
+    }
+    .line-number {
+      display: block;
+      margin-bottom: 42px;
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: 1.3px;
+    }
+    .persona-line p {
+      position: relative;
+      z-index: 2;
+      max-width: 370px;
+      margin: 0;
+      font-size: clamp(16px, 4.5vw, 21px);
+      font-weight: 700;
+      letter-spacing: -.5px;
+      line-height: 1.22;
+    }
+    .persona-line::after {
+      position: absolute;
+      right: -10px;
+      bottom: -28px;
+      color: var(--seat-accent);
+      content: "✳";
+      font-size: 108px;
+      line-height: 1;
+      opacity: .9;
+      transform: rotate(18deg);
+    }
+
+    .collection {
+      padding-top: 72px;
+      padding-bottom: 82px;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    .section-heading {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .section-heading h2 {
+      max-width: 720px;
+      margin: 0;
+      font-size: clamp(38px, 10vw, 64px);
+      font-weight: 520;
+      letter-spacing: -2.8px;
+      line-height: 1;
+    }
+    .section-heading p {
+      max-width: 550px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .product-grid {
+      display: grid;
+      gap: 14px;
+    }
+    .product-card {
+      position: relative;
+      display: grid;
+      min-height: 480px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--card-color);
+      padding: 22px;
+      color: var(--ink);
+      text-align: left;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow);
+    }
+    .product-card.raw { --card-color: #e5edd0; }
+    .product-card.flavoured { --card-color: #ffe4cf; }
+    .product-card.moringa { --card-color: #dce8c8; }
+    .product-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .product-kicker,
+    .from-price {
+      font-size: 9px;
+      font-weight: 850;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+    .from-price {
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      padding: 7px 9px;
+    }
+    .product-card-art {
+      position: relative;
+      display: grid;
+      min-height: 230px;
+      place-items: center;
+    }
+    .product-card-art::before {
+      position: absolute;
+      width: 205px;
+      height: 205px;
+      border: 1px dashed rgba(23,60,44,.3);
+      border-radius: 50%;
+      content: "";
+    }
+    .product-card-copy {
+      align-self: end;
+    }
+    .product-card h3 {
+      margin-bottom: 9px;
+      font-size: 30px;
+      font-weight: 560;
+      letter-spacing: -1.4px;
+    }
+    .product-card p {
+      min-height: 48px;
+      margin-bottom: 20px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+    .product-card-bottom {
+      display: flex;
+      min-height: 46px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      border-top: 1px solid rgba(23,60,44,.15);
+      padding-top: 14px;
+      font-size: 11px;
+      font-weight: 850;
+    }
+    .product-card-bottom span:last-child { font-size: 22px; }
+
+    .product-pack {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(11px 16px 9px rgba(26, 47, 33, .18));
+      text-align: center;
+    }
+    .product-pack.small { transform: scale(.62); }
+    .product-pack.card { transform: scale(.78); }
+    .product-pack.large { transform: scale(1); }
+    .product-pack.raw,
+    .product-pack.moringa {
+      width: 150px;
+      height: 205px;
+      border: 1px solid rgba(255,255,255,.38);
+      border-radius: 10px 10px 20px 20px;
+      clip-path: polygon(4% 0, 96% 0, 100% 100%, 0 100%);
+    }
+    .product-pack.raw { background: linear-gradient(120deg, #173f2b, #396245 58%, #123622); color: #f4edbf; }
+    .product-pack.moringa { background: linear-gradient(120deg, #6f9d3e, #accd55 58%, #4f7d2f); color: #173c2c; }
+    .product-pack.raw::before,
+    .product-pack.moringa::before {
+      position: absolute;
+      top: 11px;
+      right: 8px;
+      left: 8px;
+      border-top: 2px solid currentColor;
+      content: "";
+      opacity: .35;
+    }
+    .product-pack.flavoured {
+      width: 154px;
+      height: 188px;
+      border: 1px solid #29462f;
+      border-radius: 20px 20px 25px 25px;
+      background: linear-gradient(90deg, #eac45c, #fff1a6 44%, #dfad3d);
+      color: #173c2c;
+    }
+    .product-pack.flavoured::before {
+      position: absolute;
+      top: -16px;
+      width: 150px;
+      height: 30px;
+      border: 1px solid #29462f;
+      border-radius: 50%;
+      background: #244931;
+      content: "";
+    }
+    .product-pack.flavoured::after {
+      position: absolute;
+      right: 6px;
+      bottom: 10px;
+      left: 6px;
+      height: 15px;
+      border-radius: 50%;
+      border-bottom: 1px solid rgba(23,60,44,.45);
+      content: "";
+    }
+    .pack-brand {
+      margin-bottom: 19px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: -.5px;
+    }
+    .pack-name {
+      font-family: "Trebuchet MS", sans-serif;
+      font-size: 19px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: .95;
+    }
+    .pack-note {
+      max-width: 110px;
+      margin-top: 11px;
+      font-size: 7px;
+      font-weight: 850;
+      letter-spacing: 1.2px;
+      line-height: 1.4;
+      text-transform: uppercase;
+    }
+    .pack-leaf {
+      width: 24px;
+      height: 29px;
+      margin-bottom: 8px;
+    }
+
+    .proof-strip {
+      display: grid;
+      gap: 10px;
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+      margin-top: 34px;
+    }
+    .proof-item {
+      border-radius: 12px;
+      background: #fffdf8;
+      padding: 18px;
+    }
+    .proof-item strong {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 12px;
+    }
+    .proof-item span {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .product-view {
+      min-height: calc(100dvh - 74px);
+      background: var(--paper);
+      padding-top: 28px;
+      padding-bottom: 82px;
+    }
+    .back-link {
+      display: inline-flex;
+      min-height: 46px;
+      align-items: center;
+      gap: 8px;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      font-size: 11px;
+      font-weight: 850;
+    }
+    .product-layout {
+      display: grid;
+      gap: 32px;
+      margin-top: 18px;
+    }
+    .product-stage {
+      position: relative;
+      display: grid;
+      min-height: 430px;
+      overflow: hidden;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--product-bg, #e5edd0);
+      isolation: isolate;
+    }
+    .product-stage::before {
+      position: absolute;
+      width: min(75vw, 400px);
+      height: min(75vw, 400px);
+      border: 1px dashed rgba(23,60,44,.32);
+      border-radius: 50%;
+      content: "";
+      animation: spin 25s linear infinite;
+    }
+    .product-stage::after {
+      position: absolute;
+      z-index: -1;
+      width: min(62vw, 330px);
+      height: min(62vw, 330px);
+      border-radius: 50%;
+      background: rgba(255,255,255,.43);
+      content: "";
+    }
+    .product-stage .product-pack { transform: scale(1.25) rotate(-4deg); }
+    .product-sticker {
+      position: absolute;
+      z-index: 5;
+      right: 6%;
+      bottom: 7%;
+      display: grid;
+      width: 96px;
+      height: 96px;
+      place-items: center;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      background: var(--accent);
+      padding: 12px;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.2;
+      text-align: center;
+      transform: rotate(8deg);
+    }
+    .product-information {
+      align-self: center;
+    }
+    .product-information h1 {
+      margin: 15px 0 14px;
+      font-size: clamp(43px, 11vw, 70px);
+      font-weight: 540;
+      letter-spacing: -3px;
+      line-height: .98;
+    }
+    .product-intro {
+      max-width: 610px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+    .product-facts {
+      display: grid;
+      gap: 9px;
+      margin: 24px 0 30px;
+      padding: 0;
+      list-style: none;
+    }
+    .product-facts li {
+      position: relative;
+      border-bottom: 1px solid var(--line);
+      padding: 0 0 9px 22px;
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.5;
+    }
+    .product-facts li::before {
+      position: absolute;
+      top: 3px;
+      left: 0;
+      color: #789448;
+      content: "✳";
+      font-size: 11px;
+    }
+    .option-fieldset {
+      margin: 0 0 22px;
+      border: 0;
+      padding: 0;
+    }
+    .option-fieldset legend {
+      margin-bottom: 10px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .option-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .option-button {
+      min-height: 47px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: white;
+      padding: 0 14px;
+      font-size: 12px;
+      font-weight: 750;
+    }
+    .option-button[aria-pressed="true"] {
+      border-color: var(--ink);
+      background: var(--ink);
+      color: white;
+      box-shadow: 4px 4px 0 var(--accent);
+    }
+    .price-panel {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+    }
+    .selected-price small {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+    }
+    .selected-price strong {
+      font-family: "Trebuchet MS", sans-serif;
+      font-size: 35px;
+      letter-spacing: -1px;
+    }
+    .add-button { flex: 1; max-width: 280px; }
+    .checkout-note {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.5;
+    }
+    .product-story {
+      display: grid;
+      gap: 12px;
+      margin-top: 45px;
+    }
+    .story-card {
+      border-top: 1px solid var(--ink);
+      padding-top: 17px;
+    }
+    .story-card span {
+      display: block;
+      margin-bottom: 22px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 850;
+      letter-spacing: 1px;
+    }
+    .story-card h2 {
+      margin-bottom: 8px;
+      font-size: 23px;
+      font-weight: 560;
+      letter-spacing: -.8px;
+    }
+    .story-card p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .cart-backdrop {
+      position: fixed;
+      z-index: 110;
+      inset: 0;
+      background: rgba(14, 37, 27, .52);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .cart-drawer {
+      position: fixed;
+      z-index: 120;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      max-height: min(88dvh, 760px);
+      flex-direction: column;
+      border-radius: 24px 24px 0 0;
+      background: var(--surface);
+      box-shadow: 0 -18px 60px rgba(14,37,27,.25);
+      padding: 22px var(--safe-right) max(22px, env(safe-area-inset-bottom)) var(--safe-left);
+      animation: drawer-enter .35s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .cart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 15px;
+    }
+    .cart-header h2 {
+      margin: 0;
+      font-size: 27px;
+      font-weight: 580;
+      letter-spacing: -1px;
+    }
+    .close-button {
+      display: grid;
+      width: 44px;
+      height: 44px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: transparent;
+      font-size: 21px;
+    }
+    .cart-items {
+      display: grid;
+      gap: 10px;
+      overflow-y: auto;
+      padding: 16px 0;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+    .empty-cart {
+      border: 1px dashed var(--line);
+      border-radius: 14px;
+      padding: 35px 20px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      text-align: center;
+    }
+    .cart-item {
+      display: grid;
+      grid-template-columns: 66px 1fr auto;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: white;
+      padding: 10px;
+    }
+    .cart-item-art {
+      display: grid;
+      width: 66px;
+      height: 78px;
+      overflow: hidden;
+      place-items: center;
+      border-radius: 9px;
+      background: #edf1df;
+    }
+    .cart-item-copy strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 12px;
+    }
+    .cart-item-copy span {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.4;
+    }
+    .quantity-control {
+      display: grid;
+      grid-template-columns: 36px 30px 36px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .quantity-control button {
+      width: 36px;
+      height: 38px;
+      border: 0;
+      background: transparent;
+      font-size: 17px;
+    }
+    .quantity-control span {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 850;
+    }
+    .cart-footer {
+      margin-top: auto;
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+    }
+    .cart-total {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .cart-total span {
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+    }
+    .cart-total strong {
+      font-family: "Trebuchet MS", sans-serif;
+      font-size: 28px;
+    }
+    .share-order {
+      width: 100%;
+      border: 1px solid var(--ink);
+    }
+    .share-order:disabled {
+      cursor: not-allowed;
+      opacity: .45;
+      box-shadow: none;
+    }
+    .cart-help {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 9px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .site-footer {
+      display: grid;
+      gap: 13px;
+      border-top: 1px solid var(--line);
+      background: var(--paper);
+      padding-top: 28px;
+      padding-bottom: max(28px, env(safe-area-inset-bottom));
+      color: var(--muted);
+      font-size: 9px;
+      line-height: 1.6;
+      text-align: center;
+    }
+    .footer-center { color: var(--ink); }
+    .footer-center span { margin: 0 7px; color: #819d4b; }
+    .product-disclaimer {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .toast {
+      position: fixed;
+      z-index: 150;
+      right: var(--safe-right);
+      bottom: max(22px, env(safe-area-inset-bottom));
+      left: var(--safe-left);
+      border: 1px solid #fff4;
+      border-radius: 12px;
+      background: var(--ink);
+      color: white;
+      box-shadow: var(--shadow);
+      padding: 14px 16px;
+      font-size: 12px;
+      font-weight: 750;
+      text-align: center;
+      animation: toast-enter .3s ease both;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    @keyframes modal-enter {
+      from { opacity: 0; transform: translateY(32px) scale(.98); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes drawer-enter {
+      from { transform: translateY(100%); }
+      to { transform: none; }
+    }
+    @keyframes toast-enter {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes can-bob {
+      0%, 100% { transform: translate(-50%, -50%) rotate(-9deg); }
+      50% { transform: translate(-50%, calc(-50% - 12px)) rotate(-5deg); }
+    }
+    @keyframes packet-bob {
+      0%, 100% { transform: translateY(0) rotate(9deg); }
+      50% { transform: translateY(-9px) rotate(5deg); }
+    }
+    @keyframes puff-float {
+      0%, 100% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-11px) rotate(8deg); }
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes back-desk {
+      0%, 100% { transform: rotate(-8deg) translateY(0); }
+      50% { transform: rotate(-4deg) translateY(-8px); }
+    }
+
+    @media (min-width: 560px) {
+      .seat-button { display: inline-flex; }
+      .memory-dialog { padding-left: max(30px, env(safe-area-inset-left)); padding-right: max(30px, env(safe-area-inset-right)); }
+      .memory-options { grid-template-columns: repeat(3, 1fr); }
+      .memory-option { min-height: 320px; }
+      .memory-option h2 { margin-top: 132px; font-size: 28px; }
+      .option-art { top: 39px; right: 50%; width: 145px; height: 115px; transform: translateX(50%); }
+      .proof-strip { grid-template-columns: repeat(3, 1fr); }
+      .product-story { grid-template-columns: repeat(3, 1fr); }
+      .site-footer { grid-template-columns: 1fr auto 1fr; align-items: center; text-align: left; }
+      .site-footer > :last-child { text-align: right; }
+      .product-disclaimer { grid-column: 1 / -1; text-align: center; }
+      .toast { right: 24px; left: auto; min-width: 300px; }
+    }
+
+    @media (min-width: 760px) {
+      .site-header { min-height: 82px; }
+      .landing { min-height: calc(100dvh - 82px); padding-top: 50px; }
+      .landing-grid,
+      .persona-hero,
+      .product-layout { grid-template-columns: 1fr 1fr; }
+      .landing-copy { order: 0; }
+      .hero-art { min-height: 520px; }
+      .persona-hero { padding-top: 65px; padding-bottom: 70px; }
+      .persona-art { min-height: 470px; }
+      .persona-lines,
+      .product-grid { grid-template-columns: repeat(3, 1fr); }
+      .memory-strip-heading span { display: inline; }
+      .section-heading { grid-template-columns: 1fr .65fr; align-items: end; }
+      .product-card { min-height: 550px; }
+      .product-stage { min-height: 650px; }
+      .cart-drawer {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: auto;
+        width: min(440px, 100%);
+        max-height: none;
+        border-radius: 0;
+        padding: max(25px, env(safe-area-inset-top)) max(25px, env(safe-area-inset-right)) max(25px, env(safe-area-inset-bottom)) 25px;
+        animation-name: drawer-enter-desktop;
+      }
+      @keyframes drawer-enter-desktop {
+        from { transform: translateX(100%); }
+        to { transform: none; }
+      }
+    }
+
+    @media (min-width: 980px) {
+      .shell { padding-left: 5.5%; padding-right: 5.5%; }
+      .memory-dialog {
+        align-self: center;
+        width: min(1180px, calc(100% - 48px));
+        min-height: auto;
+        margin: 24px auto;
+        border: 1px solid rgba(255,255,255,.55);
+        border-radius: 28px;
+        box-shadow: 0 35px 90px rgba(10,31,21,.28);
+        padding: 30px 34px 34px;
+      }
+      .modal-copy { margin-bottom: 30px; }
+      .memory-option { min-height: 340px; padding: 24px; }
+      .memory-option h2 { font-size: 32px; }
+      .hero-can,
+      .persona-art .hero-can { width: 270px; }
+      .persona-hero { gap: 60px; }
+      .product-layout { gap: 70px; }
+      .product-card { padding: 25px; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      *, *::before, *::after { animation: none !important; transition: none !important; }
-      .reveal, [data-seat="back"] .reveal { opacity: 1; transform: none; }
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition: none !important;
+      }
+      .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
@@ -228,189 +1449,562 @@
         <use href="#puff" x="141" y="211" width="43" height="43"/>
         <g stroke="#c1cc90" fill="none" opacity=".7"><path d="M58 268c-8-7-10-19-3-25m1 18-10-4m9-3 7-9M179 270c12-6 18-17 16-27m-9 19 13-1m-8-8-4-9"/></g>
       </symbol>
-      <symbol id="back-art" viewBox="0 0 110 85"><g stroke="#435a31" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m14 50 62-8 12 8-61 9Zm9 9-5 20m64-27 4 22M37 33l-4-16 31-4 6 17M39 33l4 10m21-13 2 13"/><path d="m43 26 9 1 4-6m-5 13 9-2M5 22l7 3m64-16 5-5m3 22 8-2"/><path d="m67 58 13-15 17 7-12 16Z" fill="#d4dfb6"/><path d="m74 58 10 5"/></g><text x="3" y="12" fill="#435a31" font-size="13" transform="rotate(-10)">z z</text></symbol>
-      <symbol id="middle-art" viewBox="0 0 110 85"><g stroke="#9c714e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m16 49 67-5 11 9-66 6Zm8 10-3 20m66-24 3 23M37 33l-3-19 33-2 2 20M40 33l3 13m21-13 2 12"/><path d="m35 45 21-2 5 8-22 2Zm36-5 9-3 3 8-9 3M43 21l8 3 7-5"/><path d="m8 17 3-7 3 7 7 3-7 3-3 7-3-7-7-3Zm79-5 2-5 2 5 5 2-5 2-2 5-2-5-5-2Z"/></g></symbol>
-      <symbol id="front-art" viewBox="0 0 110 85"><g stroke="#526d7c" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M16 47h78v9H16Zm9 9v23m59-23v23M38 31V10h33v21M43 31v15m23-15v15M42 18h25M33 44h28v-6H33Zm37-1h12v-8H70Z"/><path d="m81 20 4 4 8-9"/></g></symbol>
-      <symbol id="clock" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7" fill="none" stroke="currentColor"/><path d="M10 5v5l3 2" fill="none" stroke="currentColor" stroke-linecap="round"/></symbol>
+      <symbol id="back-art" viewBox="0 0 110 85"><g stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m14 50 62-8 12 8-61 9Zm9 9-5 20m64-27 4 22M37 33l-4-16 31-4 6 17M39 33l4 10m21-13 2 13"/><path d="m43 26 9 1 4-6m-5 13 9-2M5 22l7 3m64-16 5-5m3 22 8-2"/><path d="m67 58 13-15 17 7-12 16Z" fill="currentColor" opacity=".12"/><path d="m74 58 10 5"/></g><text x="3" y="12" fill="currentColor" font-size="13" transform="rotate(-10)">z z</text></symbol>
+      <symbol id="middle-art" viewBox="0 0 110 85"><g stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m16 49 67-5 11 9-66 6Zm8 10-3 20m66-24 3 23M37 33l-3-19 33-2 2 20M40 33l3 13m21-13 2 12"/><path d="m35 45 21-2 5 8-22 2Zm36-5 9-3 3 8-9 3M43 21l8 3 7-5"/><path d="m8 17 3-7 3 7 7 3-7 3-3 7-3-7-7-3Zm79-5 2-5 2 5 5 2-5 2-2 5-2-5-5-2Z"/></g></symbol>
+      <symbol id="front-art" viewBox="0 0 110 85"><g stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M16 47h78v9H16Zm9 9v23m59-23v23M38 31V10h33v21M43 31v15m23-15v15M42 18h25M33 44h28v-6H33Zm37-1h12v-8H70Z"/><path d="m81 20 4 4 8-9"/></g></symbol>
     </defs>
   </svg>
 
-  <div id="landing" class="shell">
-    <header>
-      <a class="brand" href="#" aria-label="Farmwagon home"><svg aria-hidden="true"><use href="#leaf"/></svg>farmwagon<span class="brand-dot">.</span></a>
-      <span class="header-note">Good food. A little less ordinary.</span>
-      <span class="edition">THE CLASSROOM EDITION ↗</span>
+  <div id="app">
+    <header class="site-header shell">
+      <button class="brand" type="button" data-home aria-label="Farmwagon home">
+        <svg aria-hidden="true"><use href="#leaf"/></svg>
+        farmwagon<span class="brand-dot">.</span>
+      </button>
+      <div class="header-actions">
+        <button class="header-button seat-button" id="changeSeatButton" type="button">Change seat</button>
+        <button class="header-button bag-button" id="bagButton" type="button" aria-haspopup="dialog" aria-controls="cartDrawer">
+          Order bag <span class="bag-count" id="bagCount">0</span>
+        </button>
+      </div>
     </header>
+
     <main>
-      <section class="landing-hero" aria-labelledby="landing-title">
-        <div class="hero-copy">
-          <p class="eyebrow">Same makhana. Different energy.</p>
-          <h1 id="landing-title" tabindex="-1">Where do<br>you <span>sit?</span></h1>
-          <p class="intro">One seriously good snack. Three ways to explain it.<br>Pick your classroom personality. We’ll do the rest.</p>
-          <div class="tiny-note"><svg aria-hidden="true"><use href="#leaf"/></svg>A little nostalgia. A whole lot of crunch.</div>
-        </div>
-        <div class="product-stage" role="img" aria-label="Illustration of a green Farmwagon sealed makhana can surrounded by makhana">
-          <div class="halo"></div>
-          <span class="little-star" aria-hidden="true">✳</span>
-          <svg class="can landing-can" aria-hidden="true"><use href="#product-can"/></svg>
-          <div class="stage-label" aria-hidden="true">small snack.<br><span>big main<br>character energy.</span></div>
-          <svg class="floating-puff puff-one" aria-hidden="true"><use href="#puff"/></svg>
-          <svg class="floating-puff puff-two" aria-hidden="true"><use href="#puff"/></svg>
-          <svg class="floating-puff puff-three" aria-hidden="true"><use href="#puff"/></svg>
-          <span class="stage-caption">Farmwagon makhana · Your new desk mate</span>
+      <section id="landingView" class="landing shell" aria-labelledby="landingTitle">
+        <div class="landing-grid">
+          <div class="landing-copy reveal">
+            <p class="eyebrow">School nostalgia. Farm-grown good.</p>
+            <h1 id="landingTitle">Pick your seat.<br>Find your <span class="marker">good.</span></h1>
+            <p>One farm, two everyday superfoods, and three wonderfully different ways to choose them. Your classroom personality sets the vibe. The product facts stay real.</p>
+            <button class="primary-button" id="openSeatButton" type="button">Take the nostalgia test <span aria-hidden="true">↗</span></button>
+            <div class="hero-points" aria-label="Product highlights">
+              <span>Bihar makhana</span>
+              <span>Farm-grown moringa</span>
+              <span>Mobile-first ordering</span>
+            </div>
+          </div>
+          <div class="hero-art reveal" role="img" aria-label="Graphic illustrations of Farmwagon makhana and moringa products">
+            <span class="hero-sticker">Two products.<br>Three personalities.</span>
+            <span class="hero-doodle" aria-hidden="true">✳</span>
+            <svg class="hero-can" aria-hidden="true"><use href="#product-can"/></svg>
+            <div class="hero-packet" data-pack="moringa"></div>
+            <svg class="floating-puff puff-one" aria-hidden="true"><use href="#puff"/></svg>
+            <svg class="floating-puff puff-two" aria-hidden="true"><use href="#puff"/></svg>
+            <span class="hero-caption">A little good, every day · Classroom edition</span>
+          </div>
         </div>
       </section>
-      <section class="selection" aria-labelledby="selection-title">
-        <div class="section-heading"><h2 id="selection-title">Choose your seat</h2><p>No wrong answers. Just different vibes.</p></div>
-        <div class="cards">
-          <button type="button" class="seat-card back-card" data-choice="back">
-            <div class="card-top"><span class="seat-number">SEAT 01 / THE BACK</span><span class="pill">Unfiltered</span></div>
-            <div class="seat-art" aria-hidden="true"><svg><use href="#back-art"/></svg><span class="art-aside">attendance? optional.<br>snacking? compulsory.</span></div>
-            <h3>Backbencher</h3>
-            <p>Zero filter. Full flavour. A little roast with<br>your roasted makhana.</p>
-            <div class="card-bottom"><span>Let’s cause a little crunch</span><span class="arrow" aria-hidden="true">↗</span></div>
-          </button>
-          <button type="button" class="seat-card middle-card" data-choice="middle">
-            <div class="card-top"><span class="seat-number">SEAT 02 / THE MIDDLE</span><span class="pill">Best of both</span></div>
-            <div class="seat-art" aria-hidden="true"><svg><use href="#middle-art"/></svg><span class="art-aside">a little focus.<br>a little daydream.</span></div>
-            <h3>Middle row student</h3>
-            <p>A bit of wit. A bit of wisdom. The perfect<br>balance of fun and functional.</p>
-            <div class="card-bottom"><span>Find my happy middle</span><span class="arrow" aria-hidden="true">↗</span></div>
-          </button>
-          <button type="button" class="seat-card front-card" data-choice="front">
-            <div class="card-top"><span class="seat-number">SEAT 03 / THE FRONT</span><span class="pill">To the point</span></div>
-            <div class="seat-art" aria-hidden="true"><svg><use href="#front-art"/></svg><span class="art-aside">NOTES READY.<br>SNACK SORTED. ✓</span></div>
-            <h3>Front row student</h3>
-            <p>All the good stuff. None of the noise.<br>Consider this your well-organised snack break.</p>
-            <div class="card-bottom"><span>Give me the essentials</span><span class="arrow" aria-hidden="true">↗</span></div>
-          </button>
+
+      <div id="personaView" class="persona-view" hidden>
+        <section class="persona-hero shell" aria-labelledby="personaTitle">
+          <div class="persona-copy reveal">
+            <span class="persona-tag" id="personaTag"></span>
+            <h1 id="personaTitle" tabindex="-1"></h1>
+            <p id="personaIntro"></p>
+            <div class="persona-actions">
+              <button class="primary-button" id="browseProductsButton" type="button"><span id="personaCta"></span><span aria-hidden="true">↓</span></button>
+              <button class="secondary-button" type="button" data-change-seat>Choose another seat</button>
+            </div>
+          </div>
+          <div class="persona-art reveal" role="img" aria-label="Graphic Farmwagon product scene styled for the selected classroom personality">
+            <svg class="persona-seat-art" id="personaSeatArt" aria-hidden="true"></svg>
+            <svg class="hero-can" aria-hidden="true"><use href="#product-can"/></svg>
+            <div class="hero-packet" data-pack="moringa"></div>
+            <svg class="floating-puff puff-two" aria-hidden="true"><use href="#puff"/></svg>
+            <span class="persona-art-note" id="personaArtNote"></span>
+          </div>
+        </section>
+
+        <section class="memory-strip">
+          <div class="shell">
+            <div class="memory-strip-heading reveal">
+              <h2 id="memoryHeading"></h2>
+              <span>Same products · Your kind of energy</span>
+            </div>
+            <div class="persona-lines" id="personaLines"></div>
+          </div>
+        </section>
+
+        <section class="collection" id="collection" aria-labelledby="collectionTitle">
+          <div class="shell">
+            <div class="section-heading reveal">
+              <h2 id="collectionTitle">Farm-grown choices, clearly packed.</h2>
+              <p>Explore raw makhana, flavoured makhana, and moringa leaf powder. Choose a pack, see the exact price, and build an order request from your phone.</p>
+            </div>
+            <div class="product-grid">
+              <button class="product-card raw reveal" type="button" data-product="raw">
+                <span class="product-card-top"><span class="product-kicker">01 · Bihar wetlands</span><span class="from-price">From ₹120</span></span>
+                <span class="product-card-art"><span data-pack="raw"></span></span>
+                <span class="product-card-copy">
+                  <span class="visually-hidden">Explore </span>
+                  <h3>Raw Makhana</h3>
+                  <p>Handpicked, naturally fresh, crunchy makhana in practical standing pouches.</p>
+                  <span class="product-card-bottom"><span>Choose 100g, 200g or 500g</span><span aria-hidden="true">↗</span></span>
+                </span>
+              </button>
+              <button class="product-card flavoured reveal" type="button" data-product="flavoured">
+                <span class="product-card-top"><span class="product-kicker">02 · Olive oil roasted</span><span class="from-price">From ₹80</span></span>
+                <span class="product-card-art"><span data-pack="flavoured"></span></span>
+                <span class="product-card-copy">
+                  <span class="visually-hidden">Explore </span>
+                  <h3>Flavoured Makhana</h3>
+                  <p>Crisp, savoury jars in Peri Peri, Himalayan Pink Salt, and Mint.</p>
+                  <span class="product-card-bottom"><span>Choose flavour and jar size</span><span aria-hidden="true">↗</span></span>
+                </span>
+              </button>
+              <button class="product-card moringa reveal" type="button" data-product="moringa">
+                <span class="product-card-top"><span class="product-kicker">03 · Our own farm</span><span class="from-price">From ₹80</span></span>
+                <span class="product-card-art"><span data-pack="moringa"></span></span>
+                <span class="product-card-copy">
+                  <span class="visually-hidden">Explore </span>
+                  <h3>Moringa Leaf Powder</h3>
+                  <p>Organically grown leaves, solar-dried and packed as an everyday wellness staple.</p>
+                  <span class="product-card-bottom"><span>Choose 100g or 250g</span><span aria-hidden="true">↗</span></span>
+                </span>
+              </button>
+            </div>
+            <div class="proof-strip reveal" aria-label="Farmwagon product promises">
+              <div class="proof-item"><strong>Origin-led sourcing</strong><span>Bihar wetlands for makhana; organically grown moringa from our own farm.</span></div>
+              <div class="proof-item"><strong>Pack-first transparency</strong><span>Final ingredients, nutrition, allergens, certification, and storage information stay on the supplied pack.</span></div>
+              <div class="proof-item"><strong>Simple pricing</strong><span>Exact pack prices are shown here. GST and shipping are added at checkout.</span></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section id="productView" class="product-view" hidden aria-labelledby="productTitle">
+        <div class="shell">
+          <button class="back-link" id="backToCollectionButton" type="button">← Back to all products</button>
+          <div class="product-layout">
+            <div class="product-stage reveal" id="productStage" role="img" aria-label="Graphic product pack illustration">
+              <div id="productPackSlot"></div>
+              <span class="product-sticker" id="productSticker"></span>
+            </div>
+            <div class="product-information reveal">
+              <span class="persona-tag" id="productTag"></span>
+              <h1 id="productTitle" tabindex="-1"></h1>
+              <p class="product-intro" id="productIntro"></p>
+              <ul class="product-facts" id="productFacts"></ul>
+              <fieldset class="option-fieldset" id="flavourFieldset" hidden>
+                <legend>Choose your flavour</legend>
+                <div class="option-buttons" id="flavourButtons"></div>
+              </fieldset>
+              <fieldset class="option-fieldset">
+                <legend>Choose your pack</legend>
+                <div class="option-buttons" id="packButtons"></div>
+              </fieldset>
+              <div class="price-panel">
+                <div class="selected-price"><small>Selected pack</small><strong id="selectedPrice">₹0</strong></div>
+                <button class="primary-button add-button" id="addToOrderButton" type="button">Add to order <span aria-hidden="true">＋</span></button>
+              </div>
+              <p class="checkout-note">GST and shipping charges are calculated at checkout. Final product information should always be verified on the supplied pack.</p>
+            </div>
+          </div>
+          <div class="product-story" id="productStory"></div>
         </div>
-        <p class="auto-note"><svg aria-hidden="true"><use href="#clock"/></svg>Can’t decide? We’ll save you a front-row seat in <span id="countdown">40</span>s.</p>
       </section>
     </main>
-    <footer><span>© <span class="year">2026</span> Farmwagon</span><span class="footer-center">Thoughtfully packed <span>✳</span> Unapologetically crunchy</span><span>Made for every kind of you.</span></footer>
+
+    <footer class="site-footer shell">
+      <span>© <span id="year"></span> Farmwagon</span>
+      <span class="footer-center">Farm-grown <span>✳</span> Unapologetically graphic</span>
+      <span>Made for every kind of you.</span>
+      <p class="product-disclaimer">Product illustrations are conceptual. Health, nutrition, organic certification, ingredient, allergen, storage, and seal claims must match the final product labels and supporting documentation.</p>
+    </footer>
   </div>
 
-  <div id="experience" class="experience" hidden>
-    <div class="shell">
-      <header>
-        <a class="brand" href="#" data-home aria-label="Farmwagon home"><svg aria-hidden="true"><use href="#leaf"/></svg>farmwagon<span class="brand-dot">.</span></a>
-        <button type="button" class="back-button" data-home>← Choose another seat</button>
-      </header>
-      <main>
-        <section class="detail-hero" aria-labelledby="detail-title">
-          <div>
-            <span class="detail-tag" id="detail-tag"></span>
-            <h1 id="detail-title" tabindex="-1"></h1>
-            <p class="intro" id="detail-intro"></p>
-            <a class="detail-cta" href="#inside"><span id="detail-cta"></span><span aria-hidden="true">↓</span></a>
-          </div>
-          <div class="detail-stage" role="img" aria-label="Illustration of the Farmwagon sealed makhana can">
-            <div class="halo"></div>
-            <svg class="can" aria-hidden="true"><use href="#product-can"/></svg>
-            <svg class="floating-puff puff-one" aria-hidden="true"><use href="#puff"/></svg>
-            <svg class="floating-puff puff-three" aria-hidden="true"><use href="#puff"/></svg>
-            <span class="detail-sticker" id="detail-sticker"></span>
-          </div>
-        </section>
-        <div class="ticker" aria-hidden="true"><div class="ticker-track" id="detail-ticker"></div></div>
-        <section class="detail-section" id="inside" aria-labelledby="inside-title">
-          <p class="eyebrow reveal" id="inside-eyebrow"></p>
-          <h2 class="reveal" id="inside-title"></h2>
-          <div class="benefits" id="benefits"></div>
-        </section>
-        <section class="closing reveal">
-          <div><h2 id="closing-title"></h2><p id="closing-copy"></p></div>
-          <button type="button" class="back-button" data-home>← Back to the classroom</button>
-        </section>
-        <p class="product-disclaimer">Product illustration is conceptual. Refer to the actual pack for ingredients, allergens, nutritional information, storage instructions, and seal condition.</p>
-      </main>
-      <footer><span>© <span class="year">2026</span> Farmwagon</span><span class="footer-center">Same can. Your kind of crunch.</span><span>Made for every kind of you.</span></footer>
+  <div class="seat-modal" id="seatModal" role="dialog" aria-modal="true" aria-labelledby="seatModalTitle" aria-describedby="seatModalDescription" hidden>
+    <div class="memory-dialog" tabindex="-1">
+      <div class="modal-topline">
+        <span class="roll-call">Roll call begins</span>
+        <span class="edition-chip">School + college memories</span>
+      </div>
+      <div class="modal-copy">
+        <p class="eyebrow">Before we open the tiffin</p>
+        <h1 id="seatModalTitle">Which seat still feels like <span class="marker">home?</span></h1>
+        <p id="seatModalDescription">Choose your most nostalgic school or college memory. We will match the energy—not change the product facts.</p>
+      </div>
+      <div class="memory-options">
+        <button class="memory-option back" type="button" data-choice="back">
+          <span class="option-number">Seat 01 · Last bench</span>
+          <svg class="option-art" aria-hidden="true"><use href="#back-art"/></svg>
+          <h2>Jugaadu Backbenchers</h2>
+          <p>Attendance optional. Jugaad and snack game compulsory.</p>
+          <span class="option-arrow" aria-hidden="true">↗</span>
+        </button>
+        <button class="memory-option middle" type="button" data-choice="middle">
+          <span class="option-number">Seat 02 · The middle</span>
+          <svg class="option-art" aria-hidden="true"><use href="#middle-art"/></svg>
+          <h2>Creative Middle Row</h2>
+          <p>Half notes. Full imagination. Best of every world.</p>
+          <span class="option-arrow" aria-hidden="true">↗</span>
+        </button>
+        <button class="memory-option front" type="button" data-choice="front">
+          <span class="option-number">Seat 03 · First row</span>
+          <svg class="option-art" aria-hidden="true"><use href="#front-art"/></svg>
+          <h2>Topper Front Row</h2>
+          <p>Every label read. Every detail checked. Obviously.</p>
+          <span class="option-arrow" aria-hidden="true">↗</span>
+        </button>
+      </div>
+      <p class="modal-note">No wrong answer. You can change your seat any time.</p>
     </div>
   </div>
+
+  <div class="cart-backdrop" id="cartBackdrop" hidden></div>
+  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" hidden>
+    <div class="cart-header">
+      <div><span class="product-kicker">Your mobile order</span><h2 id="cartTitle">The good bag</h2></div>
+      <button class="close-button" id="closeCartButton" type="button" aria-label="Close order bag">×</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div class="cart-total"><span>Product subtotal</span><strong id="cartTotal">₹0</strong></div>
+      <button class="primary-button share-order" id="shareOrderButton" type="button">Share order request <span aria-hidden="true">↗</span></button>
+      <p class="cart-help">Uses the native share sheet on supported iOS and Android phones. GST and shipping are added at checkout.</p>
+    </div>
+  </aside>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
   <script>
-    const stories = {
+    const seats = {
       back: {
-        tag: 'Seat 01 / Backbench energy',
-        title: 'Bro. Syllabus chhodo. Crunch pakdo.',
-        intro: 'Lecture going on. Brain gone off. Then Farmwagon makhana enters the chat. Roasted little puffs in a sealed can. Full snack scene, zero boring explanation. English thoda broken. Crunch fully working.',
-        cta: 'Okay but what is this?', sticker: 'Topper nahi. Top snack.',
-        ticker: ['✳ LAST BENCH. FIRST BITE.', '✳ LESS BLAH. MORE CRUNCH.', '✳ CAN WE SKIP TO SNACK BREAK?'],
-        eyebrow: 'Important notes. Not in exam.',
-        heading: 'Small puff. Full attitude.',
-        benefits: [
-          ['Makhana hai, magic nahi.', 'Fox nuts, aka popped water lily seeds. Light, crisp, roasted little legends. Fancy name bolke impress karna? Your wish, bro. We just here for the crunch.'],
-          ['Sealed can. Scene sorted.', 'No sad packet doing gymnastics in your bag. A proper sealed can for your makhana. Check seal before opening. Even backbenchers have standards, okay?'],
-          ['Break ka main character.', 'Between lectures, during a movie, after one very long “quick call”. Open, munch, enjoy. Sharing with front row? Optional. Being smug? Natural.']
-        ],
-        closingTitle: 'Attendance low. Snack game high.',
-        closingCopy: 'Farmwagon makhana. For that “bas ek aur” moment. Actual ingredients and nutrition? Pack pe padh lena. We roast the vibe, not the facts.'
+        label: 'Seat 01 · Jugaadu Backbenchers',
+        title: 'Bunk karenge. Aish karenge. Crunch sorted.',
+        intro: 'Last-bench confidence meets farm-grown good. Makhana chahiye? Moringa powder chahiye? Scene simple hai: choose karo, bag banao, hero ban jao.',
+        cta: 'Jugaad my snack',
+        art: '#back-art',
+        artNote: 'Last minute. Still legendary.',
+        memoryHeading: 'Three rules from the last bench.',
+        lines: [
+          'Bunk karenge, aish karenge — sab chill hai yaar.',
+          'You need makhana or moringa powder. I sell makhana and moringa powder. Deal simple hai.',
+          'Exam se ek din pehle syllabus cover kiya; order bhi last moment pe karke hero ban jayenge.'
+        ]
       },
       middle: {
-        tag: 'Seat 02 / A happy middle',
-        title: 'A little focus. A little flavour.',
-        intro: 'For the note-taker with doodles in the margins. Meet Farmwagon makhana: roasted, delightfully crisp puffs in a sealed can. A thoughtful little pause between the things you have to do and the things you love.',
-        cta: 'Meet your break-time muse', sticker: 'Balance, with a crunch.',
-        ticker: ['✳ MAKE ROOM FOR A LITTLE JOY', '✳ A CRISP CHANGE OF PACE', '✳ YOUR DESK’S COLOURFUL PLUS-ONE'],
-        eyebrow: 'The sweet spot of snack time',
-        heading: 'Good breaks make bright days.',
-        benefits: [
-          ['A familiar favourite, reimagined.', 'Makhana, also known as fox nuts or popped water lily seeds, brings a delicate crunch to your everyday. Roasted and ready for a change of pace.'],
-          ['A can with a plan.', 'A sealed can keeps your snack neatly packed until you are ready to open it. A tidy companion for your desk, your bag, and your next little adventure.'],
-          ['Fits between everything.', 'A creative brainstorm. An afternoon chapter. A catch-up with friends. There is no perfect time for a break—just a little space you make for yourself.']
-        ],
-        closingTitle: 'Your everyday, with a little extra.',
-        closingCopy: 'Not too serious. Not all play. Just Farmwagon makhana and a moment that is entirely yours. Pick a different seat whenever the mood changes.'
+        label: 'Seat 02 · Creative Middle Row',
+        title: 'All-rounder energy, snack edition.',
+        intro: 'A little research, a little instinct, and a colourful answer that actually makes sense. Explore every Farmwagon option without turning snack time into homework.',
+        cta: 'Find my smart pick',
+        art: '#middle-art',
+        artNote: 'Thoda focus. Full imagination.',
+        memoryHeading: 'The middle row has range.',
+        lines: [
+          'Bro, all-rounder hona mandatory hai.',
+          'Best makhana aur moringa powder choose karenge.',
+          'Smart work: thoda research, thodi mehnat, phir order. Isme kaunsi badi baat hai?'
+        ]
       },
       front: {
-        tag: 'Seat 03 / The essentials',
-        title: 'A considered choice. A satisfying crunch.',
-        intro: 'Farmwagon makhana offers roasted fox nuts in a sealed can. A straightforward snack for your workday, study session, or time away from the screen.',
-        cta: 'Explore the product', sticker: 'Simply. Clearly. Crunchy.',
-        ticker: ['ROASTED MAKHANA', 'SEALED CAN', 'AN EVERYDAY SNACK'],
-        eyebrow: 'Product overview',
-        heading: 'The details that matter.',
-        benefits: [
-          ['The product', 'Makhana, commonly called fox nuts or popped water lily seeds, has a light, crisp texture. Farmwagon brings this familiar snack to your daily routine in a roasted format.'],
-          ['The packaging', 'Supplied in a sealed can. Check that the seal is intact before opening, and follow the storage and consumption instructions printed on the product label.'],
-          ['The occasion', 'Suitable for a pause between meetings, a study break, or a relaxed evening. Consult the pack for serving information, ingredients, allergens, and nutritional details.']
-        ],
-        closingTitle: 'A simple addition to your day.',
-        closingCopy: 'Farmwagon makhana. Clearly presented, thoughtfully packed, and ready for your next snack break. For verified product specifications, always refer to the actual packaging.'
+        label: 'Seat 03 · Topper Front Row',
+        title: 'No nonsense. Only perfection.',
+        intro: 'Read the label, compare every pack, and choose confidently for yourself and your loved ones. Clear details, exact prices, and no distracting guesswork.',
+        cta: 'Review every detail',
+        art: '#front-art',
+        artNote: 'Label read. Choice made. ✓',
+        memoryHeading: 'Details first. Best-in-town badge next.',
+        lines: [
+          'No nonsense. Only perfection.',
+          'Read the label and sweat the details to choose the best makhana or moringa powder for you and your loved ones.',
+          'Explore every option, choose the best, and earn the best-in-town badge.'
+        ]
       }
     };
-    const landing = document.getElementById('landing');
-    const experience = document.getElementById('experience');
+
+    const products = {
+      raw: {
+        name: 'Raw Makhana',
+        tag: 'Bihar wetlands · Standing pouch',
+        intro: 'Handpicked makhana sourced from the wetlands of Bihar and packed naturally fresh from the farm for a clean, satisfying crunch.',
+        sticker: 'Farm fresh. Naturally crunchy.',
+        stageColor: '#e5edd0',
+        facts: ['Sourced from the wetlands of Bihar', 'Handpicked and naturally farm-fresh', 'Crunchy taste with a protein-rich product profile'],
+        variants: [{ label: '100g', price: 120 }, { label: '200g', price: 240 }, { label: '500g', price: 600 }],
+        flavours: [],
+        story: [
+          ['01', 'Where it starts', 'Wetland-sourced makhana from Bihar, selected for a naturally fresh product story.'],
+          ['02', 'What you get', 'A clean raw makhana format with a light, crunchy bite and practical standing-pouch packaging.'],
+          ['03', 'What to verify', 'Check the final pack for nutrition, ingredients, allergens, storage, serving guidance, and seal condition.']
+        ]
+      },
+      flavoured: {
+        name: 'Flavoured Makhana',
+        tag: 'Olive oil roasted · PET jar',
+        intro: 'Roasted in olive oil at a carefully controlled temperature for a crisp, savoury bite designed to wake up your taste buds.',
+        sticker: 'Three flavours. One crisp obsession.',
+        stageColor: '#ffe4cf',
+        facts: ['Roasted in olive oil for a crisp finish', 'Available in Peri Peri, Himalayan Pink Salt, and Mint', 'Packed in a convenient PET jar'],
+        variants: [{ label: '30g', price: 80 }, { label: '60g', price: 160 }, { label: '90g', price: 240 }],
+        flavours: ['Peri Peri', 'Himalayan Pink Salt', 'Mint'],
+        story: [
+          ['01', 'The roast', 'Prepared at a carefully controlled temperature in olive oil for a crispy, savoury texture.'],
+          ['02', 'The flavour', 'Pick the boldness of Peri Peri, the simplicity of Himalayan Pink Salt, or the freshness of Mint.'],
+          ['03', 'The jar', 'A compact PET jar for desk drawers, travel bags, movie breaks, and strategic snack emergencies.']
+        ]
+      },
+      moringa: {
+        name: 'Moringa Leaf Powder',
+        tag: 'Our own farm · Standing pouch',
+        intro: 'Organically grown moringa leaves from our own farm, solar-dried and packed as a practical everyday wellness ingredient.',
+        sticker: 'Farm-grown green goodness.',
+        stageColor: '#dce8c8',
+        facts: ['Organically grown on our own farm', 'Organic certification available', 'Solar-dried wellness ingredient with vitamins, minerals, and antioxidants'],
+        variants: [{ label: '100g', price: 80 }, { label: '250g', price: 200 }],
+        flavours: [],
+        story: [
+          ['01', 'The farm', 'Moringa grown organically on our own farm, with supporting organic certification available.'],
+          ['02', 'The process', 'Leaves are solar-dried before being milled and packed in practical standing pouches.'],
+          ['03', 'The routine', 'Use only according to the final pack guidance and consult an appropriate professional for individual dietary needs.']
+        ]
+      }
+    };
+
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    let timer;
+    const app = document.getElementById('app');
+    const landingView = document.getElementById('landingView');
+    const personaView = document.getElementById('personaView');
+    const productView = document.getElementById('productView');
+    const seatModal = document.getElementById('seatModal');
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartBackdrop = document.getElementById('cartBackdrop');
+    const toast = document.getElementById('toast');
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    let selectedSeat = sessionStorage.getItem('farmwagon-seat');
+    let currentProductId = null;
+    let selectedVariantIndex = 0;
+    let selectedFlavour = '';
     let observer;
-    let deadline;
-    const setText = (id, value) => { document.getElementById(id).textContent = value; };
+    let toastTimer;
+    let lastFocusedElement;
 
-    function stopCountdown() {
-      window.clearInterval(timer);
+    function loadCart() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('farmwagon-order') || '[]');
+        return Array.isArray(saved) ? saved : [];
+      } catch (error) {
+        console.warn('Farmwagon order could not be restored.', error);
+        return [];
+      }
     }
 
-    function startCountdown() {
-      stopCountdown();
-      deadline = Date.now() + 40000;
-      setText('countdown', '40');
-      timer = window.setInterval(() => {
-        const remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
-        setText('countdown', String(remaining));
-        if (remaining === 0) {
-          stopCountdown();
-          window.location.hash = 'front';
-        }
-      }, 250);
+    let cart = loadCart();
+
+    function saveCart() {
+      localStorage.setItem('farmwagon-order', JSON.stringify(cart));
     }
 
-    function revealSections() {
+    function formatPrice(price) {
+      return new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: 'INR',
+        maximumFractionDigits: 0
+      }).format(price);
+    }
+
+    function createPack(productId, size = 'card') {
+      const pack = document.createElement('span');
+      pack.className = `product-pack ${productId} ${size}`;
+
+      if (productId === 'moringa') {
+        const leaf = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        leaf.setAttribute('class', 'pack-leaf');
+        leaf.setAttribute('aria-hidden', 'true');
+        const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+        use.setAttribute('href', '#leaf');
+        leaf.append(use);
+        pack.append(leaf);
+      }
+
+      const brand = document.createElement('span');
+      brand.className = 'pack-brand';
+      brand.textContent = 'farmwagon.';
+      const name = document.createElement('strong');
+      name.className = 'pack-name';
+      name.textContent = productId === 'raw' ? 'RAW MAKHANA' : productId === 'flavoured' ? 'FLAVOURED MAKHANA' : 'MORINGA LEAF POWDER';
+      const note = document.createElement('span');
+      note.className = 'pack-note';
+      note.textContent = productId === 'raw' ? 'Farm fresh crunch' : productId === 'flavoured' ? 'Olive oil roasted' : 'Organically grown';
+      pack.append(brand, name, note);
+      return pack;
+    }
+
+    function populatePackGraphics() {
+      document.querySelectorAll('[data-pack]').forEach(slot => {
+        slot.replaceChildren(createPack(slot.dataset.pack, slot.closest('.product-card-art') ? 'card' : 'small'));
+      });
+    }
+
+    function routeTo(route) {
+      const nextHash = route ? `#${route}` : '';
+      if (window.location.hash === nextHash) {
+        renderRoute();
+      } else {
+        window.location.hash = nextHash;
+      }
+    }
+
+    function showView(view) {
+      landingView.hidden = view !== 'landing';
+      personaView.hidden = view !== 'persona';
+      productView.hidden = view !== 'product';
+    }
+
+    function openSeatModal() {
+      lastFocusedElement = document.activeElement;
+      seatModal.hidden = false;
+      app.inert = true;
+      document.body.classList.add('modal-open');
+      requestAnimationFrame(() => seatModal.querySelector('.memory-dialog').focus());
+    }
+
+    function closeSeatModal() {
+      seatModal.hidden = true;
+      app.inert = false;
+      document.body.classList.remove('modal-open');
+    }
+
+    function renderLanding() {
+      showView('landing');
+      document.body.removeAttribute('data-seat');
+      themeMeta.setAttribute('content', '#f7f3e8');
+      document.title = 'Farmwagon — Pick your seat. Find your good.';
+      openSeatModal();
+      observeReveals();
+    }
+
+    function renderPersona(seatId) {
+      const seat = seats[seatId];
+      selectedSeat = seatId;
+      sessionStorage.setItem('farmwagon-seat', seatId);
+      closeSeatModal();
+      showView('persona');
+      document.body.dataset.seat = seatId;
+      themeMeta.setAttribute('content', { back: '#e6f4bd', middle: '#fff0dd', front: '#eaf3fb' }[seatId]);
+      document.title = `Farmwagon — ${seat.label.split('· ')[1]}`;
+      document.getElementById('personaTag').textContent = seat.label;
+      document.getElementById('personaTitle').textContent = seat.title;
+      document.getElementById('personaIntro').textContent = seat.intro;
+      document.getElementById('personaCta').textContent = seat.cta;
+      document.getElementById('personaArtNote').textContent = seat.artNote;
+      document.getElementById('memoryHeading').textContent = seat.memoryHeading;
+      document.getElementById('personaSeatArt').replaceChildren();
+      const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+      use.setAttribute('href', seat.art);
+      document.getElementById('personaSeatArt').append(use);
+
+      const lineContainer = document.getElementById('personaLines');
+      lineContainer.replaceChildren(...seat.lines.map((line, index) => {
+        const article = document.createElement('article');
+        article.className = 'persona-line reveal';
+        const number = document.createElement('span');
+        number.className = 'line-number';
+        number.textContent = `0${index + 1}`;
+        const copy = document.createElement('p');
+        copy.textContent = line;
+        article.append(number, copy);
+        return article;
+      }));
+
+      observeReveals();
+      requestAnimationFrame(() => document.getElementById('personaTitle').focus({ preventScroll: true }));
+    }
+
+    function renderProduct(productId) {
+      const product = products[productId];
+      currentProductId = productId;
+      selectedVariantIndex = 0;
+      selectedFlavour = product.flavours[0] || '';
+      if (!seats[selectedSeat]) selectedSeat = 'front';
+      showView('product');
+      closeSeatModal();
+      document.body.dataset.seat = selectedSeat;
+      document.title = `Farmwagon — ${product.name}`;
+      themeMeta.setAttribute('content', product.stageColor);
+
+      document.getElementById('productStage').style.setProperty('--product-bg', product.stageColor);
+      document.getElementById('productPackSlot').replaceChildren(createPack(productId, 'large'));
+      document.getElementById('productSticker').textContent = product.sticker;
+      document.getElementById('productTag').textContent = product.tag;
+      document.getElementById('productTitle').textContent = product.name;
+      document.getElementById('productIntro').textContent = product.intro;
+      document.getElementById('productFacts').replaceChildren(...product.facts.map(fact => {
+        const item = document.createElement('li');
+        item.textContent = fact;
+        return item;
+      }));
+
+      const flavourFieldset = document.getElementById('flavourFieldset');
+      flavourFieldset.hidden = product.flavours.length === 0;
+      document.getElementById('flavourButtons').replaceChildren(...product.flavours.map(flavour => {
+        const button = document.createElement('button');
+        button.className = 'option-button';
+        button.type = 'button';
+        button.dataset.flavour = flavour;
+        button.setAttribute('aria-pressed', String(flavour === selectedFlavour));
+        button.textContent = flavour;
+        return button;
+      }));
+
+      document.getElementById('packButtons').replaceChildren(...product.variants.map((variant, index) => {
+        const button = document.createElement('button');
+        button.className = 'option-button';
+        button.type = 'button';
+        button.dataset.variantIndex = String(index);
+        button.setAttribute('aria-pressed', String(index === selectedVariantIndex));
+        button.textContent = `${variant.label} · ${formatPrice(variant.price)}`;
+        return button;
+      }));
+
+      document.getElementById('productStory').replaceChildren(...product.story.map(([number, title, copy]) => {
+        const article = document.createElement('article');
+        article.className = 'story-card reveal';
+        const count = document.createElement('span');
+        count.textContent = number;
+        const heading = document.createElement('h2');
+        heading.textContent = title;
+        const paragraph = document.createElement('p');
+        paragraph.textContent = copy;
+        article.append(count, heading, paragraph);
+        return article;
+      }));
+
+      updateSelectedPrice();
+      observeReveals();
+      requestAnimationFrame(() => document.getElementById('productTitle').focus({ preventScroll: true }));
+    }
+
+    function updateSelectedPrice() {
+      const product = products[currentProductId];
+      const variant = product.variants[selectedVariantIndex];
+      document.getElementById('selectedPrice').textContent = formatPrice(variant.price);
+      document.querySelectorAll('[data-variant-index]').forEach(button => {
+        button.setAttribute('aria-pressed', String(Number(button.dataset.variantIndex) === selectedVariantIndex));
+      });
+      document.querySelectorAll('[data-flavour]').forEach(button => {
+        button.setAttribute('aria-pressed', String(button.dataset.flavour === selectedFlavour));
+      });
+    }
+
+    function renderRoute() {
+      closeCart();
+      const route = decodeURIComponent(window.location.hash.slice(1));
+      if (Object.prototype.hasOwnProperty.call(seats, route)) {
+        renderPersona(route);
+      } else if (route.startsWith('product-') && Object.prototype.hasOwnProperty.call(products, route.slice(8))) {
+        renderProduct(route.slice(8));
+      } else {
+        renderLanding();
+      }
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    function observeReveals() {
       if (observer) observer.disconnect();
-      const sections = experience.querySelectorAll('.reveal');
-      sections.forEach(section => section.classList.remove('visible'));
-      if (!('IntersectionObserver' in window) || reducedMotion.matches) {
-        sections.forEach(section => section.classList.add('visible'));
+      const elements = document.querySelectorAll('.reveal:not([hidden])');
+      elements.forEach(element => element.classList.remove('visible'));
+      if (reducedMotion.matches || !('IntersectionObserver' in window)) {
+        elements.forEach(element => element.classList.add('visible'));
         return;
       }
       observer = new IntersectionObserver(entries => {
@@ -420,73 +2014,227 @@
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.12 });
-      sections.forEach(section => observer.observe(section));
+      }, { threshold: .12 });
+      elements.forEach(element => observer.observe(element));
     }
 
-    function render() {
-      const seat = window.location.hash.slice(1);
-      // The product anchor belongs to the current experience, not a new route.
-      if (seat === 'inside' && !experience.hidden) return;
-      stopCountdown();
-      const story = Object.hasOwn(stories, seat) ? stories[seat] : null;
-      landing.hidden = Boolean(story);
-      experience.hidden = !story;
-      if (story) {
-        experience.dataset.seat = seat;
-        document.body.style.setProperty('--page-bg', { back: '#e5eecc', middle: '#fff3e5', front: '#f4f6f8' }[seat]);
-        for (const [id, value] of Object.entries({
-          'detail-tag': story.tag, 'detail-title': story.title, 'detail-intro': story.intro,
-          'detail-cta': story.cta, 'detail-sticker': story.sticker,
-          'inside-eyebrow': story.eyebrow, 'inside-title': story.heading,
-          'closing-title': story.closingTitle, 'closing-copy': story.closingCopy
-        })) setText(id, value);
-        document.getElementById('detail-ticker').replaceChildren(...story.ticker.map(text => {
-          const item = document.createElement('span');
-          item.textContent = text;
-          return item;
-        }));
-        document.getElementById('benefits').replaceChildren(...story.benefits.map(([title, copy], index) => {
-          const article = document.createElement('article');
-          article.className = 'benefit reveal';
-          const number = document.createElement('span');
-          number.className = 'benefit-number';
-          number.textContent = `0${index + 1}`;
-          const heading = document.createElement('h3');
-          heading.textContent = title;
-          const paragraph = document.createElement('p');
-          paragraph.textContent = copy;
-          article.append(number, heading, paragraph);
-          return article;
-        }));
-        document.title = `Farmwagon — ${story.tag.split(' / ')[1]}`;
-        revealSections();
+    function addCurrentProduct() {
+      const product = products[currentProductId];
+      const variant = product.variants[selectedVariantIndex];
+      const key = [currentProductId, selectedFlavour || 'plain', variant.label].join(':');
+      const existing = cart.find(item => item.key === key);
+      if (existing) {
+        existing.quantity += 1;
       } else {
-        if (observer) observer.disconnect();
-        document.body.style.removeProperty('--page-bg');
-        document.title = 'Farmwagon — Pick your seat. Find your crunch.';
-        startCountdown();
+        cart.push({
+          key,
+          productId: currentProductId,
+          name: product.name,
+          flavour: selectedFlavour,
+          pack: variant.label,
+          price: variant.price,
+          quantity: 1
+        });
       }
-      window.scrollTo({ top: 0, behavior: 'instant' });
-      document.getElementById(story ? 'detail-title' : 'landing-title').focus({ preventScroll: true });
+      saveCart();
+      renderCart();
+      showToast(`${product.name} added to your order.`);
+    }
+
+    function cartQuantity() {
+      return cart.reduce((total, item) => total + item.quantity, 0);
+    }
+
+    function cartSubtotal() {
+      return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    }
+
+    function renderCart() {
+      document.getElementById('bagCount').textContent = String(cartQuantity());
+      document.getElementById('cartTotal').textContent = formatPrice(cartSubtotal());
+      document.getElementById('shareOrderButton').disabled = cart.length === 0;
+      const items = document.getElementById('cartItems');
+      if (cart.length === 0) {
+        const empty = document.createElement('p');
+        empty.className = 'empty-cart';
+        empty.textContent = 'Your good bag is waiting. Pick a product, choose a pack, and add it here.';
+        items.replaceChildren(empty);
+        return;
+      }
+
+      items.replaceChildren(...cart.map(item => {
+        const article = document.createElement('article');
+        article.className = 'cart-item';
+
+        const art = document.createElement('div');
+        art.className = 'cart-item-art';
+        art.append(createPack(item.productId, 'small'));
+
+        const copy = document.createElement('div');
+        copy.className = 'cart-item-copy';
+        const name = document.createElement('strong');
+        name.textContent = item.name;
+        const details = document.createElement('span');
+        details.textContent = [item.flavour, item.pack, formatPrice(item.price)].filter(Boolean).join(' · ');
+        copy.append(name, details);
+
+        const control = document.createElement('div');
+        control.className = 'quantity-control';
+        const decrement = document.createElement('button');
+        decrement.type = 'button';
+        decrement.dataset.cartAction = 'decrement';
+        decrement.dataset.key = item.key;
+        decrement.setAttribute('aria-label', `Decrease ${item.name} quantity`);
+        decrement.textContent = '−';
+        const quantity = document.createElement('span');
+        quantity.textContent = String(item.quantity);
+        const increment = document.createElement('button');
+        increment.type = 'button';
+        increment.dataset.cartAction = 'increment';
+        increment.dataset.key = item.key;
+        increment.setAttribute('aria-label', `Increase ${item.name} quantity`);
+        increment.textContent = '+';
+        control.append(decrement, quantity, increment);
+        article.append(art, copy, control);
+        return article;
+      }));
+    }
+
+    function openCart() {
+      lastFocusedElement = document.activeElement;
+      renderCart();
+      cartDrawer.hidden = false;
+      cartBackdrop.hidden = false;
+      app.inert = true;
+      document.body.classList.add('drawer-open');
+      document.getElementById('closeCartButton').focus();
+    }
+
+    function closeCart() {
+      if (cartDrawer.hidden) return;
+      cartDrawer.hidden = true;
+      cartBackdrop.hidden = true;
+      app.inert = false;
+      document.body.classList.remove('drawer-open');
+      if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') lastFocusedElement.focus();
+    }
+
+    function trapFocus(container, event) {
+      if (event.key !== 'Tab') return;
+      const focusable = [...container.querySelectorAll('button:not(:disabled), [href], [tabindex]:not([tabindex="-1"])')]
+        .filter(element => !element.hidden && element.getClientRects().length > 0);
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    function updateCartItem(key, direction) {
+      const item = cart.find(entry => entry.key === key);
+      if (!item) return;
+      item.quantity += direction;
+      if (item.quantity <= 0) cart = cart.filter(entry => entry.key !== key);
+      saveCart();
+      renderCart();
+    }
+
+    function buildOrderText() {
+      const lines = cart.map(item => `• ${item.name}${item.flavour ? ` — ${item.flavour}` : ''}, ${item.pack} × ${item.quantity}: ${formatPrice(item.price * item.quantity)}`);
+      return [
+        'Farmwagon order request',
+        '',
+        ...lines,
+        '',
+        `Product subtotal: ${formatPrice(cartSubtotal())}`,
+        'GST and shipping charges to be added at checkout.'
+      ].join('\n');
+    }
+
+    async function shareOrder() {
+      const text = buildOrderText();
+      try {
+        if (navigator.share) {
+          await navigator.share({ title: 'Farmwagon order request', text });
+          return;
+        }
+        await navigator.clipboard.writeText(text);
+        showToast('Order request copied. Share it with the Farmwagon team.');
+      } catch (error) {
+        if (error.name === 'AbortError') return;
+        console.error('Farmwagon order could not be shared.', error);
+        showToast('Could not share the order. Please try again.');
+      }
+    }
+
+    function showToast(message) {
+      window.clearTimeout(toastTimer);
+      toast.textContent = message;
+      toast.hidden = false;
+      toastTimer = window.setTimeout(() => { toast.hidden = true; }, 2800);
     }
 
     document.querySelectorAll('[data-choice]').forEach(button => {
-      button.addEventListener('click', () => { window.location.hash = button.dataset.choice; });
+      button.addEventListener('click', () => routeTo(button.dataset.choice));
+    });
+    document.querySelectorAll('[data-change-seat]').forEach(button => {
+      button.addEventListener('click', openSeatModal);
     });
     document.querySelectorAll('[data-home]').forEach(button => {
-      button.addEventListener('click', event => {
-        event.preventDefault();
-        window.location.hash = '';
-      });
+      button.addEventListener('click', () => routeTo(''));
     });
-    document.querySelector('.detail-cta').addEventListener('click', event => {
-      event.preventDefault();
-      document.getElementById('inside').scrollIntoView({ behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+    document.querySelectorAll('[data-product]').forEach(button => {
+      button.addEventListener('click', () => routeTo(`product-${button.dataset.product}`));
     });
-    document.querySelectorAll('.year').forEach(element => { element.textContent = new Date().getFullYear(); });
-    window.addEventListener('hashchange', render);
-    render();
+
+    document.getElementById('openSeatButton').addEventListener('click', openSeatModal);
+    document.getElementById('changeSeatButton').addEventListener('click', openSeatModal);
+    document.getElementById('browseProductsButton').addEventListener('click', () => {
+      document.getElementById('collection').scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+    });
+    document.getElementById('backToCollectionButton').addEventListener('click', () => routeTo(selectedSeat || 'front'));
+    document.getElementById('packButtons').addEventListener('click', event => {
+      const button = event.target.closest('[data-variant-index]');
+      if (!button) return;
+      selectedVariantIndex = Number(button.dataset.variantIndex);
+      updateSelectedPrice();
+    });
+    document.getElementById('flavourButtons').addEventListener('click', event => {
+      const button = event.target.closest('[data-flavour]');
+      if (!button) return;
+      selectedFlavour = button.dataset.flavour;
+      updateSelectedPrice();
+    });
+    document.getElementById('addToOrderButton').addEventListener('click', addCurrentProduct);
+    document.getElementById('bagButton').addEventListener('click', openCart);
+    document.getElementById('closeCartButton').addEventListener('click', closeCart);
+    cartBackdrop.addEventListener('click', closeCart);
+    document.getElementById('cartItems').addEventListener('click', event => {
+      const button = event.target.closest('[data-cart-action]');
+      if (!button) return;
+      updateCartItem(button.dataset.key, button.dataset.cartAction === 'increment' ? 1 : -1);
+    });
+    document.getElementById('shareOrderButton').addEventListener('click', shareOrder);
+    document.addEventListener('keydown', event => {
+      if (!seatModal.hidden) {
+        trapFocus(seatModal, event);
+        return;
+      }
+      if (!cartDrawer.hidden) trapFocus(cartDrawer, event);
+      if (event.key === 'Escape' && !cartDrawer.hidden) closeCart();
+    });
+    window.addEventListener('hashchange', renderRoute);
+    reducedMotion.addEventListener('change', observeReveals);
+
+    document.getElementById('year').textContent = String(new Date().getFullYear());
+    populatePackGraphics();
+    renderCart();
+    renderRoute();
   </script>
 </body>
 </html>
