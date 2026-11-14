@@ -1,10 +1,12 @@
 # fws
 
-Farmwagon's graphic, classroom-edition storefront. All styling, JavaScript, product illustrations, routing, and ordering interactions are embedded in `index.html`; no dependencies or build step are needed.
+Farmwagon's graphic, classroom-edition storefront. The page is a single `index.html` plus selected campaign photos in `images/`. No dependencies or build step are needed.
 
 Open `index.html` directly in a modern browser, or serve this directory with `python -m http.server 8000` and visit `http://localhost:8000`.
 
-The site opens with a nostalgic seat chooser:
+The site opens on a full-page classroom poster with a vertical seat chooser. Changing seats returns to that home page rather than opening a popup. Selected campaign photos live in `images/`.
+
+The nostalgic seats are:
 
 - **Jugaadu Backbenchers**
 - **Creative Middle Row**
@@ -16,4 +18,4 @@ The mobile-first order bag persists locally, updates quantities and subtotals, a
 
 ## Free hosting with GitHub Pages
 
-In this repository's **Settings → Pages → Build and deployment**, select **GitHub Actions** as the source. Pushes to `main` run the **Deploy website to GitHub Pages** workflow and publish the site at <https://cppxaxa.github.io/fws/>. The workflow can also be run manually from the Actions tab. Only `index.html` is included in the published artifact.
+In this repository's **Settings → Pages → Build and deployment**, select **GitHub Actions** as the source. Pushes to `main` run the **Deploy website to GitHub Pages** workflow and publish the site at <https://cppxaxa.github.io/fws/>. The workflow can also be run manually from the Actions tab. The published artifact includes `index.html` and `images/`.

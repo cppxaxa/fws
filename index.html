@@ -89,8 +89,7 @@
       outline: 3px solid #bd5a25;
       outline-offset: 4px;
     }
-    h1[tabindex="-1"]:focus,
-    .memory-dialog:focus { outline: none; }
+    h1[tabindex="-1"]:focus { outline: none; }
     .visually-hidden {
       position: absolute;
       width: 1px;
@@ -454,14 +453,26 @@
     }
     .start-poster-art {
       position: relative;
-      min-height: 250px;
+      min-height: 280px;
       isolation: isolate;
     }
-    .start-poster-art::before {
+    .start-poster-photo,
+    .persona-photo,
+    .product-card-art img,
+    .product-stage-photo {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .start-poster-photo {
       position: absolute;
-      inset: 18px 18px 8px;
-      border: 1px dashed rgba(23,60,44,.28);
-      border-radius: 50%;
+      inset: 0;
+    }
+    .start-poster-art::after {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(23,60,44,.08), rgba(23,60,44,.28));
       content: "";
     }
     .start-poster-badge {
@@ -478,26 +489,6 @@
       letter-spacing: 1.3px;
       text-transform: uppercase;
     }
-    .start-poster-can {
-      position: absolute;
-      z-index: 3;
-      left: 8%;
-      bottom: -28px;
-      width: min(46vw, 168px);
-      filter: drop-shadow(12px 16px 10px rgba(27,55,37,.2));
-      transform: rotate(-9deg);
-      animation: poster-can-bob 5s ease-in-out infinite;
-    }
-    .start-poster-packet {
-      position: absolute;
-      z-index: 4;
-      right: 9%;
-      bottom: -8px;
-      transform: rotate(8deg) scale(.92);
-      animation: poster-packet-bob 4.5s ease-in-out .4s infinite;
-    }
-    .start-poster .puff-one { top: 22%; left: 42%; }
-    .start-poster .puff-two { right: 6%; top: 18%; width: 46px; height: 46px; }
     .start-poster-sticker {
       position: absolute;
       z-index: 6;
@@ -538,97 +529,27 @@
       line-height: 1.55;
     }
 
-    .seat-modal {
-      position: fixed;
-      z-index: 100;
-      inset: 0;
-      display: grid;
-      align-items: end;
-      overflow: hidden;
-      background: rgba(17, 44, 32, .62);
-      overscroll-behavior: contain;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-    .memory-dialog {
-      position: relative;
-      width: 100%;
-      max-height: min(88dvh, 760px);
-      overflow: auto;
-      background:
-        linear-gradient(90deg, transparent 0 22px, rgba(190, 84, 55, .08) 22px 23px, transparent 23px),
-        repeating-linear-gradient(180deg, transparent 0 31px, rgba(42, 78, 59, .035) 31px 32px),
-        var(--paper);
-      border-radius: 28px 28px 0 0;
-      padding: 14px var(--safe-right) max(22px, env(safe-area-inset-bottom)) var(--safe-left);
-      animation: drawer-enter .4s cubic-bezier(.18,.84,.24,1) both;
-    }
-    .switcher-handle {
-      width: 46px;
-      height: 5px;
-      margin: 0 auto 16px;
-      border-radius: 999px;
-      background: rgba(23,60,44,.18);
-    }
-    .switcher-topline {
-      display: flex;
-      align-items: start;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 8px;
-    }
-    .switcher-topline h2 {
-      margin: 0;
-      font-size: clamp(32px, 8vw, 44px);
-      font-weight: 540;
-      letter-spacing: -1.6px;
-      line-height: .95;
-    }
-    .switcher-copy {
-      max-width: 34ch;
-      margin: 0 0 16px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.55;
-    }
     .memory-prompt {
       position: relative;
       z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
       margin-bottom: 10px;
       font-size: 9px;
       font-weight: 900;
       letter-spacing: 1.3px;
       text-transform: uppercase;
     }
-    .swipe-hint {
-      color: var(--muted);
-      font-weight: 750;
-      letter-spacing: .5px;
-      text-transform: none;
-    }
     .memory-options {
       position: relative;
       z-index: 2;
       display: grid;
-      grid-auto-columns: min(82vw, 300px);
-      grid-auto-flow: column;
+      grid-template-columns: 1fr;
       gap: 12px;
-      overflow-x: auto;
-      padding: 4px 3px 14px;
-      scroll-padding-inline: 3px;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
+      padding: 4px 0 8px;
     }
-    .memory-options::-webkit-scrollbar { display: none; }
     .memory-option {
       position: relative;
       display: grid;
-      min-height: 280px;
+      min-height: 240px;
       overflow: hidden;
       border: 1.5px solid var(--card-ink);
       border-radius: 16px;
@@ -636,7 +557,6 @@
       color: var(--card-ink);
       padding: 20px;
       box-shadow: 6px 6px 0 color-mix(in srgb, var(--card-ink) 24%, transparent);
-      scroll-snap-align: center;
       text-align: left;
       transition: transform .24s ease, box-shadow .24s ease;
     }
@@ -768,11 +688,21 @@
     .persona-art {
       min-height: 360px;
       border-color: color-mix(in srgb, var(--seat-ink) 22%, transparent);
-      background:
-        radial-gradient(circle at 50% 48%, color-mix(in srgb, var(--seat-accent) 48%, white) 0 34%, transparent 35%),
-        linear-gradient(135deg, rgba(255,255,255,.4), color-mix(in srgb, var(--seat-accent) 24%, transparent));
+      background: var(--seat-accent);
     }
-    .persona-art .hero-can { width: min(57vw, 245px); }
+    .persona-art::before { display: none; }
+    .persona-photo {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+    .persona-art::after {
+      position: absolute;
+      z-index: 2;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 42%, color-mix(in srgb, var(--seat-bg) 62%, transparent));
+      content: "";
+    }
     .persona-seat-art {
       position: absolute;
       z-index: 5;
@@ -946,17 +876,11 @@
     .product-card-art {
       position: relative;
       display: grid;
-      min-height: 230px;
-      place-items: center;
+      min-height: 220px;
+      overflow: hidden;
+      border-radius: 16px;
     }
-    .product-card-art::before {
-      position: absolute;
-      width: 205px;
-      height: 205px;
-      border: 1px dashed rgba(23,60,44,.3);
-      border-radius: 50%;
-      content: "";
-    }
+    .product-card-art img { min-height: 220px; }
     .product-card-copy {
       align-self: end;
     }
@@ -1126,31 +1050,12 @@
       display: grid;
       min-height: 430px;
       overflow: hidden;
-      place-items: center;
       border: 1px solid var(--line);
       border-radius: 24px;
       background: var(--product-bg, #e5edd0);
       isolation: isolate;
     }
-    .product-stage::before {
-      position: absolute;
-      width: min(75vw, 400px);
-      height: min(75vw, 400px);
-      border: 1px dashed rgba(23,60,44,.32);
-      border-radius: 50%;
-      content: "";
-      animation: spin 25s linear infinite;
-    }
-    .product-stage::after {
-      position: absolute;
-      z-index: -1;
-      width: min(62vw, 330px);
-      height: min(62vw, 330px);
-      border-radius: 50%;
-      background: rgba(255,255,255,.43);
-      content: "";
-    }
-    .product-stage .product-pack { transform: scale(1.25) rotate(-4deg); }
+    .product-stage-photo { min-height: 430px; }
     .product-sticker {
       position: absolute;
       z-index: 5;
@@ -1517,14 +1422,6 @@
       0%, 100% { transform: translateY(0) rotate(9deg); }
       50% { transform: translateY(-9px) rotate(5deg); }
     }
-    @keyframes poster-can-bob {
-      0%, 100% { transform: rotate(-9deg) translateY(0); }
-      50% { transform: rotate(-5deg) translateY(-8px); }
-    }
-    @keyframes poster-packet-bob {
-      0%, 100% { transform: rotate(8deg) scale(.92) translateY(0); }
-      50% { transform: rotate(5deg) scale(.92) translateY(-8px); }
-    }
     @keyframes puff-float {
       0%, 100% { transform: translateY(0) rotate(0); }
       50% { transform: translateY(-11px) rotate(8deg); }
@@ -1558,7 +1455,7 @@
       }
       .bag-button { gap: 5px; }
       .bag-count { min-width: 19px; height: 19px; }
-      .start-poster-art { min-height: 220px; }
+      .start-poster-art { min-height: 240px; }
       .start-poster-copy .eyebrow { letter-spacing: 1px; }
       .start-poster-copy h1 { font-size: clamp(40px, 13vw, 52px); }
       .start-poster-sticker {
@@ -1601,8 +1498,8 @@
         max-width: 105px;
         font-size: 14px;
       }
-      .product-stage { min-height: 380px; }
-      .product-stage .product-pack { transform: scale(1.08) rotate(-4deg); }
+      .product-stage,
+      .product-stage-photo { min-height: 320px; }
       .product-sticker {
         width: 84px;
         height: 84px;
@@ -1659,7 +1556,6 @@
     }
 
     @media (min-width: 560px) {
-      .memory-dialog { padding-left: max(30px, env(safe-area-inset-left)); padding-right: max(30px, env(safe-area-inset-right)); }
       .site-footer { grid-template-columns: 1fr auto 1fr; align-items: center; text-align: left; }
       .site-footer > :last-child { text-align: right; }
       .product-disclaimer { grid-column: 1 / -1; text-align: center; }
@@ -1679,20 +1575,10 @@
         align-self: end;
         padding: 36px 8px 36px 28px;
       }
-      .start-poster-can { left: 18%; bottom: 8%; width: 210px; }
-      .start-poster-packet { right: 8%; bottom: 12%; }
-      .memory-options {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        grid-auto-columns: auto;
-        grid-auto-flow: row;
-        overflow: visible;
-        padding: 4px 0 8px;
-        scroll-snap-type: none;
-      }
+      .memory-options { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .memory-option { min-height: 320px; }
       .memory-option h2 { margin-top: 132px; font-size: 28px; }
       .option-art { top: 39px; right: 50%; width: 145px; height: 115px; transform: translateX(50%); }
-      .swipe-hint { display: none; }
       .proof-strip { grid-template-columns: repeat(3, 1fr); }
       .product-story { grid-template-columns: repeat(3, 1fr); }
     }
@@ -1730,23 +1616,12 @@
       .persona-hero { padding-top: 65px; padding-bottom: 70px; }
       .persona-copy h1 { font-size: clamp(54px, 6vw, 80px); }
       .persona-art { min-height: 470px; }
-      .product-stage { min-height: 620px; }
+      .product-stage,
+      .product-stage-photo { min-height: 620px; }
     }
 
     @media (min-width: 980px) {
       .shell { padding-left: 5.5%; padding-right: 5.5%; }
-      .seat-modal { align-items: center; }
-      .memory-dialog {
-        width: min(980px, calc(100% - 48px));
-        max-height: min(86dvh, 760px);
-        margin: 24px auto;
-        border: 1px solid rgba(255,255,255,.55);
-        border-radius: 28px;
-        box-shadow: 0 35px 90px rgba(10,31,21,.28);
-        padding: 28px 34px 34px;
-        animation-name: modal-enter;
-      }
-      .switcher-handle { display: none; }
       .memory-option { min-height: 340px; padding: 24px; }
       .memory-option h2 { font-size: 32px; }
       .hero-can,
@@ -1834,12 +1709,9 @@
     <main>
       <section id="landingView" class="start-view shell" aria-labelledby="landingTitle">
         <div class="start-poster reveal">
-          <div class="start-poster-art" role="img" aria-label="Graphic Farmwagon makhana can and moringa pouch">
+          <div class="start-poster-art">
+            <img class="start-poster-photo" src="images/classroom.jpg" alt="College classroom — last bench, middle row, and front row energy">
             <span class="start-poster-badge">Classroom edition</span>
-            <svg class="start-poster-can" aria-hidden="true"><use href="#product-can"/></svg>
-            <div class="start-poster-packet" data-pack="moringa"></div>
-            <svg class="floating-puff puff-one" aria-hidden="true"><use href="#puff"/></svg>
-            <svg class="floating-puff puff-two" aria-hidden="true"><use href="#puff"/></svg>
             <span class="start-poster-sticker">Same farm.<br>Three vibes.</span>
           </div>
           <div class="start-poster-copy">
@@ -1848,7 +1720,7 @@
             <p>Pick the school memory. We’ll match the energy — not the product facts.</p>
           </div>
         </div>
-        <div class="memory-prompt"><span>Tap your old seat</span><span class="swipe-hint">Swipe for the other two →</span></div>
+        <div class="memory-prompt">Tap your old seat</div>
         <div class="memory-options start-seats">
           <button class="memory-option back" type="button" data-choice="back">
             <span class="option-number">Seat 01 · Last bench</span>
@@ -1883,14 +1755,12 @@
             <p id="personaIntro"></p>
             <div class="persona-actions">
               <button class="primary-button" id="browseProductsButton" type="button"><span id="personaCta"></span><span aria-hidden="true">↓</span></button>
-              <button class="secondary-button seat-switch-cta" type="button" data-change-seat><span aria-hidden="true">↺</span> Switch my seat</button>
+              <button class="secondary-button seat-switch-cta" type="button" data-change-seat>Switch my seat</button>
             </div>
           </div>
-          <div class="persona-art reveal" role="img" aria-label="Graphic Farmwagon product scene styled for the selected classroom personality">
+          <div class="persona-art reveal">
+            <img class="persona-photo" src="images/harvest.jpg" alt="Makhana and moringa from Bihar fields">
             <svg class="persona-seat-art" id="personaSeatArt" aria-hidden="true"></svg>
-            <svg class="hero-can" aria-hidden="true"><use href="#product-can"/></svg>
-            <div class="hero-packet" data-pack="moringa"></div>
-            <svg class="floating-puff puff-two" aria-hidden="true"><use href="#puff"/></svg>
             <span class="persona-art-note" id="personaArtNote"></span>
           </div>
         </section>
@@ -1914,7 +1784,7 @@
             <div class="product-grid">
               <button class="product-card raw reveal" type="button" data-product="raw">
                 <span class="product-card-top"><span class="product-kicker">01 · Bihar wetlands</span><span class="from-price">From ₹120</span></span>
-                <span class="product-card-art"><span data-pack="raw"></span></span>
+                <span class="product-card-art"><img src="images/raw-makhana.jpg" alt="Raw makhana pouch and bowl"></span>
                 <span class="product-card-copy">
                   <span class="visually-hidden">Explore </span>
                   <h3>Raw Makhana</h3>
@@ -1924,7 +1794,7 @@
               </button>
               <button class="product-card flavoured reveal" type="button" data-product="flavoured">
                 <span class="product-card-top"><span class="product-kicker">02 · Olive oil roasted</span><span class="from-price">From ₹80</span></span>
-                <span class="product-card-art"><span data-pack="flavoured"></span></span>
+                <span class="product-card-art"><img src="images/flavoured-makhana.jpg" alt="Peri peri, pink salt, and mint makhana jars"></span>
                 <span class="product-card-copy">
                   <span class="visually-hidden">Explore </span>
                   <h3>Flavoured Makhana</h3>
@@ -1934,7 +1804,7 @@
               </button>
               <button class="product-card moringa reveal" type="button" data-product="moringa">
                 <span class="product-card-top"><span class="product-kicker">03 · Our own farm</span><span class="from-price">From ₹80</span></span>
-                <span class="product-card-art"><span data-pack="moringa"></span></span>
+                <span class="product-card-art"><img src="images/moringa.jpg" alt="Moringa leaf powder pouch and bowl"></span>
                 <span class="product-card-copy">
                   <span class="visually-hidden">Explore </span>
                   <h3>Moringa Leaf Powder</h3>
@@ -1956,8 +1826,8 @@
         <div class="shell">
           <button class="back-link" id="backToCollectionButton" type="button">← Back to all products</button>
           <div class="product-layout">
-            <div class="product-stage reveal" id="productStage" role="img" aria-label="Graphic product pack illustration">
-              <div id="productPackSlot"></div>
+            <div class="product-stage reveal" id="productStage">
+              <img class="product-stage-photo" id="productPhoto" alt="">
               <span class="product-sticker" id="productSticker"></span>
             </div>
             <div class="product-information reveal">
@@ -1989,45 +1859,8 @@
       <span>© <span id="year"></span> Farmwagon</span>
       <span class="footer-center">Farm-grown <span>✳</span> Unapologetically graphic</span>
       <span>Made for every kind of you.</span>
-      <p class="product-disclaimer">Product illustrations are conceptual. Health, nutrition, organic certification, ingredient, allergen, storage, and seal claims must match the final product labels and supporting documentation.</p>
+      <p class="product-disclaimer">Lifestyle and product photography is campaign imagery. Health, nutrition, organic certification, ingredient, allergen, storage, and seal claims must match the final product labels and supporting documentation.</p>
     </footer>
-  </div>
-
-  <div class="seat-modal" id="seatModal" role="dialog" aria-modal="true" aria-labelledby="seatModalTitle" aria-describedby="seatModalDescription" hidden>
-    <div class="memory-dialog switcher-dialog" tabindex="-1">
-      <div class="switcher-handle" aria-hidden="true"></div>
-      <div class="switcher-topline">
-        <div>
-          <p class="eyebrow">Keep the products. Change the energy.</p>
-          <h2 id="seatModalTitle">Switch your seat</h2>
-        </div>
-        <button class="close-button" id="closeSeatButton" type="button" aria-label="Keep current seat">×</button>
-      </div>
-      <p id="seatModalDescription" class="switcher-copy">Same makhana. Same moringa. A different classroom personality.</p>
-      <div class="memory-options">
-        <button class="memory-option back" type="button" data-choice="back">
-          <span class="option-number">Seat 01 · Last bench</span>
-          <svg class="option-art" aria-hidden="true"><use href="#back-art"/></svg>
-          <h2>Jugaadu Backbenchers</h2>
-          <p>Attendance optional. Jugaad and snack game compulsory.</p>
-          <span class="option-arrow" aria-hidden="true">↗</span>
-        </button>
-        <button class="memory-option middle" type="button" data-choice="middle">
-          <span class="option-number">Seat 02 · The middle</span>
-          <svg class="option-art" aria-hidden="true"><use href="#middle-art"/></svg>
-          <h2>Creative Middle Row</h2>
-          <p>Half notes. Full imagination. Best of every world.</p>
-          <span class="option-arrow" aria-hidden="true">↗</span>
-        </button>
-        <button class="memory-option front" type="button" data-choice="front">
-          <span class="option-number">Seat 03 · First row</span>
-          <svg class="option-art" aria-hidden="true"><use href="#front-art"/></svg>
-          <h2>Topper Front Row</h2>
-          <p>Every label read. Every detail checked. Obviously.</p>
-          <span class="option-arrow" aria-hidden="true">↗</span>
-        </button>
-      </div>
-    </div>
   </div>
 
   <div class="cart-backdrop" id="cartBackdrop" hidden></div>
@@ -2097,6 +1930,7 @@
         tag: 'Bihar wetlands · Standing pouch',
         intro: 'Handpicked makhana sourced from the wetlands of Bihar and packed naturally fresh from the farm for a clean, satisfying crunch.',
         sticker: 'Farm fresh. Naturally crunchy.',
+        photo: 'images/raw-makhana.jpg',
         stageColor: '#e5edd0',
         facts: ['Sourced from the wetlands of Bihar', 'Handpicked and naturally farm-fresh', 'Crunchy taste with a protein-rich product profile'],
         variants: [{ label: '100g', price: 120 }, { label: '200g', price: 240 }, { label: '500g', price: 600 }],
@@ -2112,6 +1946,7 @@
         tag: 'Olive oil roasted · PET jar',
         intro: 'Roasted in olive oil at a carefully controlled temperature for a crisp, savoury bite designed to wake up your taste buds.',
         sticker: 'Three flavours. One crisp obsession.',
+        photo: 'images/flavoured-makhana.jpg',
         stageColor: '#ffe4cf',
         facts: ['Roasted in olive oil for a crisp finish', 'Available in Peri Peri, Himalayan Pink Salt, and Mint', 'Packed in a convenient PET jar'],
         variants: [{ label: '30g', price: 80 }, { label: '60g', price: 160 }, { label: '90g', price: 240 }],
@@ -2127,6 +1962,7 @@
         tag: 'Our own farm · Standing pouch',
         intro: 'Organically grown moringa leaves from our own farm, solar-dried and packed as a practical everyday wellness ingredient.',
         sticker: 'Farm-grown green goodness.',
+        photo: 'images/moringa.jpg',
         stageColor: '#dce8c8',
         facts: ['Organically grown on our own farm', 'Organic certification available', 'Solar-dried wellness ingredient with vitamins, minerals, and antioxidants'],
         variants: [{ label: '100g', price: 80 }, { label: '250g', price: 200 }],
@@ -2144,7 +1980,6 @@
     const landingView = document.getElementById('landingView');
     const personaView = document.getElementById('personaView');
     const productView = document.getElementById('productView');
-    const seatModal = document.getElementById('seatModal');
     const cartDrawer = document.getElementById('cartDrawer');
     const cartBackdrop = document.getElementById('cartBackdrop');
     const toast = document.getElementById('toast');
@@ -2245,24 +2080,8 @@
       });
     }
 
-    function openSeatModal() {
-      lastFocusedElement = document.activeElement;
-      seatModal.hidden = false;
-      app.inert = true;
-      document.documentElement.classList.add('overlay-open');
-      document.body.classList.add('modal-open');
-      requestAnimationFrame(() => {
-        const selectedOption = seatModal.querySelector(`[data-choice="${selectedSeat}"]`);
-        if (selectedOption) selectedOption.scrollIntoView({ block: 'nearest', inline: 'center' });
-        seatModal.querySelector('.memory-dialog').focus();
-      });
-    }
-
-    function closeSeatModal() {
-      seatModal.hidden = true;
-      app.inert = false;
-      if (cartDrawer.hidden) document.documentElement.classList.remove('overlay-open');
-      document.body.classList.remove('modal-open');
+    function changeSeat() {
+      routeTo('');
     }
 
     function renderLanding() {
@@ -2270,7 +2089,6 @@
       document.body.removeAttribute('data-seat');
       themeMeta.setAttribute('content', '#f7f3e8');
       document.title = 'Farmwagon — Pick your seat. Find your good.';
-      closeSeatModal();
       updateSeatControl();
       observeReveals();
     }
@@ -2279,7 +2097,6 @@
       const seat = seats[seatId];
       selectedSeat = seatId;
       sessionStorage.setItem('farmwagon-seat', seatId);
-      closeSeatModal();
       showView('persona');
       document.body.dataset.seat = seatId;
       updateSeatControl();
@@ -2320,14 +2137,15 @@
       selectedFlavour = product.flavours[0] || '';
       if (!seats[selectedSeat]) selectedSeat = 'front';
       showView('product');
-      closeSeatModal();
       document.body.dataset.seat = selectedSeat;
       updateSeatControl();
       document.title = `Farmwagon — ${product.name}`;
       themeMeta.setAttribute('content', product.stageColor);
 
       document.getElementById('productStage').style.setProperty('--product-bg', product.stageColor);
-      document.getElementById('productPackSlot').replaceChildren(createPack(productId, 'large'));
+      const photo = document.getElementById('productPhoto');
+      photo.src = product.photo;
+      photo.alt = product.name;
       document.getElementById('productSticker').textContent = product.sticker;
       document.getElementById('productTag').textContent = product.tag;
       document.getElementById('productTitle').textContent = product.name;
@@ -2522,7 +2340,7 @@
       cartDrawer.hidden = true;
       cartBackdrop.hidden = true;
       app.inert = false;
-      if (seatModal.hidden) document.documentElement.classList.remove('overlay-open');
+      document.documentElement.classList.remove('overlay-open');
       document.body.classList.remove('drawer-open');
       if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') lastFocusedElement.focus();
     }
@@ -2591,7 +2409,7 @@
       button.addEventListener('click', () => routeTo(button.dataset.choice));
     });
     document.querySelectorAll('[data-change-seat]').forEach(button => {
-      button.addEventListener('click', openSeatModal);
+      button.addEventListener('click', changeSeat);
     });
     document.querySelectorAll('[data-home]').forEach(button => {
       button.addEventListener('click', () => routeTo(''));
@@ -2600,11 +2418,7 @@
       button.addEventListener('click', () => routeTo(`product-${button.dataset.product}`));
     });
 
-    document.getElementById('changeSeatButton').addEventListener('click', openSeatModal);
-    document.getElementById('closeSeatButton').addEventListener('click', closeSeatModal);
-    seatModal.addEventListener('click', event => {
-      if (event.target === seatModal) closeSeatModal();
-    });
+    document.getElementById('changeSeatButton').addEventListener('click', changeSeat);
     document.getElementById('browseProductsButton').addEventListener('click', () => {
       document.getElementById('collection').scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth' });
     });
@@ -2632,14 +2446,6 @@
     });
     document.getElementById('shareOrderButton').addEventListener('click', shareOrder);
     document.addEventListener('keydown', event => {
-      if (!seatModal.hidden) {
-        if (event.key === 'Escape') {
-          closeSeatModal();
-          return;
-        }
-        trapFocus(seatModal, event);
-        return;
-      }
       if (!cartDrawer.hidden) trapFocus(cartDrawer, event);
       if (event.key === 'Escape' && !cartDrawer.hidden) closeCart();
     });
