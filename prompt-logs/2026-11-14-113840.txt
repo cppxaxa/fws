@@ -1,0 +1,33 @@
+Farmwagon fws — prompt log from conversation start
+Use these notes to rebuild the single-page HTML site. Later changes get their own smaller timestamped files in this folder.
+
+1. Review the repo as a single-page HTML site already on GitHub Pages. Judge how it is, and infer what the creator wanted.
+
+2. Continue that review if interrupted.
+
+3. Keep the funkiness and creativity. Also satisfy product managers and founders: catchy, animated, iOS and Android first.
+   - Loading starts with a nostalgic school/college seat choice.
+   - Seats: Jugaadu Backbenchers; Creative Middle Row; Topper Front Row.
+   - Backbenchers: bunk/aish/chill; you need makhana/moringa, I sell it; last-moment syllabus and last-moment order, become the hero.
+   - Middle row: all-rounder is mandatory; choose the best makhana/moringa; smart work, a bit of research and effort, then order.
+   - Front row: no nonsense, only perfection; read the label and details for loved ones' health; explore every option, order, earn best-in-town.
+   - Products:
+     Raw makhana — standing pouches 100g/200g/500g at ₹120/240/600; Bihar wetlands, handpicked, healthy, natural, farm-fresh, crunchy, high protein; GST and shipping at checkout.
+     Flavoured makhana — olive-oil roasted, crispy, savoury; Peri Peri, Himalayan Pink Salt, Mint; PET jars 30g/60g/90g at ₹80/160/240; GST and shipping at checkout.
+     Moringa leaf powder — standing pouches 100g/250g at ₹80/200; natural, organic certification, own farm, solar heating; wellness superfood, vitamins, minerals, antioxidants.
+
+4. Keep it graphic. Do not flatten into a plain catalogue.
+
+5. Commit and push.
+
+6. Fix responsiveness, page overflow, and related layout issues.
+
+7. The Change seat control looks bad. The start page is not good enough. Fix both (asked twice).
+
+8. Use selected images from the fws-images folder. Not all — only ones that feel aesthetic and fit each section. On mobile, seat cards must scroll vertically, not sideways. Changing seats on mobile must not be a popup; use a full-page selector or go home.
+
+9. After tapping Now sitting and returning to the first page, auto-scroll to the first seat button.
+
+10. Inside the Now sitting control, add a back arrow on the left of the label.
+
+11. Add a prompt-logs folder. Put a timestamped .txt with every prompt so far, concisely. From now on, each commit or change gets a smaller prompt txt. These logs may be used someday to rebuild the HTML website.
