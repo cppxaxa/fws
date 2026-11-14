@@ -198,6 +198,14 @@
       box-shadow: 5px 5px 0 var(--seat-ink);
       transform: translate(-2px, -2px) rotate(-1.5deg);
     }
+    .seat-button-back {
+      flex: 0 0 auto;
+      margin-right: -2px;
+      padding: 0 0 0 8px;
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 1;
+    }
     .seat-button-desk {
       width: 38px;
       height: 30px;
@@ -1693,6 +1701,7 @@
       </button>
       <div class="header-actions">
         <button class="header-button seat-button" id="changeSeatButton" type="button" aria-label="Switch classroom seat" title="Switch classroom seat">
+          <span class="seat-button-back" aria-hidden="true">←</span>
           <svg class="seat-button-desk" id="seatButtonArt" aria-hidden="true"><use href="#back-art"/></svg>
           <span class="seat-button-copy">
             <small>Now sitting</small>
@@ -1722,7 +1731,7 @@
         </div>
         <div class="memory-prompt">Tap your old seat</div>
         <div class="memory-options start-seats">
-          <button class="memory-option back" type="button" data-choice="back">
+          <button class="memory-option back" id="firstSeatButton" type="button" data-choice="back">
             <span class="option-number">Seat 01 · Last bench</span>
             <svg class="option-art" aria-hidden="true"><use href="#back-art"/></svg>
             <h2>Jugaadu Backbenchers</h2>
@@ -1991,6 +2000,7 @@
     let observer;
     let toastTimer;
     let lastFocusedElement;
+    let pendingSeatScroll = false;
 
     function loadCart() {
       try {
@@ -2081,7 +2091,15 @@
     }
 
     function changeSeat() {
+      pendingSeatScroll = true;
       routeTo('');
+    }
+
+    function scrollToFirstSeat() {
+      const firstSeat = document.getElementById('firstSeatButton');
+      if (!firstSeat) return;
+      const behavior = reducedMotion.matches ? 'auto' : 'smooth';
+      firstSeat.scrollIntoView({ behavior, block: 'start' });
     }
 
     function renderLanding() {
@@ -2091,6 +2109,9 @@
       document.title = 'Farmwagon — Pick your seat. Find your good.';
       updateSeatControl();
       observeReveals();
+      if (!pendingSeatScroll) return;
+      pendingSeatScroll = false;
+      requestAnimationFrame(() => requestAnimationFrame(scrollToFirstSeat));
     }
 
     function renderPersona(seatId) {
@@ -2210,6 +2231,7 @@
 
     function renderRoute() {
       closeCart();
+      const skipTopScroll = pendingSeatScroll;
       const route = decodeURIComponent(window.location.hash.slice(1));
       if (Object.prototype.hasOwnProperty.call(seats, route)) {
         renderPersona(route);
@@ -2218,7 +2240,7 @@
       } else {
         renderLanding();
       }
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      if (!skipTopScroll) window.scrollTo({ top: 0, behavior: 'instant' });
     }
 
     function observeReveals() {
