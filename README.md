@@ -1,22 +1,12 @@
 # fws
 
-Farmwagon's graphic, classroom-edition storefront. The page is a single `index.html` plus selected campaign photos in `images/`. No dependencies or build step are needed.
+Farmwagon company demo page. A single `index.html` plus campaign photos in `images/`. No dependencies or build step.
+
+Open `index.html` in a modern browser, or serve this directory with `python -m http.server 8000` and visit `http://localhost:8000`.
+
+The live page is a logo-free product site: a harvest banner, raw makhana, flavoured makhana, and moringa leaf powder, then a footer. There is no classroom / seat story on the published page.
 
 This is a public learning demo for collaborators, not a live shop. See [NOTICE.md](NOTICE.md).
-
-Open `index.html` directly in a modern browser, or serve this directory with `python -m http.server 8000` and visit `http://localhost:8000`.
-
-The site opens on a full-page classroom poster with a vertical seat chooser. Changing seats returns to that home page rather than opening a popup. Selected campaign photos live in `images/`.
-
-The nostalgic seats are:
-
-- **Jugaadu Backbenchers**
-- **Creative Middle Row**
-- **Topper Front Row**
-
-Each choice applies a distinct visual treatment and voice while preserving the same product facts. The storefront includes dedicated single-page routes for raw makhana (`#product-raw`), flavoured makhana (`#product-flavoured`), and moringa leaf powder (`#product-moringa`), with selectable flavours and pack sizes.
-
-The mobile-first order bag persists locally, updates quantities and subtotals, and uses the native share sheet on supported iOS and Android devices. Browser back/forward navigation, direct links, touch-sized controls, safe-area insets, and reduced-motion preferences are supported.
 
 ## Free hosting with GitHub Pages
 

@@ -1,0 +1,1 @@
+The classroom / backbencher idea can stay in the public repo. On main, remove all bencher/seat ideas. Show a Farmwagon company page with no logo: catchy banner (alternate version), product list, footer. Minimally decent. Demo it once.
