@@ -1,0 +1,1 @@
+Add left and right padding in the footer so text does not stick to the border on phones and tablets.
