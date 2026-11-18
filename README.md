@@ -1,6 +1,6 @@
 # fws
 
-Farmwagon company demo page. A single `index.html` plus campaign photos in `images/`. No dependencies or build step.
+FarmWagon company page. A single `index.html` plus campaign photos in `images/`. No dependencies or build step.
 
 Open `index.html` in a modern browser, or serve this directory with `python -m http.server 8000` and visit `http://localhost:8000`.
 
