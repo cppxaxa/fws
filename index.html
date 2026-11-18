@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f7f3e8">
-  <meta name="description" content="Farmwagon demo: raw makhana, flavoured makhana, and moringa leaf powder from Bihar. Learning site — no actual buying or selling.">
+  <meta name="description" content="Farmwagon: raw and flavoured makhana from the wetlands of Bihar.">
   <meta name="format-detection" content="telephone=no">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Farmwagon">
-  <meta property="og:description" content="Farm-grown makhana and moringa. A public learning demo — not a shop.">
+  <meta property="og:description" content="Farm-grown makhana from Bihar. Raw pouches and olive-oil roasted jars.">
   <title>Farmwagon</title>
   <style>
     :root {
@@ -213,17 +213,76 @@
       line-height: 1.55;
     }
     .site-footer {
-      border-top: 1px solid var(--line);
-      padding: 36px 0 max(40px, env(safe-area-inset-bottom));
+      background: #12281d;
+      color: #eef4e4;
     }
-    .site-footer p {
-      max-width: 62ch;
-      margin: 0 0 12px;
-      color: var(--muted);
-      font-size: 13px;
+    .footer-grid {
+      display: grid;
+      gap: 28px;
+      padding: 48px 0 28px;
+    }
+    .footer-brand .brand {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: #f7f3e8;
+    }
+    .footer-brand p {
+      max-width: 32ch;
+      margin: 0;
+      color: rgba(238, 244, 228, .72);
+      font-size: 14px;
       line-height: 1.6;
     }
-    .site-footer strong { color: var(--ink); }
+    .footer-col h2 {
+      margin: 0 0 12px;
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+    .footer-col ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .footer-col li { margin: 0 0 8px; }
+    .footer-col a,
+    .footer-col p {
+      color: rgba(238, 244, 228, .78);
+      font-size: 14px;
+      line-height: 1.5;
+      text-decoration: none;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-col p { margin: 0; }
+    .footer-trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      border-top: 1px solid rgba(238, 244, 228, .12);
+      padding: 18px 0;
+    }
+    .footer-trust span {
+      border: 1px solid rgba(238, 244, 228, .22);
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+    }
+    .footer-legal {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px 18px;
+      border-top: 1px solid rgba(238, 244, 228, .12);
+      padding: 16px 0 max(28px, env(safe-area-inset-bottom));
+      color: rgba(238, 244, 228, .62);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .footer-legal p { margin: 0; }
     @media (min-width: 760px) {
       .product {
         display: grid;
@@ -231,6 +290,11 @@
       }
       .product img { height: 100%; min-height: 320px; }
       .product-copy { padding: 32px; }
+      .footer-grid {
+        grid-template-columns: minmax(0, 1.3fr) repeat(3, minmax(0, 1fr));
+        gap: 36px;
+        padding-top: 56px;
+      }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -245,12 +309,12 @@
 
   <main id="top">
     <section class="banner" aria-labelledby="bannerTitle">
-      <img src="images/harvest.jpg" alt="Bowl of makhana and moringa powder on a farm table at sunset">
+      <img src="images/harvest.jpg" alt="Bowl of makhana on a farm table at sunset">
       <div class="shell">
         <div class="banner-copy">
-          <p class="kicker">Bihar wetlands · Own farm</p>
-          <h1 id="bannerTitle">Farm-grown crunch. Everyday green.</h1>
-          <p>Raw makhana, olive-oil roasted flavours, and solar-dried moringa leaf powder — packed simply, priced clearly.</p>
+          <p class="kicker">Bihar wetlands · Olive-oil roasted</p>
+          <h1 id="bannerTitle">Farm-grown crunch. Everyday good.</h1>
+          <p>Raw makhana and olive-oil roasted flavours — packed simply, priced clearly.</p>
           <a class="banner-cta" href="#products">See the products</a>
         </div>
       </div>
@@ -259,7 +323,7 @@
     <section class="products shell" id="products">
       <div class="section-heading">
         <h2>What we grow and pack</h2>
-        <p>Three products. Exact pack sizes. GST and shipping would be added at checkout on a real store — this page is a demo.</p>
+        <p>Two makhana formats. Exact pack sizes. GST and shipping charges at checkout.</p>
       </div>
 
       <div class="product-list">
@@ -300,33 +364,47 @@
             </div>
           </div>
         </article>
-
-        <article class="product" id="moringa">
-          <img src="images/moringa.jpg" alt="Moringa leaf powder pouch beside a wooden bowl of powder">
-          <div class="product-copy">
-            <span class="product-tag">Own farm · Standing pouch</span>
-            <h3>Moringa Leaf Powder</h3>
-            <p>Organically grown on our own farm, solar-dried, and packed as an everyday wellness ingredient. Organic certification available.</p>
-            <ul class="facts">
-              <li>Grown organically on our own farm</li>
-              <li>Solar heating / solar-dried process</li>
-              <li>Vitamins, minerals, and antioxidants</li>
-            </ul>
-            <div class="packs">
-              <span class="pack">100g · ₹80</span>
-              <span class="pack">250g · ₹200</span>
-            </div>
-          </div>
-        </article>
       </div>
-      <p class="note">Campaign photography is conceptual. Nutrition, organic certification, ingredients, allergens, storage, and serving guidance must match the final pack. GST and shipping charges at checkout on any real order.</p>
+      <p class="note">Nutrition, ingredients, allergens, storage, and serving guidance must match the final pack. GST and shipping charges at checkout.</p>
     </section>
   </main>
 
-  <footer class="site-footer shell">
-    <p><strong>Demo only.</strong> This is a public learning page for collaborators. There is no actual buying or selling.</p>
-    <p>If this site is used for any commercial purpose, the GitHub Pages deployment will be taken down to stay within applicable terms.</p>
-    <p>© <span id="year"></span> Farmwagon</p>
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#top">Farmwagon</a>
+        <p>Farm-grown makhana from the wetlands of Bihar. Raw pouches and olive-oil roasted jars.</p>
+      </div>
+      <div class="footer-col">
+        <h2>Shop</h2>
+        <ul>
+          <li><a href="#raw">Raw Makhana</a></li>
+          <li><a href="#flavoured">Flavoured Makhana</a></li>
+          <li><a href="#products">All products</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2>About</h2>
+        <ul>
+          <li><a href="#top">Our story</a></li>
+          <li><a href="#products">The goods</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2>Help &amp; support</h2>
+        <p>Bihar, India</p>
+      </div>
+    </div>
+    <div class="shell footer-trust">
+      <span>Made in Bihar</span>
+      <span>Wetland makhana</span>
+      <span>Olive-oil roasted</span>
+      <span>Packed fresh</span>
+    </div>
+    <div class="shell footer-legal">
+      <p>© <span id="year"></span> Farmwagon · Packed with care in Bihar</p>
+      <p>All products · Farm-grown crunch</p>
+    </div>
   </footer>
   <script>
     document.getElementById('year').textContent = String(new Date().getFullYear());

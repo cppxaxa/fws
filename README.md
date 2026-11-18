@@ -4,7 +4,7 @@ Farmwagon company demo page. A single `index.html` plus campaign photos in `imag
 
 Open `index.html` in a modern browser, or serve this directory with `python -m http.server 8000` and visit `http://localhost:8000`.
 
-The live page is a logo-free product site: a harvest banner, raw makhana, flavoured makhana, and moringa leaf powder, then a footer. There is no classroom / seat story on the published page.
+The live page is a logo-free product site: a harvest banner, raw makhana, flavoured makhana, and a company footer. There is no classroom / seat story on the published page.
 
 This is a public learning demo for collaborators, not a live shop. See [NOTICE.md](NOTICE.md).
 

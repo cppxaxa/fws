@@ -1,0 +1,1 @@
+Footer inspired by mixflavour.com layout only (not their brand). Remove moringa powder. Remove Demo only footer; make footer look like a real website. Remove all mentions of demo from the website.
