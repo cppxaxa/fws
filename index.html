@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f7f3e8">
-  <meta name="description" content="FarmWagon: raw and flavoured makhana from the wetlands of Bihar.">
+  <meta name="description" content="FarmWagon: raw and flavoured makhana from the wetlands of Bihar. Jagat Food and Beverages, Patna.">
   <meta name="format-detection" content="telephone=no">
   <meta property="og:type" content="website">
   <meta property="og:title" content="FarmWagon">
@@ -26,7 +26,6 @@
       max-width: 100%;
       overflow-x: clip;
       scroll-behavior: smooth;
-      scroll-padding-top: 84px;
     }
     body {
       margin: 0;
@@ -44,6 +43,8 @@
       text-wrap: balance;
     }
     a { color: inherit; }
+    button { font: inherit; color: inherit; cursor: pointer; }
+    [hidden] { display: none !important; }
     .shell {
       width: min(100%, 1120px);
       margin: 0 auto;
@@ -73,8 +74,13 @@
       letter-spacing: -1px;
       text-decoration: none;
     }
-    .header-link {
-      flex: 0 0 auto;
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      align-items: center;
+    }
+    .nav a {
       font-size: 12px;
       font-weight: 800;
       letter-spacing: .6px;
@@ -82,6 +88,23 @@
       text-transform: uppercase;
       white-space: nowrap;
     }
+    .nav a.is-current { border-bottom: 2px solid var(--ink); }
+    .cart-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .cart-count {
+      display: grid;
+      min-width: 20px;
+      height: 20px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--accent);
+      font-size: 10px;
+    }
+    .view { min-height: calc(100dvh - 220px); }
     .banner {
       position: relative;
       overflow: hidden;
@@ -99,7 +122,7 @@
     .banner::after {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(16, 40, 28, .18) 0%, rgba(16, 40, 28, .55) 100%);
+      background: linear-gradient(180deg, rgba(16, 40, 28, .18) 0%, rgba(16, 40, 28, .58) 100%);
       content: "";
     }
     .banner-copy {
@@ -118,10 +141,10 @@
     }
     .banner-copy h1 {
       margin-bottom: 16px;
-      font-size: clamp(42px, 10vw, 76px);
+      font-size: clamp(46px, 11vw, 84px);
       font-weight: 540;
       letter-spacing: -2.8px;
-      line-height: .95;
+      line-height: .92;
     }
     .banner-copy p {
       max-width: 46ch;
@@ -130,19 +153,30 @@
       font-size: clamp(16px, 3.4vw, 19px);
       line-height: 1.6;
     }
-    .banner-cta {
+    .banner-cta,
+    .primary-button,
+    .ghost-button {
       display: inline-flex;
       min-height: 48px;
       align-items: center;
+      justify-content: center;
       border-radius: 999px;
-      background: var(--accent);
-      color: var(--ink);
       padding: 0 20px;
       font-size: 13px;
       font-weight: 850;
       text-decoration: none;
     }
-    .products { padding: 56px 0 28px; }
+    .banner-cta,
+    .primary-button {
+      border: 0;
+      background: var(--accent);
+      color: var(--ink);
+    }
+    .ghost-button {
+      border: 1px solid currentColor;
+      background: transparent;
+    }
+    .page-pad { padding: 48px 0 56px; }
     .section-heading { max-width: 640px; margin-bottom: 28px; }
     .section-heading h2 {
       margin-bottom: 12px;
@@ -151,11 +185,35 @@
       letter-spacing: -1.8px;
       line-height: 1;
     }
-    .section-heading p {
-      margin: 0;
+    .section-heading p,
+    .prose p {
+      margin: 0 0 14px;
       color: var(--muted);
       font-size: 16px;
       line-height: 1.65;
+    }
+    .benefit-grid,
+    .trust-grid {
+      display: grid;
+      gap: 12px;
+      margin: 28px 0 8px;
+    }
+    .benefit, .trust {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface);
+      padding: 18px 20px;
+    }
+    .benefit strong, .trust strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+    .benefit p, .trust p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
     }
     .product-list { display: grid; gap: 18px; }
     .product {
@@ -197,14 +255,72 @@
       font-size: 13px;
       line-height: 1.5;
     }
-    .packs { display: flex; flex-wrap: wrap; gap: 8px; }
-    .pack {
+    .option-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
+    .option {
       border: 1px solid var(--ink);
       border-radius: 999px;
-      background: var(--accent);
+      background: transparent;
       padding: 8px 12px;
       font-size: 12px;
       font-weight: 800;
+    }
+    .option[aria-pressed="true"] { background: var(--accent); }
+    .add-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 8px; }
+    .notice {
+      border: 1px solid rgba(23, 60, 44, .18);
+      border-radius: 16px;
+      background: #eef4d8;
+      padding: 14px 16px;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .empty, .cart-total {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .cart-list { display: grid; gap: 12px; margin: 22px 0; }
+    .cart-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--surface);
+      padding: 16px;
+    }
+    .cart-item strong { display: block; margin-bottom: 4px; }
+    .cart-item span { color: var(--muted); font-size: 13px; }
+    .qty {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .qty button {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: white;
+    }
+    .contact-grid { display: grid; gap: 18px; }
+    .contact-card {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--surface);
+      padding: 22px;
+    }
+    .contact-card a { font-weight: 750; }
+    .map-wrap {
+      overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      min-height: 280px;
+    }
+    .map-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 320px;
+      border: 0;
     }
     .note {
       margin: 22px 0 0;
@@ -212,22 +328,11 @@
       font-size: 12px;
       line-height: 1.55;
     }
-    .site-footer {
-      background: #12281d;
-      color: #eef4e4;
-    }
-    .footer-grid {
-      display: grid;
-      gap: 28px;
-      padding: 48px 0 28px;
-    }
-    .footer-brand .brand {
-      display: inline-block;
-      margin-bottom: 12px;
-      color: #f7f3e8;
-    }
+    .site-footer { background: #12281d; color: #eef4e4; }
+    .footer-grid { display: grid; gap: 28px; padding: 48px 0 28px; }
+    .footer-brand .brand { display: inline-block; margin-bottom: 12px; color: #f7f3e8; }
     .footer-brand p {
-      max-width: 32ch;
+      max-width: 36ch;
       margin: 0;
       color: rgba(238, 244, 228, .72);
       font-size: 14px;
@@ -240,14 +345,9 @@
       letter-spacing: 1.4px;
       text-transform: uppercase;
     }
-    .footer-col ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
+    .footer-col ul { margin: 0; padding: 0; list-style: none; }
     .footer-col li { margin: 0 0 8px; }
-    .footer-col a,
-    .footer-col p {
+    .footer-col a, .footer-col p {
       color: rgba(238, 244, 228, .78);
       font-size: 14px;
       line-height: 1.5;
@@ -283,7 +383,8 @@
       line-height: 1.5;
     }
     .footer-legal p { margin: 0; }
-    @media (min-width: 760px) {
+    @media (min-width: 720px) {
+      .benefit-grid, .trust-grid, .contact-grid { grid-template-columns: 1fr 1fr; }
       .product {
         display: grid;
         grid-template-columns: minmax(280px, .9fr) minmax(0, 1.1fr);
@@ -303,111 +404,363 @@
 </head>
 <body>
   <header class="site-header shell">
-    <a class="brand" href="#top">FarmWagon</a>
-    <a class="header-link" href="#products">Products</a>
+    <a class="brand" href="#home">FarmWagon</a>
+    <nav class="nav" aria-label="Site">
+      <a href="#home" data-nav="home">Home</a>
+      <a href="#products" data-nav="products">Products</a>
+      <a class="cart-link" href="#cart" data-nav="cart">Cart <span class="cart-count" id="cartCount">0</span></a>
+      <a href="#contact" data-nav="contact">Contact</a>
+      <a href="#about" data-nav="about">About</a>
+    </nav>
   </header>
 
-  <main id="top">
-    <section class="banner" aria-labelledby="bannerTitle">
-      <img src="images/harvest.jpg" alt="Bowl of makhana on a farm table at sunset">
-      <div class="shell">
-        <div class="banner-copy">
-          <p class="kicker">Bihar wetlands · Olive-oil roasted</p>
-          <h1 id="bannerTitle">Farm-grown crunch. Everyday good.</h1>
-          <p>Raw makhana and olive-oil roasted flavours — packed simply, priced clearly.</p>
-          <a class="banner-cta" href="#products">See the products</a>
+  <main>
+    <section class="view" id="homeView">
+      <div class="banner" aria-labelledby="bannerTitle">
+        <img src="images/harvest.jpg" alt="Bowl of makhana on a farm table at sunset">
+        <div class="shell">
+          <div class="banner-copy">
+            <p class="kicker">Jagat Food and Beverages · Patna</p>
+            <h1 id="bannerTitle">FarmWagon</h1>
+            <p>Makhana from the wetlands of Bihar — a light, crunchy fox nut packed for everyday tables.</p>
+            <a class="banner-cta" href="#products">See the products</a>
+          </div>
+        </div>
+      </div>
+      <div class="page-pad shell">
+        <div class="section-heading">
+          <h2>What makhana is, and why we pack it</h2>
+          <p>Makhana (fox nut) is popped from the seeds of Euryale ferox. FarmWagon sources it from Bihar wetlands, then packs it raw or roasted in olive oil — a traditional snack with a clean crunch.</p>
+        </div>
+        <div class="benefit-grid">
+          <article class="benefit"><strong>Light, protein-forward crunch</strong><p>A pantry snack with a satisfying bite, typically enjoyed as a lighter alternative to fried namkeen.</p></article>
+          <article class="benefit"><strong>Sourced in Bihar</strong><p>Handpicked makhana from wetland farms, packed for freshness rather than long, anonymous supply chains.</p></article>
+          <article class="benefit"><strong>Two honest formats</strong><p>Raw standing pouches for home roasting or cooking, and olive-oil roasted jars in Himalayan Pink Salt, Peri Peri, and Mint.</p></article>
+          <article class="benefit"><strong>Everyday, not medicinal</strong><p>We describe the food as packed. Nutrition, allergens, and serving guidance always follow the final label.</p></article>
+        </div>
+        <div class="section-heading" style="margin-top:40px">
+          <h2>How we work</h2>
+          <p>FarmWagon is packed under Jagat Food and Beverages with standard procedures and a clean, hygienic workplace.</p>
+        </div>
+        <div class="trust-grid">
+          <article class="trust"><strong>GST registered</strong><p>The firm is GST registered. Registration numbers are held on file and can be shared when required.</p></article>
+          <article class="trust"><strong>UDYAM (MSME) certified</strong><p>Registered as a micro enterprise. The UDYAM number is not published on this page.</p></article>
+          <article class="trust"><strong>Standard procedures</strong><p>Batch packing follows documented food-handling routines and a hygienic work environment.</p></article>
+          <article class="trust"><strong>FSSAI licence</strong><p>Licence number to be added once generated. Purchases stay closed until then.</p></article>
         </div>
       </div>
     </section>
 
-    <section class="products shell" id="products">
+    <section class="view page-pad shell" id="productsView" hidden>
       <div class="section-heading">
-        <h2>What we grow and pack</h2>
-        <p>Two makhana formats. Exact pack sizes. GST and shipping charges at checkout.</p>
+        <h2>The goods</h2>
+        <p>Raw pouches and olive-oil roasted jars. Choose a pack, add it to the bag — orders open after the FSSAI licence is issued.</p>
       </div>
-
       <div class="product-list">
         <article class="product" id="raw">
           <img src="images/raw-makhana.jpg" alt="Raw makhana in a standing pouch beside a bowl">
           <div class="product-copy">
             <span class="product-tag">Bihar wetlands · Standing pouch</span>
             <h3>Raw Makhana</h3>
-            <p>Handpicked makhana sourced from the wetlands of Bihar. Naturally farm-fresh, crunchy, and packed for everyday snacking.</p>
+            <p>Handpicked, farm-fresh crunch in a practical pouch.</p>
             <ul class="facts">
               <li>Sourced from the wetlands of Bihar</li>
-              <li>Handpicked, natural, farm-fresh crunch</li>
+              <li>Natural, handpicked fox nut</li>
               <li>Protein-rich snack profile</li>
             </ul>
-            <div class="packs">
-              <span class="pack">100g · ₹120</span>
-              <span class="pack">200g · ₹240</span>
-              <span class="pack">500g · ₹600</span>
+            <div class="option-row" id="rawPacks"></div>
+            <div class="add-row">
+              <button class="primary-button" type="button" data-add="raw">Add to bag</button>
             </div>
           </div>
         </article>
-
         <article class="product" id="flavoured">
-          <img src="images/flavoured-makhana.jpg" alt="Three jars of flavoured makhana: peri peri, pink salt, and mint">
+          <img src="images/flavoured-makhana.jpg" alt="Jars of flavoured makhana">
           <div class="product-copy">
             <span class="product-tag">Olive oil roasted · PET jar</span>
             <h3>Flavoured Makhana</h3>
-            <p>Roasted in olive oil at a controlled temperature for a crisp, savoury bite. Peri Peri, Himalayan Pink Salt, and Mint.</p>
+            <p>Roasted in olive oil. Himalayan Pink Salt, Peri Peri, and Mint.</p>
             <ul class="facts">
-              <li>Roasted in olive oil for a crispy finish</li>
-              <li>Flavours: Peri Peri, Himalayan Pink Salt, Mint</li>
-              <li>Packed in a convenient PET jar</li>
+              <li>Olive-oil roasted for a crisp finish</li>
+              <li>Three flavours in a convenient jar</li>
+              <li>Packed for desks, tiffins, and travel</li>
             </ul>
-            <div class="packs">
-              <span class="pack">30g · ₹80</span>
-              <span class="pack">60g · ₹160</span>
-              <span class="pack">90g · ₹240</span>
+            <div class="option-row" id="flavourChoices"></div>
+            <div class="option-row" id="flavouredPacks"></div>
+            <div class="add-row">
+              <button class="primary-button" type="button" data-add="flavoured">Add to bag</button>
             </div>
           </div>
         </article>
       </div>
-      <p class="note">Nutrition, ingredients, allergens, storage, and serving guidance must match the final pack. GST and shipping charges at checkout.</p>
+      <p class="note">Nutrition, ingredients, allergens, storage, and serving guidance must match the final pack. GST and shipping would apply at checkout when orders open.</p>
+    </section>
+
+    <section class="view page-pad shell" id="cartView" hidden>
+      <div class="section-heading">
+        <h2>Your bag</h2>
+        <p>Build a list of packs. Checkout stays closed until the FSSAI licence is in place.</p>
+      </div>
+      <p class="notice">FSSAI licence is under process. FarmWagon is not accepting any orders right now. You can add items to this bag, but nothing will be billed or shipped.</p>
+      <div class="cart-list" id="cartItems"></div>
+      <p class="cart-total" id="cartTotal"></p>
+    </section>
+
+    <section class="view page-pad shell" id="contactView" hidden>
+      <div class="section-heading">
+        <h2>Contact</h2>
+        <p>Jagat Food and Beverages · FarmWagon · Patna, Bihar</p>
+      </div>
+      <div class="contact-grid">
+        <article class="contact-card">
+          <p class="kicker">Consumer complaint</p>
+          <p><a href="mailto:jagatfoodandbeverages@gmail.com">jagatfoodandbeverages@gmail.com</a></p>
+        </article>
+        <article class="contact-card">
+          <p class="kicker">Enquiry</p>
+          <p><a href="mailto:jagatfoodandbeverages@gmail.com">jagatfoodandbeverages@gmail.com</a></p>
+        </article>
+        <article class="contact-card">
+          <p class="kicker">Instagram</p>
+          <p><a href="https://www.instagram.com/farmwagon.in" rel="noopener noreferrer" target="_blank">@farmwagon.in</a></p>
+        </article>
+        <article class="contact-card">
+          <p class="kicker">Address</p>
+          <p>Lohiya Path, Jagdeo Path, Patna, Bihar</p>
+        </article>
+      </div>
+      <div class="map-wrap" style="margin-top:22px">
+        <iframe title="FarmWagon on Lohiya Path, Jagdeo Path, Patna" src="https://maps.google.com/maps?q=Lohiya%20Path%2C%20Jagdeo%20Path%2C%20Patna%2C%20Bihar&amp;z=15&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </section>
+
+    <section class="view page-pad shell" id="aboutView" hidden>
+      <div class="section-heading">
+        <h2>About us</h2>
+        <p>FarmWagon is a registered trademark of Jagat Food and Beverages.</p>
+      </div>
+      <div class="prose">
+        <p>Jagat Food and Beverages is a Patna firm built around one Bihar crop: makhana. The work started with wetland fox nut — popped, sorted, and packed so a pantry snack from Mithila’s ponds could travel as a clean pouch or an olive-oil roasted jar.</p>
+        <p>FarmWagon is the name on that pack. Raw makhana for people who cook and roast at home. Flavoured jars — Himalayan Pink Salt, Peri Peri, Mint — for people who want the crunch already done. The kitchen follows standard food procedures and a hygienic routine while the FSSAI licence is completed.</p>
+        <p>No licence number is printed here yet. When it is generated, it will sit on this page and on the pack.</p>
+      </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="shell footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="#top">FarmWagon</a>
-        <p>Farm-grown makhana from the wetlands of Bihar. Raw pouches and olive-oil roasted jars.</p>
+        <a class="brand" href="#home">FarmWagon</a>
+        <p>Farm-grown makhana from Bihar. This website is not yet live for purchase — FSSAI licence is still under process.</p>
       </div>
       <div class="footer-col">
         <h2>Shop</h2>
         <ul>
-          <li><a href="#raw">Raw Makhana</a></li>
-          <li><a href="#flavoured">Flavoured Makhana</a></li>
-          <li><a href="#products">All products</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#cart">Cart</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h2>About</h2>
+        <h2>Company</h2>
         <ul>
-          <li><a href="#top">Our story</a></li>
-          <li><a href="#products">The goods</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h2>Help &amp; support</h2>
-        <p>Bihar, India</p>
+        <p><a href="mailto:jagatfoodandbeverages@gmail.com">jagatfoodandbeverages@gmail.com</a></p>
+        <p>Lohiya Path, Jagdeo Path, Patna</p>
       </div>
     </div>
     <div class="shell footer-trust">
-      <span>Made in Bihar</span>
-      <span>Wetland makhana</span>
-      <span>Olive-oil roasted</span>
-      <span>Packed fresh</span>
+      <span>GST registered</span>
+      <span>UDYAM / MSME</span>
+      <span>Hygienic workplace</span>
+      <span>FSSAI licence pending</span>
     </div>
     <div class="shell footer-legal">
-      <p>© <span id="year"></span> FarmWagon · Packed with care in Bihar</p>
-      <p>All products · Farm-grown crunch</p>
+      <p>© <span id="year"></span> FarmWagon · Jagat Food and Beverages · Packed in Bihar</p>
+      <p>FSSAI licence no. to be added once generated</p>
     </div>
   </footer>
   <script>
+    const products = {
+      raw: {
+        name: 'Raw Makhana',
+        packs: [{ label: '100g', price: 120 }, { label: '200g', price: 240 }, { label: '500g', price: 600 }],
+        flavours: []
+      },
+      flavoured: {
+        name: 'Flavoured Makhana',
+        packs: [{ label: '30g', price: 80 }, { label: '60g', price: 160 }, { label: '90g', price: 240 }],
+        flavours: ['Himalayan Pink Salt', 'Peri Peri', 'Mint']
+      }
+    };
+    const views = {
+      home: document.getElementById('homeView'),
+      products: document.getElementById('productsView'),
+      cart: document.getElementById('cartView'),
+      contact: document.getElementById('contactView'),
+      about: document.getElementById('aboutView')
+    };
+    const selection = {
+      raw: { pack: 0, flavour: '' },
+      flavoured: { pack: 0, flavour: 'Himalayan Pink Salt' }
+    };
+
+    function loadCart() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('farmwagon-bag') || '[]');
+        return Array.isArray(saved) ? saved : [];
+      } catch (error) {
+        return [];
+      }
+    }
+    let cart = loadCart();
+    function saveCart() {
+      localStorage.setItem('farmwagon-bag', JSON.stringify(cart));
+    }
+    function formatPrice(price) {
+      return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(price);
+    }
+    function renderOptions(containerId, values, selected, attr) {
+      const root = document.getElementById(containerId);
+      root.replaceChildren(...values.map((value, index) => {
+        const button = document.createElement('button');
+        button.className = 'option';
+        button.type = 'button';
+        button.dataset[attr] = String(index);
+        const label = typeof value === 'string' ? value : value.label + ' · ' + formatPrice(value.price);
+        button.textContent = label;
+        button.setAttribute('aria-pressed', String(index === selected));
+        return button;
+      }));
+    }
+    function syncOptions() {
+      renderOptions('rawPacks', products.raw.packs, selection.raw.pack, 'rawPack');
+      renderOptions('flavouredPacks', products.flavoured.packs, selection.flavoured.pack, 'flavouredPack');
+      renderOptions('flavourChoices', products.flavoured.flavours, products.flavoured.flavours.indexOf(selection.flavoured.flavour), 'flavour');
+    }
+    function cartCount() {
+      return cart.reduce((total, item) => total + item.quantity, 0);
+    }
+    function cartSubtotal() {
+      return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    }
+    function renderCart() {
+      document.getElementById('cartCount').textContent = String(cartCount());
+      const list = document.getElementById('cartItems');
+      const total = document.getElementById('cartTotal');
+      if (cart.length === 0) {
+        list.replaceChildren();
+        const empty = document.createElement('p');
+        empty.className = 'empty';
+        empty.textContent = 'Your bag is empty. Choose a pack on Products.';
+        list.append(empty);
+        total.textContent = '';
+        return;
+      }
+      list.replaceChildren(...cart.map(item => {
+        const row = document.createElement('article');
+        row.className = 'cart-item';
+        const copy = document.createElement('div');
+        const name = document.createElement('strong');
+        name.textContent = item.name;
+        const meta = document.createElement('span');
+        meta.textContent = [item.flavour, item.pack, formatPrice(item.price)].filter(Boolean).join(' · ');
+        copy.append(name, meta);
+        const qty = document.createElement('div');
+        qty.className = 'qty';
+        const minus = document.createElement('button');
+        minus.type = 'button';
+        minus.dataset.key = item.key;
+        minus.dataset.delta = '-1';
+        minus.setAttribute('aria-label', 'Decrease quantity');
+        minus.textContent = '−';
+        const count = document.createElement('span');
+        count.textContent = String(item.quantity);
+        const plus = document.createElement('button');
+        plus.type = 'button';
+        plus.dataset.key = item.key;
+        plus.dataset.delta = '1';
+        plus.setAttribute('aria-label', 'Increase quantity');
+        plus.textContent = '+';
+        qty.append(minus, count, plus);
+        row.append(copy, qty);
+        return row;
+      }));
+      total.textContent = 'Subtotal ' + formatPrice(cartSubtotal()) + ' · not billed while the licence is pending.';
+    }
+    function addProduct(id) {
+      const product = products[id];
+      const pack = product.packs[selection[id].pack];
+      const flavour = selection[id].flavour || '';
+      const key = [id, flavour, pack.label].join(':');
+      const existing = cart.find(item => item.key === key);
+      if (existing) existing.quantity += 1;
+      else cart.push({ key, name: product.name, flavour, pack: pack.label, price: pack.price, quantity: 1 });
+      saveCart();
+      renderCart();
+    }
+    function showView(name) {
+      const view = views[name] ? name : 'home';
+      Object.entries(views).forEach(([key, node]) => { node.hidden = key !== view; });
+      document.querySelectorAll('[data-nav]').forEach(link => {
+        link.classList.toggle('is-current', link.dataset.nav === view);
+      });
+      const titles = {
+        home: 'FarmWagon',
+        products: 'FarmWagon — Products',
+        cart: 'FarmWagon — Cart',
+        contact: 'FarmWagon — Contact',
+        about: 'FarmWagon — About'
+      };
+      document.title = titles[view];
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+    function route() {
+      const name = decodeURIComponent(window.location.hash.replace('#', '')) || 'home';
+      showView(name);
+    }
+
+    document.getElementById('rawPacks').addEventListener('click', event => {
+      const button = event.target.closest('[data-raw-pack]');
+      if (!button) return;
+      selection.raw.pack = Number(button.dataset.rawPack);
+      syncOptions();
+    });
+    document.getElementById('flavouredPacks').addEventListener('click', event => {
+      const button = event.target.closest('[data-flavoured-pack]');
+      if (!button) return;
+      selection.flavoured.pack = Number(button.dataset.flavouredPack);
+      syncOptions();
+    });
+    document.getElementById('flavourChoices').addEventListener('click', event => {
+      const button = event.target.closest('[data-flavour]');
+      if (!button) return;
+      selection.flavoured.flavour = products.flavoured.flavours[Number(button.dataset.flavour)];
+      syncOptions();
+    });
+    document.querySelectorAll('[data-add]').forEach(button => {
+      button.addEventListener('click', () => addProduct(button.dataset.add));
+    });
+    document.getElementById('cartItems').addEventListener('click', event => {
+      const button = event.target.closest('[data-key]');
+      if (!button) return;
+      const item = cart.find(entry => entry.key === button.dataset.key);
+      if (!item) return;
+      item.quantity += Number(button.dataset.delta);
+      if (item.quantity <= 0) cart = cart.filter(entry => entry.key !== item.key);
+      saveCart();
+      renderCart();
+    });
+
     document.getElementById('year').textContent = String(new Date().getFullYear());
+    syncOptions();
+    renderCart();
+    window.addEventListener('hashchange', route);
+    route();
   </script>
 </body>
 </html>

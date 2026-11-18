@@ -1,12 +1,12 @@
 # fws
 
-FarmWagon company page. A single `index.html` plus campaign photos in `images/`. No dependencies or build step.
+FarmWagon company page for Jagat Food and Beverages. A single `index.html` plus campaign photos in `images/`. No dependencies or build step.
 
 Open `index.html` in a modern browser, or serve this directory with `python -m http.server 8000` and visit `http://localhost:8000`.
 
-The live page is a logo-free product site: a harvest banner, raw makhana, flavoured makhana, and a company footer. There is no classroom / seat story on the published page.
+Hash views (`#home`, `#products`, `#cart`, `#contact`, `#about`) stay on one page. The bag can be filled; checkout stays closed until the FSSAI licence is issued. GST and UDYAM numbers are not published.
 
-This is a public learning demo for collaborators, not a live shop. See [NOTICE.md](NOTICE.md).
+See [NOTICE.md](NOTICE.md).
 
 ## Free hosting with GitHub Pages
 
