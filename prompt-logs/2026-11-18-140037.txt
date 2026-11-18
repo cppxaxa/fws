@@ -1,0 +1,1 @@
+Add a declaration/notice file in the repo: demo website for collaborators, no actual buy or sell, learning purpose with AI (hence public). If used for any commercial purpose, the github.io page will be brought down to conform terms and conditions.

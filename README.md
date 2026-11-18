@@ -2,6 +2,8 @@
 
 Farmwagon's graphic, classroom-edition storefront. The page is a single `index.html` plus selected campaign photos in `images/`. No dependencies or build step are needed.
 
+This is a public learning demo for collaborators, not a live shop. See [NOTICE.md](NOTICE.md).
+
 Open `index.html` directly in a modern browser, or serve this directory with `python -m http.server 8000` and visit `http://localhost:8000`.
 
 The site opens on a full-page classroom poster with a vertical seat chooser. Changing seats returns to that home page rather than opening a popup. Selected campaign photos live in `images/`.
