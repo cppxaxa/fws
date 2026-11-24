@@ -123,6 +123,28 @@
       background: linear-gradient(180deg, rgba(16, 40, 28, .18) 0%, rgba(16, 40, 28, .58) 100%);
       content: "";
     }
+    .launch-sticker {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      width: 96px;
+      height: 96px;
+      margin: 0 0 18px;
+      place-items: center;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--ink);
+      padding: 12px;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: .3px;
+      text-align: center;
+      text-transform: uppercase;
+      transform: rotate(-8deg);
+      box-shadow: 4px 4px 0 rgba(16, 40, 28, .22);
+    }
     .banner-copy {
       position: relative;
       z-index: 1;
@@ -404,6 +426,13 @@
         padding-right: max(40px, env(safe-area-inset-right, 0px));
       }
     }
+    @media (max-width: 430px) {
+      .launch-sticker {
+        width: 84px;
+        height: 84px;
+        font-size: 11px;
+      }
+    }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
     }
@@ -427,7 +456,8 @@
         <img src="images/harvest.jpg" alt="Bowl of makhana on a farm table at sunset">
         <div class="shell">
           <div class="banner-copy">
-            <p class="kicker">Launching Soon · Jagat Food and Beverages · Patna</p>
+            <span class="launch-sticker">Launching<br>Soon</span>
+            <p class="kicker">Jagat Food and Beverages · Patna</p>
             <h1 id="bannerTitle">FarmWagon</h1>
             <p>Makhana from the wetlands of Bihar — a light, crunchy fox nut we provide for everyday tables.</p>
             <a class="banner-cta" href="#products">See the products</a>
