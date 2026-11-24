@@ -1,0 +1,1 @@
+Product manager wants users who open the page to see Launching Soon first. Add it without changing anything major.

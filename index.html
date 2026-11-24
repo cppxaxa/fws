@@ -404,12 +404,65 @@
         padding-right: max(40px, env(safe-area-inset-right, 0px));
       }
     }
+    .launch-screen {
+      position: fixed;
+      z-index: 80;
+      inset: 0;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      color: #f7f3e8;
+    }
+    .launch-screen img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .launch-screen::after {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(16, 40, 28, .28) 0%, rgba(16, 40, 28, .72) 100%);
+      content: "";
+    }
+    .launch-copy {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 1120px);
+      margin: 0 auto;
+      padding: 48px max(28px, env(safe-area-inset-left, 0px)) max(48px, env(safe-area-inset-bottom, 0px)) max(28px, env(safe-area-inset-right, 0px));
+    }
+    .launch-copy h1 {
+      margin-bottom: 10px;
+      font-size: clamp(48px, 12vw, 92px);
+      font-weight: 540;
+      letter-spacing: -3px;
+      line-height: .92;
+    }
+    .launch-copy p {
+      max-width: 28ch;
+      margin-bottom: 28px;
+      color: rgba(247, 243, 232, .86);
+      font-size: clamp(16px, 3.4vw, 20px);
+      line-height: 1.5;
+    }
+    body.launch-open { overflow: hidden; }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
     }
   </style>
 </head>
-<body>
+<body class="launch-open">
+  <div class="launch-screen" id="launchScreen" role="dialog" aria-modal="true" aria-labelledby="launchTitle">
+    <img src="images/harvest.jpg" alt="">
+    <div class="launch-copy">
+      <p class="kicker">FarmWagon · Bihar</p>
+      <h1 id="launchTitle">Launching Soon</h1>
+      <p>Makhana from the wetlands of Bihar. The site is open to browse — orders wait for the FSSAI licence.</p>
+      <button class="banner-cta" id="enterSiteButton" type="button">Enter the site</button>
+    </div>
+  </div>
   <header class="site-header shell">
     <a class="brand" href="#home">FarmWagon</a>
     <nav class="nav" aria-label="Site">
@@ -764,6 +817,13 @@
     });
 
     document.getElementById('year').textContent = String(new Date().getFullYear());
+    const launchScreen = document.getElementById('launchScreen');
+    const enterSiteButton = document.getElementById('enterSiteButton');
+    enterSiteButton.addEventListener('click', () => {
+      launchScreen.hidden = true;
+      document.body.classList.remove('launch-open');
+    });
+    enterSiteButton.focus();
     syncOptions();
     renderCart();
     window.addEventListener('hashchange', route);
