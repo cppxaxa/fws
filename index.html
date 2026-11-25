@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f7f3e8">
-  <meta name="description" content="FarmWagon: raw and flavoured makhana from the wetlands of Bihar. Jagat Food and Beverages, Patna.">
+  <meta name="description" content="FarmWagon: flavoured makhana from the wetlands of Bihar. Jagat Food and Beverages, Patna.">
   <meta name="format-detection" content="telephone=no">
   <meta property="og:type" content="website">
   <meta property="og:title" content="FarmWagon">
-  <meta property="og:description" content="Farm-grown makhana from Bihar. Raw pouches and olive-oil roasted jars.">
+  <meta property="og:description" content="Farm-grown makhana from Bihar. Olive-oil roasted jars in Himalayan Pink Salt, Peri Peri, and Mint.">
   <title>FarmWagon</title>
   <style>
     :root {
@@ -503,12 +503,12 @@
       <div class="page-pad shell">
         <div class="section-heading">
           <h2>What makhana is, and why we provide it</h2>
-          <p>Makhana (fox nut) is popped from the seeds of Euryale ferox. FarmWagon sources it from Bihar wetlands, then provides it raw or roasted in olive oil — a traditional snack with a clean crunch.</p>
+          <p>Makhana (fox nut) is popped from the seeds of Euryale ferox. FarmWagon sources it from Bihar wetlands, then provides it roasted in olive oil — a traditional snack with a clean crunch.</p>
         </div>
         <div class="benefit-grid">
           <article class="benefit"><strong>Light, protein-forward crunch</strong><p>A pantry snack with a satisfying bite, typically enjoyed as a lighter alternative to fried namkeen.</p></article>
           <article class="benefit"><strong>Sourced in Bihar</strong><p>Handpicked makhana from wetland farms, provided for freshness rather than long, anonymous supply chains.</p></article>
-          <article class="benefit"><strong>Two honest formats</strong><p>Raw standing pouches for home roasting or cooking, and olive-oil roasted jars in Himalayan Pink Salt, Peri Peri, and Mint.</p></article>
+          <article class="benefit"><strong>Three honest flavours</strong><p>Olive-oil roasted jars in Himalayan Pink Salt, Peri Peri, and Mint — the same crunch, three ways.</p></article>
           <article class="benefit"><strong>Everyday, not medicinal</strong><p>We describe the food as provided. Nutrition, allergens, and serving guidance always follow the final label.</p></article>
         </div>
         <div class="section-heading" style="margin-top:40px">
@@ -527,26 +527,9 @@
     <section class="view page-pad shell" id="productsView" hidden>
       <div class="section-heading">
         <h2>The goods</h2>
-        <p>Raw pouches and olive-oil roasted jars. Choose a size, add it to the bag — orders open after the FSSAI licence is issued.</p>
+        <p>Olive-oil roasted jars. Choose a flavour and size, add it to the bag — orders open after the FSSAI licence is issued.</p>
       </div>
       <div class="product-list">
-        <article class="product" id="raw">
-          <img src="images/raw-makhana.jpg" alt="Raw makhana in a standing pouch beside a bowl">
-          <div class="product-copy">
-            <span class="product-tag">Bihar wetlands · Standing pouch</span>
-            <h3>Raw Makhana</h3>
-            <p>Handpicked, farm-fresh crunch in a practical pouch.</p>
-            <ul class="facts">
-              <li>Sourced from the wetlands of Bihar</li>
-              <li>Natural, handpicked fox nut</li>
-              <li>Protein-rich snack profile</li>
-            </ul>
-            <div class="option-row" id="rawPacks"></div>
-            <div class="add-row">
-              <button class="primary-button" type="button" data-add="raw">Add to bag</button>
-            </div>
-          </div>
-        </article>
         <article class="product" id="flavoured">
           <img src="images/flavoured-makhana.jpg" alt="Jars of flavoured makhana">
           <div class="product-copy">
@@ -613,8 +596,8 @@
         <p>FarmWagon is a registered trademark of Jagat Food and Beverages.</p>
       </div>
       <div class="prose">
-        <p>Jagat Food and Beverages is a Patna firm built around one Bihar crop: makhana. The work started with wetland fox nut — popped and sorted so a pantry snack from Mithila’s ponds could travel as a clean pouch or an olive-oil roasted jar.</p>
-        <p>FarmWagon is the name we provide it under. Raw makhana for people who cook and roast at home. Flavoured jars — Himalayan Pink Salt, Peri Peri, Mint — for people who want the crunch already done. The processing unit follows standard food procedures and a hygienic routine while the FSSAI licence is completed.</p>
+        <p>Jagat Food and Beverages is a Patna firm built around one Bihar crop: makhana. The work started with wetland fox nut — popped and sorted so a pantry snack from Mithila’s ponds could travel as an olive-oil roasted jar.</p>
+        <p>FarmWagon is the name we provide it under. Flavoured jars — Himalayan Pink Salt, Peri Peri, Mint — for people who want the crunch already done. The processing unit follows standard food procedures and a hygienic routine while the FSSAI licence is completed.</p>
         <p>No licence number is printed here yet. When it is generated, it will sit on this page and on the product.</p>
       </div>
     </section>
@@ -659,11 +642,6 @@
   </footer>
   <script>
     const products = {
-      raw: {
-        name: 'Raw Makhana',
-        packs: [{ label: '100g', price: 120 }, { label: '200g', price: 240 }, { label: '500g', price: 600 }],
-        flavours: []
-      },
       flavoured: {
         name: 'Flavoured Makhana',
         packs: [{ label: '30g', price: 80 }, { label: '60g', price: 160 }, { label: '90g', price: 240 }],
@@ -678,14 +656,14 @@
       about: document.getElementById('aboutView')
     };
     const selection = {
-      raw: { pack: 0, flavour: '' },
       flavoured: { pack: 0, flavour: 'Himalayan Pink Salt' }
     };
 
     function loadCart() {
       try {
         const saved = JSON.parse(localStorage.getItem('farmwagon-bag') || '[]');
-        return Array.isArray(saved) ? saved : [];
+        if (!Array.isArray(saved)) return [];
+        return saved.filter(item => item && typeof item.key === 'string' && item.key.startsWith('flavoured:'));
       } catch (error) {
         return [];
       }
@@ -694,6 +672,7 @@
     function saveCart() {
       localStorage.setItem('farmwagon-bag', JSON.stringify(cart));
     }
+    saveCart();
     function formatPrice(price) {
       return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(price);
     }
@@ -711,7 +690,6 @@
       }));
     }
     function syncOptions() {
-      renderOptions('rawPacks', products.raw.packs, selection.raw.pack, 'rawPack');
       renderOptions('flavouredPacks', products.flavoured.packs, selection.flavoured.pack, 'flavouredPack');
       renderOptions('flavourChoices', products.flavoured.flavours, products.flavoured.flavours.indexOf(selection.flavoured.flavour), 'flavour');
     }
@@ -767,6 +745,7 @@
     }
     function addProduct(id) {
       const product = products[id];
+      if (!product) return;
       const pack = product.packs[selection[id].pack];
       const flavour = selection[id].flavour || '';
       const key = [id, flavour, pack.label].join(':');
@@ -797,12 +776,6 @@
       showView(name);
     }
 
-    document.getElementById('rawPacks').addEventListener('click', event => {
-      const button = event.target.closest('[data-raw-pack]');
-      if (!button) return;
-      selection.raw.pack = Number(button.dataset.rawPack);
-      syncOptions();
-    });
     document.getElementById('flavouredPacks').addEventListener('click', event => {
       const button = event.target.closest('[data-flavoured-pack]');
       if (!button) return;

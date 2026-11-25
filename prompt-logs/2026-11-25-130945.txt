@@ -1,0 +1,1 @@
+Remove Raw Makhana from the site. Keep flavoured makhana only (Pink Salt, Peri Peri, Mint). Drop the raw product card and cart SKU. Rewrite home, products intro, about, and meta copy that still mentioned raw pouches.
